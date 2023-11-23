@@ -38,8 +38,9 @@ body,
         --primary-foreground: 210 40% 98%;
 
         /* --secondary: 210 40% 96.1%; */
+        /* --secondary-foreground: 222.2 47.4% 11.2%; */
         --secondary: 156 37% 46%;
-        --secondary-foreground: 222.2 47.4% 11.2%;
+        --secondary-foreground: 210 40% 98%;
 
         /* --muted: 210 40% 96.1%; */
         --muted: 183 91% 95%;
