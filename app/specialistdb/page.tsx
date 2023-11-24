@@ -6,6 +6,7 @@ import LogoFlat from "../../public/LogoFlat.png";
 import { Separator } from "@/components/ui/separator";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
@@ -15,6 +16,9 @@ export default function Home() {
         { src: "/icons/IconSearch.png", alt: "Search", route: "/messages" },
         { src: "/icons/IconAvatar.png", alt: "Settings", route: "/settings" },
     ];
+
+    const bountyHuntList = [{}, {}, {}, {}];
+    const foundItemList = [{}, {}, {}, {}];
 
     return (
         <div className="flex flex-col">
@@ -41,6 +45,16 @@ export default function Home() {
                             treasures and gain a reward!
                         </p>
                     </div>
+                    <div className="mt-4">
+                        <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
+                            <div className="flex w-max space-x-4 p-4">
+                                {bountyHuntList.map((item) => (
+                                    <div className="h-40 w-40 bg-grass"></div>
+                                ))}
+                            </div>
+                            <ScrollBar orientation="horizontal" />
+                        </ScrollArea>
+                    </div>
                 </div>
                 {/* Found Item Inventory */}
                 <div className="flex flex-col m-4">
@@ -55,8 +69,19 @@ export default function Home() {
                     </div>
                     <div className="mt-2">
                         <p className="text-sm">
-                        List of items stored in the Lost & Found office. Come and see if your item is here!
+                            List of items stored in the Lost & Found office.
+                            Come and see if your item is here!
                         </p>
+                    </div>
+                    <div className="mt-4">
+                        <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
+                            <div className="flex w-max space-x-4 p-4">
+                                {bountyHuntList.map((item) => (
+                                    <div className="h-40 w-40 bg-grass"></div>
+                                ))}
+                            </div>
+                            <ScrollBar orientation="horizontal" />
+                        </ScrollArea>
                     </div>
                 </div>
             </div>
