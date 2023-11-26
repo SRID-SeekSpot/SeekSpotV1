@@ -55,7 +55,7 @@ export default function Home() {
                 {/* Button Panel */}
                 <div className="flex flex-col mt-20 justify-between space-y-4">
                     <Button className="w-56" asChild>
-                        <a href="/specialistdb">Specialist</a>
+                        <a href="/specialist/dashboard">Specialist</a>
                     </Button>
                     <Button className="w-56" variant={"secondary"}>
                         Non-Specialist

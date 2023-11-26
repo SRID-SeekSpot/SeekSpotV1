@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 
-import LogoFlat from "../../public/LogoFlat.png";
-import { Separator } from "@/components/ui/separator";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -11,8 +9,16 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = [
-        { src: "/icons/IconHome.png", alt: "Home", route: "/specialistdb" },
-        { src: "/icons/IconMoney.png", alt: "BountyHunt", route: "/profile" },
+        {
+            src: "/icons/IconHome.png",
+            alt: "Home",
+            route: "/specialist/dashboard",
+        },
+        {
+            src: "/icons/IconMoney.png",
+            alt: "BountyHunt",
+            route: "/specialist/bounty",
+        },
         { src: "/icons/IconSearch.png", alt: "Search", route: "/messages" },
         { src: "/icons/IconAvatar.png", alt: "Settings", route: "/settings" },
     ];
@@ -76,7 +82,7 @@ export default function Home() {
                     <div className="mt-4">
                         <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
                             <div className="flex w-max space-x-4 p-4">
-                                {bountyHuntList.map((item) => (
+                                {foundItemList.map((item) => (
                                     <div className="h-40 w-40 bg-grass"></div>
                                 ))}
                             </div>
