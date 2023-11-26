@@ -9,24 +9,11 @@ import BountyHuntListItem, {
     BountyHuntListItemProps,
 } from "@/components/general/bountyhuntListItem";
 import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
+import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
-    const navButtons = [
-        {
-            src: "/icons/IconHome.png",
-            alt: "Home",
-            route: "/specialist/dashboard",
-        },
-        {
-            src: "/icons/IconMoney.png",
-            alt: "BountyHunt",
-            route: "/specialist/bounty",
-        },
-        { src: "/icons/IconSearch.png", alt: "Search", route: "/messages" },
-        { src: "/icons/IconAvatar.png", alt: "Settings", route: "/settings" },
-    ];
-
+    const navButtons = SPECIALIST_ROUTES;
     const bountyHuntList: BountyHuntListItemProps[] = BOUNTY_ITEMS;
 
     return (
@@ -38,9 +25,16 @@ export default function Home() {
             {/* Body */}
             <div className="flex flex-col m-5 space-y-4">
                 {bountyHuntList.map((item) => {
-                    return <BountyHuntListItem {...item} onClick={()=>{
-                        console.log("Item " + item.name + " was clicked")
-                    }}/>;
+                    return (
+                        <BountyHuntListItem
+                            {...item}
+                            onClick={() => {
+                                console.log(
+                                    "Item " + item.name + " was clicked"
+                                );
+                            }}
+                        />
+                    );
                 })}
             </div>
             {/* Bottom Navigation Bar */}

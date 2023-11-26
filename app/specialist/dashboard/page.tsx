@@ -5,23 +5,11 @@ import Image from "next/image";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
-    const navButtons = [
-        {
-            src: "/icons/IconHome.png",
-            alt: "Home",
-            route: "/specialist/dashboard",
-        },
-        {
-            src: "/icons/IconMoney.png",
-            alt: "BountyHunt",
-            route: "/specialist/bounty",
-        },
-        { src: "/icons/IconSearch.png", alt: "Search", route: "/messages" },
-        { src: "/icons/IconAvatar.png", alt: "Settings", route: "/settings" },
-    ];
+    const navButtons = SPECIALIST_ROUTES;
 
     const bountyHuntList = [{}, {}, {}, {}];
     const foundItemList = [{}, {}, {}, {}];
