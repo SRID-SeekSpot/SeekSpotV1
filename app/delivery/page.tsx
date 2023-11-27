@@ -144,8 +144,7 @@ export default function Home() {
     };
     return (
         <div className="flex flex-col">
-            <title>Message</title>
-            <Header href="/" />
+            <Header altText="Message" />
             <div className="m-4 flex flex-col items-center justify-center">
             <Separator />
                 <Card className="m-9 w-55">
