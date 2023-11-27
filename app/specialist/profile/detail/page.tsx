@@ -19,10 +19,10 @@ export default function Home() {
 
     return (
         <div className="flex flex-col">
-            <title>Specialist Profile Page</title>
+            <title>Specialist Profile Detail Page</title>
             {/* Header that redirects to home */}
             {/* <Header href="/" altText="Hello"/> */}
-            <Header altText="Profile" />
+            <Header altText="My Profile" href="/specialist/profile"/>
             {/* Body */}
             <div className="flex flex-col justify-center items-center">
                 {/* Avatar */}
@@ -38,41 +38,24 @@ export default function Home() {
             </div>
             {/* Profile Buttons */}
             <div className="pt-8 space-y-4">
-                <a href="/specialist/profile/detail">
-                    <ProfileButton
-                        iconSrc="/ProfileIcon/User.png"
-                        buttonName="My Profile"
-                        editable={false}
-                    />
-                </a>
                 <ProfileButton
-                    iconSrc="/ProfileIcon/Email.png"
-                    buttonName="Message"
-                    editable={false}
+                    iconSrc="/ProfileIcon/User.png"
+                    buttonName="Kate"
+                    editable={true}
                 />
                 <ProfileButton
-                    iconSrc="/ProfileIcon/Wallet.png"
-                    buttonName="Wallet"
-                    editable={false}
+                    iconSrc="/ProfileIcon/Contacts.png"
+                    buttonName="123-123-1234"
+                    editable={true}
                 />
                 <ProfileButton
-                    iconSrc="/ProfileIcon/Settings.png"
-                    buttonName="Setting"
-                    editable={false}
+                    iconSrc="/ProfileIcon/Location.png"
+                    buttonName="516 2nd Ave"
+                    editable={true}
                 />
+ 
             </div>
-            {/* Logout div */}
-            <div className="mt-20">
-                <a href="/">
-                    <div
-                        className={`relative flex flex-col justify-center items-center`}
-                    >
-                        <div className="bg-slate-300 px-5 max-w-[300px] w-full h-10 rounded-3xl justify-center items-center flex flex-row">
-                            <p className="font-bold">Logout</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+
             {/* Bottom Navigation Bar */}
             <Navbar navButtons={navButtons} />
         </div>
