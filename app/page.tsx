@@ -63,9 +63,6 @@ export default function Home() {
                     <Button className="w-56" variant={"outline"} asChild>
                         <a href="/styleguide">Style Guide</a>
                     </Button>
-                    <Button className="w-56" variant={"ghost"} asChild>
-                        <a href="/delivery">Delivery</a>
-                    </Button>
                 </div>
             </div>
         </div>

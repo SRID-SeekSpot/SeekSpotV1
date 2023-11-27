@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 const Popup = ({ onClose }) => {
+    
     const popupContainerStyle = {
         position: 'fixed',
         top: 0,
@@ -54,10 +55,14 @@ const Popup = ({ onClose }) => {
         border: '1px solid #ccc', // 边框样式
         resize: 'none', // 防止用户调整大小
     };
+    const handleConfirm = () => {
+        onClose('DHL');  // 假设用户选择了 DHL
+    };
     return (
         <div className="popup-container" style={popupContainerStyle}>
             <div className="popup-content" style={popupContentStyle}>
-                <p style={deliveryTitleStyle}>Delivery</p>
+                <p style={deliveryTitleStyle}>
+                    <strong>Delivery</strong></p>
                 <div style={deliveryOptionStyle}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <input
@@ -102,8 +107,8 @@ const Popup = ({ onClose }) => {
                 />
                 {/* Button Panel */}
                 <div className="flex flex-col mt-20 justify-between space-y-4">
-                    <Button className="w-56" asChild>
-                        <a href="/specialist/dashboard">Confirm</a>
+                    <Button className="w-56" asChild onClick={handleConfirm}>
+                        <a>Confirm</a>
                     </Button>
                     <Button className="w-56" variant={"secondary"} onClick={()=> onClose()}>
                     <a href="/delivery">Cancel</a>
@@ -117,6 +122,7 @@ const Popup = ({ onClose }) => {
 
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false);
+    const [isConfirmed, setIsConfirmed] = useState(false);
     const navButtons = SPECIALIST_ROUTES;
     const shipToMeRef = useRef(null); // 添加 ref
     const handleDeliveryChange = (e) => {
@@ -124,12 +130,16 @@ export default function Home() {
             setShowPopup(true);
         }
     };
+    
 
-    const handlePopupClose = () => {
+    const handlePopupClose = (choice) => {
         setShowPopup(false);
         // console.log(`User chose: ${choice}`); // 处理用户的选择
         if (shipToMeRef.current) {
             shipToMeRef.current.checked = false;
+        }
+        if (choice === 'DHL') {
+            setIsConfirmed(true);  // 设置状态为已确认
         }
     };
     return (
@@ -190,6 +200,12 @@ export default function Home() {
                     </CardContent>
                 </Card>
             </div>
+            {isConfirmed && (
+            <p className="text-xl text-green-600">
+                Congratulations! Your item will come back home shortly.
+                Here is the tracking info: XX123456ABC
+            </p>
+        )}
             {showPopup && <Popup onClose={handlePopupClose} />}
             {/* Bottom Navigation Bar */}
             <Navbar navButtons={navButtons} />
