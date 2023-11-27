@@ -55,8 +55,25 @@ const Popup = ({ onClose }) => {
         border: '1px solid #ccc', // 边框样式
         resize: 'none', // 防止用户调整大小
     };
+    // const handleConfirm = () => {
+    //     onClose('DHL');  // 假设用户选择了 DHL
+    // };
+    // 新增状态来跟踪用户选择的送货方式
+    const [selectedDeliveryOption, setSelectedDeliveryOption] = useState('');
+
+    // 处理送货方式选择的事件
+    const handleDeliveryOptionChange = (e) => {
+        setSelectedDeliveryOption(e.target.value);
+    };
+
+    // 修改确认按钮的处理逻辑
     const handleConfirm = () => {
-        onClose('DHL');  // 假设用户选择了 DHL
+        if (selectedDeliveryOption === 'ups' || selectedDeliveryOption === 'dhl') {
+            onClose(selectedDeliveryOption);
+        } else {
+            // 可以在这里显示错误消息或做其他处理
+            console.log('Please select a delivery option.');
+        }
     };
     return (
         <div className="popup-container" style={popupContainerStyle}>
@@ -71,6 +88,7 @@ const Popup = ({ onClose }) => {
                             name="delivery"
                             value="ups"
                             className="mr-2"
+                            onChange={handleDeliveryOptionChange}
                         />
                         <label htmlFor="ups" className="mr-4 text-lg">
                             UPS
@@ -88,6 +106,7 @@ const Popup = ({ onClose }) => {
                             name="delivery"
                             value="dhl"
                             className="mr-2"
+                            onChange={handleDeliveryOptionChange}
                         />
                         <label htmlFor="dhl" className="text-lg">
                             DHL
@@ -107,7 +126,7 @@ const Popup = ({ onClose }) => {
                 />
                 {/* Button Panel */}
                 <div className="flex flex-col mt-20 justify-between space-y-4">
-                    <Button className="w-56" asChild onClick={handleConfirm}>
+                    <Button className="w-56" asChild onClick={handleConfirm} disabled={!selectedDeliveryOption}>
                         <a>Confirm</a>
                     </Button>
                     <Button className="w-56" variant={"secondary"} onClick={()=> onClose()}>
@@ -122,26 +141,22 @@ const Popup = ({ onClose }) => {
 
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false);
-    const [isConfirmed, setIsConfirmed] = useState(false);
+    const [selectedDelivery, setSelectedDelivery] = useState(null); // 新增状态
     const navButtons = SPECIALIST_ROUTES;
-    const shipToMeRef = useRef(null); // 添加 ref
+    const shipToMeRef = useRef(null);
+
     const handleDeliveryChange = (e) => {
         if (e.target.value === 'ship-to-me') {
             setShowPopup(true);
         }
     };
-    
 
     const handlePopupClose = (choice) => {
         setShowPopup(false);
-        // console.log(`User chose: ${choice}`); // 处理用户的选择
-        if (shipToMeRef.current) {
-            shipToMeRef.current.checked = false;
-        }
-        if (choice === 'DHL') {
-            setIsConfirmed(true);  // 设置状态为已确认
-        }
+        setSelectedDelivery(choice); // 设置选中的送货方式
     };
+
+    
     return (
         <div className="flex flex-col">
             <Header altText="Message" />
@@ -199,13 +214,13 @@ export default function Home() {
                     </CardContent>
                 </Card>
             </div>
-            {isConfirmed && (
+            {selectedDelivery && (
             <p className="text-xl text-green-600">
                 Congratulations! Your item will come back home shortly.
                 Here is the tracking info: XX123456ABC
             </p>
         )}
-            {showPopup && <Popup onClose={handlePopupClose} />}
+        {showPopup && <Popup onClose={handlePopupClose} />}
             {/* Bottom Navigation Bar */}
             <Navbar navButtons={navButtons} />
         </div>
