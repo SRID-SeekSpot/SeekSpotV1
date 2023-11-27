@@ -10,5 +10,5 @@ export const SPECIALIST_ROUTES = [
         route: "/specialist/bounty",
     },
     { src: "/icons/IconSearch.png", alt: "Search", route: "/specialist/found" },
-    { src: "/icons/IconAvatar.png", alt: "Settings", route: "/settings" },
+    { src: "/icons/IconAvatar.png", alt: "Settings", route: "/specialist/profile" },
 ];
