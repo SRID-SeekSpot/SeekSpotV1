@@ -36,7 +36,7 @@ export default function Home() {
                     />
                 </div>
             </div>
-            {/* Buttons */}
+            {/* Profile Buttons */}
             <div className="pt-8 space-y-4">
                 <ProfileButton
                     iconSrc="/ProfileIcon/User.png"
@@ -58,6 +58,18 @@ export default function Home() {
                     buttonName="Setting"
                     editable={false}
                 />
+            </div>
+            {/* Logout div */}
+            <div className="mt-20">
+                <a href="/">
+                    <div
+                        className={`relative flex flex-col justify-center items-center`}
+                    >
+                        <div className="bg-slate-300 px-5 max-w-[300px] w-full h-10 rounded-3xl justify-center items-center flex flex-row">
+                            <p className="font-bold">Logout</p>
+                        </div>
+                    </div>
+                </a>
             </div>
             {/* Bottom Navigation Bar */}
             <Navbar navButtons={navButtons} />
