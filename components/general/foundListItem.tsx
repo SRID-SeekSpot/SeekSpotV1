@@ -27,7 +27,7 @@ const FoundListItem: React.FC<FoundListItemProps> = ({
     ...props
 }) => {
     return (
-        <Link href={`/${id}`} passHref>
+        <a href={`/specialist/${id}`}>
             <div className="bg-slate-100 w-full h-40 rounded-3xl flex flex-col items-center justify-center cursor-pointer">
                 <div className="h-28 w-28 rounded-2xl overflow-hidden">
                     <Image
@@ -40,7 +40,7 @@ const FoundListItem: React.FC<FoundListItemProps> = ({
                 </div>
                 <p className="text-sm">{name}</p>
             </div>
-        </Link>
+        </a>
     );
 };
 

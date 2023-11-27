@@ -1,8 +1,8 @@
 // app/specialist/itemDetail/page.tsx
 import React from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { BOUNTY_ITEMS } from '@/app/constants/BountyItems'; // Adjust the path as necessary
+// import { useRouter } from 'next/router';
+import { BOUNTY_ITEMS } from '@/app/constants/BountyItems'; 
 
 interface ItemDetailPageProps {
     item: {
