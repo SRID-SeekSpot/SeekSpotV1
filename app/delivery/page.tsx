@@ -1,7 +1,7 @@
 "use client";
 
-import Header from "@/components/general/messageHeader";
-import React, { useState, useRef} from 'react';
+import Header from "@/components/general/header";
+import React, { useContext ,useState, useRef} from 'react';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/general/navbar";
@@ -9,7 +9,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 const Popup = ({ onClose }) => {
-    
     const popupContainerStyle = {
         position: 'fixed',
         top: 0,
@@ -69,6 +68,7 @@ const Popup = ({ onClose }) => {
     // 修改确认按钮的处理逻辑
     const handleConfirm = () => {
         if (selectedDeliveryOption === 'ups' || selectedDeliveryOption === 'dhl') {
+            localStorage.setItem("unread", "false");
             onClose(selectedDeliveryOption);
         } else {
             // 可以在这里显示错误消息或做其他处理
@@ -144,6 +144,7 @@ export default function Home() {
     const [selectedDelivery, setSelectedDelivery] = useState(null); // 新增状态
     const navButtons = SPECIALIST_ROUTES;
     const shipToMeRef = useRef(null);
+    
 
     const handleDeliveryChange = (e) => {
         if (e.target.value === 'ship-to-me') {
@@ -159,10 +160,10 @@ export default function Home() {
     
     return (
         <div className="flex flex-col">
-            <Header altText="Message" />
+            <Header href="specialist/profile" altText="Message" />
             <div className="m-4 flex flex-col items-center justify-center">
             <Separator />
-                <Card className="m-9 w-55">
+                <Card className="m-4 w-55">
                     <CardContent className="grid gap-4">
                         <p className="text-3xl text-navy">
                             Your reported item: <strong>Black Glasses </strong>
@@ -215,13 +216,17 @@ export default function Home() {
                 </Card>
             </div>
             {selectedDelivery && (
-            <p className="text-xl text-green-600">
+            <p className="text-xl text-green-600 mx-6">
                 Congratulations! Your item will come back home shortly.
                 Here is the tracking info: XX123456ABC
             </p>
+            
         )}
         {showPopup && <Popup onClose={handlePopupClose} />}
             {/* Bottom Navigation Bar */}
+            <div className="mt-36">
+
+            </div>
             <Navbar navButtons={navButtons} />
         </div>
         
