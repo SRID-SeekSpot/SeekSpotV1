@@ -67,9 +67,6 @@ export default function Home() {
                     <Button className="w-56" variant={"outline"} asChild>
                         <a href="/styleguide">Style Guide</a>
                     </Button>
-                </div>
-                {/* Button Panel */}
-                <div className="flex flex-col mt-20 justify-between space-y-4">
                     <Button className="w-56" asChild onClick={handlePopup}>
                         <a href="/specialist/dashboard">Task 9 & 10 starts from here</a>
                     </Button>
