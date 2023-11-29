@@ -47,6 +47,7 @@ export default function Home() {
     // const [itemList, setItemList] = useState('')
     const bountyItemsString = JSON.stringify(BOUNTY_ITEMS);
     localStorage.setItem('dummyData', bountyItemsString);
+    localStorage.setItem('currIndex', JSON.stringify(itemIndex));
 
     let index = itemIndex
     const item = index !== undefined ? BOUNTY_ITEMS[index] : null;

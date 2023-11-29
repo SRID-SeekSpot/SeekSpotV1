@@ -5,6 +5,58 @@ import { BOUNTY_ITEMS } from '@/app/constants/BountyItems';
 import { BountyHuntListItemProps } from './bountyhuntListItem';
 
 
+// pop up area
+const PopupDelete = ({ onClose }) => {
+  const popupContainerStyle = {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+  };
+
+  const popupContentStyle = {
+      backgroundColor: 'white',
+      padding: '20px',
+      borderRadius: '10px',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+  };
+
+  // delete confirm action
+  const handleDeleteConfirm = () => {
+      let currListItemsString = localStorage.getItem("dummyData")
+      let currListItems = JSON.parse(currListItemsString)
+
+      let currIndex = localStorage.getItem("currIndex")
+
+      console.log("Delete Confirm Action")
+      console.log(currListItems[0].name)
+  };
+
+  return (
+      <div className="popup-container" style={popupContainerStyle}>
+          <div className="popup-content" style={popupContentStyle}>
+                  <p className='mt-5 text-sm'>Are you sure you want to delete the item?</p>
+              {/* Button Panel */}
+              <div className="flex mt-35 justify-between ">
+                  <Button className="w-30 mt-8 ml-8" asChild onClick={handleDeleteConfirm}>
+                    <a>Confirm</a>
+                  </Button>
+                  <Button className="w-30 mt-8 mr-8"  onClick={()=> onClose()}>
+                    <a>Cancel</a>
+                  </Button>
+              </div>
+          </div>
+          
+      </div>
+  );
+};
+
+
 export interface EditItemProps {
     itemName: string;
     imgSrc: string;
@@ -51,8 +103,40 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
     e.preventDefault();
     // Handle form submission logic here
     // console.log(itemDetails);
-    console.log("ABC");
+    console.log("submit");
   };
+
+
+  // pop up message for delete action
+  const [showPopup, setShowPopup] = useState(false);
+  
+  const showPopupMessage = () => {
+    setShowPopup(true);
+  };
+
+  // const handleDeleteConfirm = () => {
+  //   // handle delete confirm
+  //   console.log('Confirmed');
+  //   setShowPopup(false);
+  // };
+
+  // const handleDeleteCancel = () => {
+  //   // handle delete cancel
+  //   console.log('Cancelled');
+  //   setShowPopup(false);
+  // };
+
+  const handlePopupClose = (choice) => {
+    setShowPopup(false);
+    console.log("Pass")
+    // setSelectedDelivery(choice); // 设置选中的送货方式
+
+
+    const goBack = () => {
+      router.push()
+    };
+};
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -68,11 +152,14 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
                 />
       </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '20px' }}>
-        <Image
-        alt="filterIcon"
-        src="/icons/IconDelete.png"
-        width={30}
-        height={30}/>
+        <button onClick={showPopupMessage}>
+          <Image
+          alt="filterIcon"
+          src="/icons/IconDelete.png"
+          width={30}
+          height={30}/>
+        </button>
+        {showPopup && <PopupDelete onClose={handlePopupClose}  />}
       </div><br/>
       <input
         type="file"
@@ -133,10 +220,22 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
       <br/>
       <div className="flex flex-row justify-between items-center" style={{marginLeft: '40px', width: '88%'}}>
         <Button className="w-28 rounded-lg">Save</Button>
-        <Button className="w-28 rounded-lg">Cancel</Button>                   
+        <div>
+          <Button className="w-28 rounded-lg"><a href="/specialist/found">Cancel</a></Button>     
+        </div>
       </div>
     </form>
   );
+  
+};
+
+export function getLocalStorageItem(key) {
+  if (typeof window !== 'undefined') {
+      return localStorage.getItem(key);
+  }
+  return null;
 }
+
+
 
 export default EditItemDescriptionForm;
