@@ -67,9 +67,11 @@ export default function Home() {
                     <Button className="w-56" variant={"outline"} asChild>
                         <a href="/styleguide">Style Guide</a>
                     </Button>
-                    <Button className="w-56" asChild onClick={handlePopup}>
-                        <a href="/specialist/dashboard">Task 9 & 10 starts from here</a>
-                    </Button>
+                    <div className="w-56 text-center">
+                        <a href="/specialist/dashboard" className="text-sm underline" onClick={handlePopup}>
+                        Task 9 & 10 starts from here
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
