@@ -32,6 +32,15 @@ export default function Home() {
             setUnread(unreadValue === "true");
         }
     }, []);
+
+    const handleMessageClick = (e) => {
+        // 检查 localStorage 中的 unread 值
+        const unreadValue = localStorage.getItem("unread");
+        if (unreadValue !== "true") {
+            // 如果 unread 不是 "true"，阻止链接的默认行为
+            e.preventDefault();
+        }
+    };
     return (
         <div className="flex flex-col">
             <title>Specialist Profile Page</title>
@@ -61,7 +70,7 @@ export default function Home() {
                     />
                 </a>
                 <div>
-                <a href="../delivery">
+                <a href="../delivery" onClick={handleMessageClick}>
                 <ProfileButton
                     iconSrc="/ProfileIcon/Email.png"
                     buttonName="Message"

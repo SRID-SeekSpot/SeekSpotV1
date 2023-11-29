@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { UnreadProvider } from './delivery/UnreadContext';
 
 import LogoSquare from "../public/LogoSquare.png";
 import {
@@ -15,6 +14,10 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 
+const handlePopup = () => {
+    localStorage.setItem("showPopup", "true");
+    localStorage.setItem("unread", "true");
+};
 export default function Home() {
     const locationOptions = [
         { value: "Vista Valley Mall", label: "Vista Valley Mall" },
@@ -63,6 +66,12 @@ export default function Home() {
                     </Button>
                     <Button className="w-56" variant={"outline"} asChild>
                         <a href="/styleguide">Style Guide</a>
+                    </Button>
+                </div>
+                {/* Button Panel */}
+                <div className="flex flex-col mt-20 justify-between space-y-4">
+                    <Button className="w-56" asChild onClick={handlePopup}>
+                        <a href="/specialist/dashboard">Task 9 & 10 starts from here</a>
                     </Button>
                 </div>
             </div>

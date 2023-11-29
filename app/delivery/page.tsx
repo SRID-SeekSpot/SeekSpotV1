@@ -8,6 +8,7 @@ import Navbar from "@/components/general/navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+
 const Popup = ({ onClose }) => {
     const popupContainerStyle = {
         position: 'fixed',
@@ -69,6 +70,7 @@ const Popup = ({ onClose }) => {
     const handleConfirm = () => {
         if (selectedDeliveryOption === 'ups' || selectedDeliveryOption === 'dhl') {
             localStorage.setItem("unread", "false");
+            localStorage.setItem("showPopup", "false");
             onClose(selectedDeliveryOption);
         } else {
             // 可以在这里显示错误消息或做其他处理
