@@ -58,23 +58,23 @@ const PopupDelete = ({ onClose }) => {
 
 
 export interface EditItemProps {
-    itemName: string;
+  item: {
+    name: string;
     imgSrc: string;
-    locationLost: string;
-    dateLost: string;
-    additionalDetails: string;
-    onClick?: any;
+    description: string;
+    price: number;
+    location: string;
+    date: string;
+    id: string;
+  }
 }
 
 const EditItemDescriptionForm: React.FC<EditItemProps> = ({
-    itemName,
-    imgSrc,
-    locationLost,
-    dateLost,
-    additionalDetails,
-    onClick
+    item
 }) => {
     const bountyHuntList: BountyHuntListItemProps[] = BOUNTY_ITEMS;
+    
+    // console.log(item.imgSrc)
 
 //   const [itemDetails, setItemDetails] = useState({
 //     itemName: ,
@@ -131,7 +131,6 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
     console.log("Pass")
     // setSelectedDelivery(choice); // 设置选中的送货方式
 
-
     const goBack = () => {
       router.push()
     };
@@ -143,9 +142,9 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
       {/* <label htmlFor="imageUpload">Item Image</label> */}
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', width: '100%' }}>
                 <Image
-                    alt={itemName}
-                    src={imgSrc}
-                    layout="intrinsic"
+                    alt={item.name}
+                    src={item.imgSrc}
+                    // layout="intrinsic"
                     width={300}
                     height={300}
                     className="rounded-sm"
@@ -171,7 +170,7 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
         <input
           type="text"
           name="itemName"
-          placeholder={itemName}
+          placeholder={item.name}
           style={{backgroundColor:"#DCDCDC", borderRadius: '5px'}}
           // onChange={handleInputChange}
         />

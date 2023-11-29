@@ -7,6 +7,7 @@ import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { BOUNTY_ITEMS } from '@/app/constants/BountyItems'; 
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import Link from '@/node_modules/next/link';
 
 interface FoundItemDetailPageProps {
     item: {
@@ -16,6 +17,7 @@ interface FoundItemDetailPageProps {
       price: number;
       location: string;
       date: string;
+      id: string;
     };
 }
 
@@ -52,7 +54,9 @@ const FoundItemDetailPage: React.FC<FoundItemDetailPageProps> = ({ item }) => {
             <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]"> 
                 <div className="flex justify-center mb-20"> 
                     <Button className="w-56" asChild>
-                        <a href="/specialist/found">Edit</a>
+                        <Link href={`/specialist/editItem?ItemID=${item.id}`}  passHref>
+                            Edit
+                        </Link>
                     </Button>
                 </div>
             </div>
