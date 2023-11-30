@@ -81,7 +81,7 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-12 flex justify-end mr-8">
-        <Link href="/specialist/createBountyItem" passHref>
+        <Link href="/specialist/createLostItem" passHref>
           <Image
             src="/icons/IconCreate.png"
             alt="Create Button"
