@@ -1,18 +1,50 @@
 "use client";
-
+import React, { useState, useEffect} from 'react';
 import Image from "next/image";
 
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
+import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 
+// Popup component
+const Popup = ({ onClose }) => {
+    return (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-10">
+            <div className="bg-white p-5 rounded-lg shadow-lg text-center">
+                <h2 className="text-2xl font-bold mb-4">Congratulations!</h2>
+                <p className="text-sm mb-4">Your lost item is found!</p>
+                <Button className="w-56" variant={"secondary"}>
+                    <a href="/specialist/profile/delivery">Check details</a>
+                    </Button>
+            </div>
+        </div>
+    );
+};
+
 export default function Home() {
+
+    const [showPopup, setShowPopup] = useState(false);
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
 
     const bountyHuntList = [{}, {}, {}, {}];
     const foundItemList = [{}, {}, {}, {}];
+    useEffect(() => {
+        // 只在客户端执行
+        const showPopup = localStorage.getItem("showPopup");
+        if (showPopup === null) {
+            // 如果在 localStorage 中找不到 unread，那么设置它为 "true"
+            localStorage.setItem("showPopup", "false");
+            setShowPopup(false);
+        } else {
+            // 如果找到了，根据存储的值设置状态
+            setShowPopup(showPopup === "true");
+        }
+    }, []);
+
+
 
     return (
         <div className="flex flex-col">
@@ -20,6 +52,9 @@ export default function Home() {
             {/* Header that redirects to home */}
             {/* <Header href="/" altText="Hello"/> */}
             <Header href="/" />
+            {/* pop up component */}
+            {showPopup && <Popup />}
+            
             {/* Body */}
             <div className="flex flex-col">
                 {/* Bounty Hunt List */}
