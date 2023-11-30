@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import React, { useEffect } from 'react';
 
 import LogoSquare from "../public/LogoSquare.png";
 import {
@@ -19,6 +20,11 @@ const handlePopup = () => {
     localStorage.setItem("unread", "true");
 };
 export default function Home() {
+
+    // Load unread attribute
+    useEffect(() => {
+        localStorage.setItem("unread", "true");
+    }, []);
     const locationOptions = [
         { value: "Vista Valley Mall", label: "Vista Valley Mall" },
         { value: "Spectrum Square", label: "Spectrum Square" },
