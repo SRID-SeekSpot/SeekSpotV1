@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/general/header";
-import React, { useContext ,useState, useRef} from 'react';
+import React, { useContext ,useState, useRef, useEffect} from 'react';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/general/navbar";
@@ -149,6 +149,10 @@ export default function Home() {
     const [selectedDelivery, setSelectedDelivery] = useState(null); // for delivery state
     const navButtons = SPECIALIST_ROUTES;
     const shipToMeRef = useRef(null);
+
+    useEffect(() => {
+        localStorage.setItem("showPopup", "false")
+    }, []);
     
 
     const handleDeliveryChange = (e) => {
