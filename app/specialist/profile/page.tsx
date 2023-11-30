@@ -1,5 +1,6 @@
 "use client";
 
+import React, {useEffect, useState  } from 'react';
 import Image from "next/image";
 
 import Header from "@/components/general/header";
@@ -11,12 +12,26 @@ import BountyHuntListItem, {
 import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import ProfileButton from "@/components/general/profileButton";
+import { getLocalStorageItem } from "../../delivery/localStorage"
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
     const bountyHuntList: BountyHuntListItemProps[] = BOUNTY_ITEMS;
-
+    
+    const [unread, setUnread] = useState(false);
+    useEffect(() => {
+        // 只在客户端执行
+        const unreadValue = localStorage.getItem("unread");
+        if (unreadValue === null) {
+            // 如果在 localStorage 中找不到 unread，那么设置它为 "true"
+            localStorage.setItem("unread", "true");
+            setUnread(true);
+        } else {
+            // 如果找到了，根据存储的值设置状态
+            setUnread(unreadValue === "true");
+        }
+    }, []);
     return (
         <div className="flex flex-col">
             <title>Specialist Profile Page</title>
@@ -45,11 +60,17 @@ export default function Home() {
                         editable={false}
                     />
                 </a>
+                <div>
+                <a href="../delivery">
                 <ProfileButton
                     iconSrc="/ProfileIcon/Email.png"
                     buttonName="Message"
                     editable={false}
+                    unread={unread}
                 />
+                </a>
+                </div>
+                
                 <ProfileButton
                     iconSrc="/ProfileIcon/Wallet.png"
                     buttonName="Wallet"
