@@ -16,7 +16,7 @@ const Popup = ({ onClose }) => {
                 <h2 className="text-2xl font-bold mb-4">Congratulations!</h2>
                 <p className="text-sm mb-4">Your lost item is found!</p>
                 <Button className="w-56" variant={"secondary"}>
-                    <a href="../../delivery">Check details</a>
+                    <a href="/specialist/profile/delivery">Check details</a>
                     </Button>
             </div>
         </div>

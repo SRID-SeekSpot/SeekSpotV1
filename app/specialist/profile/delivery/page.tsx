@@ -167,7 +167,7 @@ export default function Home() {
     
     return (
         <div className="flex flex-col">
-            <Header href="specialist/profile" altText="Message" />
+            <Header href="/specialist/profile" altText="Message" />
             <div className="m-4 flex flex-col items-center justify-center">
             <Separator />
                 <Card className="m-4 w-55">
