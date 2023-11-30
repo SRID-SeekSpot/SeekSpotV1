@@ -25,7 +25,7 @@ const Popup = ({ onClose }) => {
 
 export default function Home() {
 
-    const [showPopup, setShowPopup] = useState(false); // 控制弹窗显示的状态
+    const [showPopup, setShowPopup] = useState(false);
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
 

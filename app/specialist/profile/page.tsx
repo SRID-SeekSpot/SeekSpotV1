@@ -33,14 +33,14 @@ export default function Home() {
         }
     }, []);
 
-    const handleMessageClick = (e) => {
-        // 检查 localStorage 中的 unread 值
-        const unreadValue = localStorage.getItem("unread");
-        if (unreadValue !== "true") {
-            // 如果 unread 不是 "true"，阻止链接的默认行为
-            e.preventDefault();
-        }
-    };
+    // const handleMessageClick = (e) => {
+    //     // check the value from localStorage
+    //     const unreadValue = localStorage.getItem("unread");
+    //     if (unreadValue !== "true") {
+    //         // If "unread" is not true, stop
+    //         e.preventDefault();
+    //     }
+    // };
     return (
         <div className="flex flex-col">
             <title>Specialist Profile Page</title>
@@ -70,7 +70,7 @@ export default function Home() {
                     />
                 </a>
                 <div>
-                <a href="../delivery" onClick={handleMessageClick}>
+                <a href="../delivery">
                 <ProfileButton
                     iconSrc="/ProfileIcon/Email.png"
                     buttonName="Message"
