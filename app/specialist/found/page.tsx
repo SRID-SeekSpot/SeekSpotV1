@@ -54,7 +54,7 @@ export default function Home() {
     const searchProductList = (val: string, color: string, category: string) => {
         let filterList = BOUNTY_ITEMS
         if(val){ // filter val
-            filterList = filterList.filter(v=>v.name.indexOf(val)>-1);
+            filterList = filterList.filter(v=>v.name.toLowerCase().indexOf(val.toLowerCase())>-1);
         }
         if(color){ // filter color
             filterList = filterList.filter(v=>v.color === color);
