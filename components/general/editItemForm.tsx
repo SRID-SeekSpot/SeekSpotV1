@@ -110,7 +110,7 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
   // pop up message for delete action
   const [showPopup, setShowPopup] = useState(false);
   
-  const showPopupMessage = () => {
+  const showPopupDelete = () => {
     setShowPopup(true);
   };
 
@@ -129,7 +129,7 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
   const handlePopupClose = (choice) => {
     setShowPopup(false);
     console.log("Pass")
-    // setSelectedDelivery(choice); // 设置选中的送货方式
+    // setSelectedDelivery(choice); 
 
     const goBack = () => {
       router.push()
@@ -144,14 +144,13 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
                 <Image
                     alt={item.name}
                     src={item.imgSrc}
-                    // layout="intrinsic"
                     width={300}
                     height={300}
                     className="rounded-sm"
                 />
       </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '20px' }}>
-        <button onClick={showPopupMessage}>
+        <button onClick={showPopupDelete}>
           <Image
           alt="filterIcon"
           src="/icons/IconDelete.png"

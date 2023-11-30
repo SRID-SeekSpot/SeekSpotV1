@@ -66,3 +66,5 @@ const FoundItemDetailPage: React.FC<FoundItemDetailPageProps> = ({ item }) => {
 };
 
 export default FoundItemDetailPage;
+
+

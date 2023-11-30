@@ -160,10 +160,6 @@ export default function Home() {
                     <div className="grid grid-cols-2 gap-x-8 gap-y-8">
                         {foundItemList.map((item) => {
                             return( <FoundListItem key={item.id} {...item} />);
-                        // {foundItemList.map((item, index) => {
-                        //     return <Link key={index} href={`/specialist/editItem?ItemId=${index}`}  passHref>
-                        //                 <FoundListItem {...item} />
-                        //            </Link>;
                         })}
                     </div>
                 </div>
