@@ -30,11 +30,10 @@ export default function Home(){
 
     return (
         <div className="flex flex-col">
+            <Header href={`/specialist/${foundItem.id}`}  altText="Report a Found Item" />
             <title>Specialist Edit Item Description</title>
             {/* Header that redirects to home */}
-            <Header altText="Report a Found Item" />
             {/* Body */}
-            {/* <EditItemDescriptionForm itemName={itemDetail?.name} imgSrc={itemDetail?.imgSrc} locationLost={itemDetail?.location} dateLost={itemDetail?.date} additionalDetails={itemDetail?.description} /> */}
             <EditItemDescriptionForm item={foundItem}></EditItemDescriptionForm>
             {/* Bottom Navigation Bar */}
             <Navbar navButtons={navButtons} />

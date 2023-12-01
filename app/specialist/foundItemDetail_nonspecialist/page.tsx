@@ -183,7 +183,7 @@ const FoundItemDetailPage_nonspecialist: React.FC<FoundItemDetailPage_nonspecial
     const [showPopup, setShowPopup] = useState(false);
     const showPopupClaim = () => {
         setShowPopup(true);
-      };
+    };
     localStorage.setItem("claimItemIndex", item.id)
 
     if (!item) {
