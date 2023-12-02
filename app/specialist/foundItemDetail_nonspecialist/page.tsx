@@ -1,5 +1,5 @@
 // app/specialist/itemDetail/page.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 // import { useRouter } from 'next/router';
 import { Button } from "@/components/ui/button";
@@ -17,15 +17,15 @@ interface FoundItemDetailPage_nonspecialistProps {
       location: string;
       date: string;
       id: string;
+      claimStatus: boolean;
     };
 }
 
 // pop up area for claim
-const PopupClaim = ({ onClose }) => {
+const PopupClaim = ({ onClose, additionalData}) => {
     const [claimCode, setClaimCode] = useState('');
     const [showCongratulations, setShowCongratulations] = useState(false);
     const [showFail, setShowFail] = useState(false);
-    const [currItemID, setCurrItemID] = useState(false);
 
     const popupContainerStyle = {
         position: 'fixed',
@@ -80,7 +80,6 @@ const PopupClaim = ({ onClose }) => {
     const handleConfirmClaim = () => {
 
         let itemID = localStorage.getItem("claimItemIndex")
-        setCurrItemID(itemID);
         // find the required claim code
         let targetClaimCode = BOUNTY_ITEMS.find((item) => item.id === itemID)?.claimCode;
         if(targetClaimCode == claimCode){
@@ -101,6 +100,34 @@ const PopupClaim = ({ onClose }) => {
         setShowCongratulations(false);
         setShowFail(false);
     }
+
+    const handleClaimSuccess = () => {
+
+        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+      
+        if (updatedBountyItemsString !== "null") {
+            let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+            const updatedBountyItemsTmp = updatedBountyItems.map((item: { id: string }) => {
+              if (item.id === additionalData) {
+                // Update the status property to true
+                return { ...item, claimStatus: true };
+              }
+              return item;
+            });
+            localStorage.setItem("updatedBountyItems", JSON.stringify(updatedBountyItemsTmp));
+            console.log(updatedBountyItemsTmp);
+          } else {
+            const updatedBountyItems = BOUNTY_ITEMS.map((item) => {
+              if (item.id === additionalData) {
+                // Update the status property to true
+                return { ...item, status: true };
+              }
+              return item;
+            });
+            localStorage.setItem("updatedBountyItems", JSON.stringify(updatedBountyItems));
+          }
+        
+    };
   
     return (
         <div>
@@ -119,8 +146,8 @@ const PopupClaim = ({ onClose }) => {
                         <p>The bounty is now in your wallet.</p>
                         {/* <p>The bounty is now in your wallet.</p> */}
                         <div className="flex items-center justify-center">
-                            <Button className="mt-5 w-200 h-10" >
-                                <a href='/specialist/dashboard'>Claim</a>
+                            <Button className="mt-5 w-200 h-10"  onClick={() => handleClaimSuccess()}>
+                                <a href='/specialist/found'>Claim</a>
                             </Button>
                         </div>
                     </div>
@@ -186,6 +213,7 @@ const FoundItemDetailPage_nonspecialist: React.FC<FoundItemDetailPage_nonspecial
     };
     localStorage.setItem("claimItemIndex", item.id)
 
+
     if (!item) {
         return <p>Item not found!</p>;
     }
@@ -220,7 +248,7 @@ const FoundItemDetailPage_nonspecialist: React.FC<FoundItemDetailPage_nonspecial
                     <Button className="w-56" asChild onClick={showPopupClaim}>
                         <p>Claim</p>
                     </Button>
-                    {showPopup && <PopupClaim onClose={handlePopupClose}  />}
+                    {showPopup && <PopupClaim onClose={handlePopupClose}  additionalData={item.id}/>}
                 </div>
             </div>
 
