@@ -22,6 +22,8 @@ export default function Home() {
         { value: "West Marketplace", label: "West Marketplace" },
     ];
 
+    localStorage.setItem("updatedBountyItems", JSON.stringify(null))
+
     return (
         <div className="bg-sky h-screen">
             <title>SRID HomePage</title>

@@ -10,6 +10,7 @@ export const BOUNTY_ITEMS = [
         location: "2nd floor",
         date: "Nov.4",
         claimCode: "1234",
+        claimStatus: false
     },
     {
         id: "f2",
@@ -22,6 +23,7 @@ export const BOUNTY_ITEMS = [
         location: "1st floor",
         date: "Nov.5",
         claimCode: "1234",
+        claimStatus: false
     },
     {
         id: "f3",
@@ -34,6 +36,7 @@ export const BOUNTY_ITEMS = [
         location: "3rd floor",
         date: "Nov.5",
         claimCode: "1234",
+        claimStatus: false
     },
     {
         id: "f4",
@@ -46,6 +49,7 @@ export const BOUNTY_ITEMS = [
         location: "parking lot",
         date: "Nov.6",
         claimCode: "1234",
+        claimStatus: false
     },
     {
         id: "l5",
@@ -58,5 +62,6 @@ export const BOUNTY_ITEMS = [
         location: "2nd floor",
         date: "Nov.6",
         claimCode: "1234",
+        claimStatus: true
     },
 ];

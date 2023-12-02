@@ -10,7 +10,7 @@ import { ITEMS_CATEGORY } from '@/app/constants/ItemCategory';
 
 
 // pop up area
-const PopupDelete = ({ onClose }) => {
+const PopupDelete = ({ onClose, additionalData }) => {
   const popupContainerStyle = {
       position: 'fixed',
       top: 0,
@@ -34,15 +34,13 @@ const PopupDelete = ({ onClose }) => {
   const handleDeleteConfirm = () => {
 
       // delete item from the category
-      let currListItemsString = localStorage.getItem("dummyData")
-      let currListItems = JSON.parse(currListItemsString)
+      const updatedBountyItems = BOUNTY_ITEMS.filter((item, index) => item.id !== additionalData);
+      localStorage.setItem("updatedBountyItems", JSON.stringify(updatedBountyItems))
 
-      // const foundItem = BOUNTY_ITEMS.find((item) => item.id === itemIndex[0]);
+      // console.log("UpdatedBountyItems: ")
+      // console.log(updatedBountyItems)
 
-      let currIndex = localStorage.getItem("currIndex")
-
-      console.log("Delete Confirm Action")
-      console.log(currListItems[0].name)
+      window.location.href = '/specialist/found';
   };
 
   return (
@@ -51,7 +49,7 @@ const PopupDelete = ({ onClose }) => {
                   <p className='mt-5 text-sm'>Are you sure you want to delete the item?</p>
               {/* Button Panel */}
               <div className="flex mt-35 justify-between ">
-                  <Button className="w-30 mt-8 ml-8" asChild onClick={handleDeleteConfirm}>
+                  <Button className="w-30 mt-8 ml-8" asChild onClick={() => handleDeleteConfirm()}>
                     <a>Confirm</a>
                   </Button>
                   <Button className="w-30 mt-8 mr-8"  onClick={()=> onClose()}>
@@ -259,7 +257,7 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
             width={30}
             height={30}/>
           </button>
-          {showPopup && <PopupDelete onClose={handlePopupClose}/>}
+          {showPopup && <PopupDelete onClose={handlePopupClose} additionalData={item.id}/>}
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
           <input

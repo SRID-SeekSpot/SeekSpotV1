@@ -29,15 +29,43 @@ import {
 import FoundListItem, {
     FoundListItemProps,
 } from "@/components/general/foundListItem";
+import { useEffect, useState } from "react";
+
+
+export interface FoundItemProps {
+    item: {
+      name: string;
+      imgSrc: string;
+      description: string;
+      color: string;
+      category: string;
+      price: number;
+      location: string;
+      date: string;
+      id: string;
+    }
+  }
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
 
-    const foundItemList: FoundListItemProps[] = BOUNTY_ITEMS;
+    const [foundItemList, setFoundItemList] = useState<FoundItemProps[]>(BOUNTY_ITEMS);
 
     const colorFilter = ["White", "Black"];
     const categoryFilter = ["Cloth", "Bottles"];
+
+    useEffect(() => {
+        // Fetch data from localStorage only once when the component mounts
+        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+        console.log(updatedBountyItemsString)
+    
+        if (updatedBountyItemsString !== "null") {
+          let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+          console.log(updatedBountyItems)
+          setFoundItemList(updatedBountyItems);
+        }
+      }, []); 
 
     return (
         <div className="flex flex-col">
