@@ -80,7 +80,10 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="mt-12 flex justify-end mr-8">
+      <div
+        className="mt-12 flex justify-end mr-6"
+        style={{ position: "fixed", bottom: "80px", right: "0px" }}
+      >
         <Link href="/specialist/createLostItem" passHref>
           <Image
             src="/icons/IconCreate.png"
