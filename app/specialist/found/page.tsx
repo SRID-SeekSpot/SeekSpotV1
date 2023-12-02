@@ -29,8 +29,15 @@ import FoundListItem, {
   FoundListItemProps,
 } from "@/components/general/foundListItem";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+  const handleBackClick = () => {
+    localStorage.removeItem("foundItems"); // Clear specific local storage data
+    router.push("/"); // Navigate to the home page
+  };
+
   // Icon Src and Route for Navigation Bar
   const navButtons = SPECIALIST_ROUTES;
 
@@ -69,10 +76,16 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-      <title>Specialist Found Item Inventory</title>
-      {/* Header that redirects to home */}
-      {/* <Header href="/" altText="Hello"/> */}
-      <Header altText="Found Item Inventory" />
+      <div className="flex items-center px-4 py-2">
+        <button onClick={handleBackClick} className="mr-4">
+          <Image src="/icons/IconBack.png" alt="Back" width={24} height={24} />
+        </button>
+        <title>Specialist Found Item Inventory</title>
+
+        {/* Header that redirects to home */}
+        {/* <Header href="/" altText="Hello"/> */}
+        <Header altText="Found Item Inventory" />
+      </div>
       {/* Body */}
       <div className="m-4">
         {/* Search Div */}
