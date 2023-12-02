@@ -10,10 +10,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 
+import ImageKit from "imagekit-javascript";
+
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 
 export default function Home() {
   const router = useRouter();
+
+  const imagekit = new ImageKit({
+    publicKey: "public_rV86OzvQJTcJmTvRzN8P/9RcMDE=", // Replace with your actual public API key
+    urlEndpoint: "https://ik.imagekit.io/seekspotv1/", // Replace with your actual ImageKit URL endpoint
+  });
 
   // Icon Src and Route for Navigation Bar
   const navButtons = SPECIALIST_ROUTES;
@@ -33,29 +40,22 @@ export default function Home() {
     const imageFile = event.target.itemImage.files[0];
 
     if (imageFile) {
-      const imageFormData = new FormData();
-      imageFormData.append("image", imageFile);
-
       try {
-        const response = await fetch("https://api.imgur.com/3/image", {
-          method: "POST",
-          headers: {
-            //Authorization: "Bearer cb697543746e1713c13a284153a74244e19fc63e", // Replace with your actual Imgur client ID
-            Authorization: "Client-ID 70d9db442c9850a",
-          },
-          body: imageFormData,
+        // Use ImageKit's upload method
+        const result = imagekit.upload({
+          file: imageFile,
+          fileName: "user_uploaded_image.jpg",
+          signature: "",
+          token: "",
+          expire: 0,
         });
 
-        const data = await response.json();
-
-        if (data.success) {
-          // Add the Imgur image link to formData
-          formData.image = data.data.link;
-        } else {
-          console.error("Image upload to Imgur failed:", data);
+        if ((await result).url) {
+          // Add the ImageKit image URL to formData
+          formData.image = (await result).url;
         }
       } catch (error) {
-        console.error("Error uploading image to Imgur:", error);
+        console.error("Error uploading image to ImageKit:", error);
         return; // Exit the function if the image upload fails
       }
     }
@@ -67,31 +67,6 @@ export default function Home() {
     localStorage.setItem("foundItems", JSON.stringify(existingItems));
 
     router.push("/specialist/found");
-
-    // const imageFile = event.target.itemImage.files[0];
-    // const formData = new FormData();
-    // formData.append("image", imageFile);
-
-    // try {
-    //   const response = await fetch("https://api.imgur.com/3/image/", {
-    //     method: "POST",
-    //     headers: {
-    //       Authorization: "Client-ID 70d9db442c9850a",
-    //     },
-    //     body: formData,
-    //   });
-
-    //   const data = await response.json();
-
-    //   if (data.success) {
-    //     const imageUrl = data.data.link;
-    //     router.push("/found");
-    //   } else {
-    //     console.error("Image upload to Imgur failed:", data);
-    //   }
-    // } catch (error) {
-    //   console.error("Error uploading image to Imgur:", error);
-    // }
   };
 
   return (
