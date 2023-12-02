@@ -29,18 +29,60 @@ import {
 import FoundListItem, {
     FoundListItemProps,
 } from "@/components/general/foundListItem";
+
 import { useEffect, useState } from "react";
 import { EachFoundItemProps } from "../editItem/page";
+// Icon Src and Route for Navigation Bar
+const navButtons = SPECIALIST_ROUTES;
 
+const foundItemList: FoundListItemProps[] = BOUNTY_ITEMS;
+
+const colorFilter = ["White", "Black", "Red", "Blue"];
+const categoryFilter = ["Cloth", "Bottles", "Phone"];
 
 export default function Home() {
-    // Icon Src and Route for Navigation Bar
-    const navButtons = SPECIALIST_ROUTES;
+    const [productList , setProductList] = useState(BOUNTY_ITEMS); // Product list data
+    const [val , setVal] = useState(''); // input value for query
+    const [color , setColor] = useState(''); // search by filter color
+    const [category , setCategory] = useState(''); // search by filter category
+    const [selectedColor , setSelectedColor] = useState(''); // selected color
+    const [selectedCategory , setSelectedCategory] = useState(''); // selected category
+
+    // Query content changes or filtering changes trigger the query
+    useEffect(()=>{
+        searchProductList(val, color, category);
+    }, [val, color, category]);
+
 
     const [foundItemList, setFoundItemList] = useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
+  
+    // search method
+    const searchProductList = (val: string, color: string, category: string) => {
+        let filterList = BOUNTY_ITEMS
+        if(val){ // filter val
+            filterList = filterList.filter(v=>v.name.toLowerCase().indexOf(val.toLowerCase())>-1);
+        }
+        if(color){ // filter color
+            filterList = filterList.filter(v=>v.color === color);
+        }
+        if(category){ // filter category
+            filterList = filterList.filter(v=>v.category === category);
+        }
+        setProductList(filterList);
+    }
+    //save filter value
+    const onSave = () => {
+        setColor(selectedColor);
+        setCategory(selectedCategory);
+    }
+    // Reset all filter value
+    const onReset = () => {
+        setColor('');
+        setCategory('');
+        setSelectedColor('');
+        setSelectedCategory('');
+    }
 
-    const colorFilter = ["White", "Black"];
-    const categoryFilter = ["Cloth", "Bottles"];
 
     useEffect(() => {
         // Fetch data from localStorage only once when the component mounts
@@ -67,6 +109,9 @@ export default function Home() {
                     <Input
                         type="search"
                         placeholder="Enter Some Keyword For Searching"
+                        onChange={val=>{
+                            setVal(val.target.value);
+                        }}
                     />
                     <Button variant={"link"}>
                         <Image
@@ -105,7 +150,7 @@ export default function Home() {
                                 <div className="flex flex-row justify-between items-center">
                                     <p>Color:</p>
                                     <div className="">
-                                        <Select>
+                                        <Select value={selectedColor} onValueChange={val=>setSelectedColor(val)}>
                                             <SelectTrigger className="w-[160px]">
                                                 <SelectValue placeholder="Select a Color" />
                                             </SelectTrigger>
@@ -132,11 +177,10 @@ export default function Home() {
                                         </Select>
                                     </div>
                                 </div>
-                                {/* Category Filter */}
                                 <div className="flex flex-row justify-between items-center">
                                     <p>Category:</p>
                                     <div className="">
-                                        <Select>
+                                        <Select value={selectedCategory} onValueChange={val=>setSelectedCategory(val)}>
                                             <SelectTrigger className="w-[160px]">
                                                 <SelectValue placeholder="Select a Category" />
                                             </SelectTrigger>
@@ -163,8 +207,8 @@ export default function Home() {
                                 </div>
                                 {/* Confirmation */}
                                 <div className="flex flex-row justify-between items-center">
-                                    <Button className="w-28 rounded-lg">Save</Button>
-                                    <Button className="w-28 rounded-lg" variant={"secondary"}>Reset</Button>
+                                    <Button className="w-28 rounded-lg" onClick={onSave}>Save</Button>
+                                    <Button className="w-28 rounded-lg" variant={"secondary"} onClick={onReset}>Reset</Button>
                                 </div>
                             </div>
                         </SheetContent>
@@ -173,8 +217,8 @@ export default function Home() {
                 {/* Display Div */}
                 <div className="mt-8">
                     <div className="grid grid-cols-2 gap-x-8 gap-y-8">
-                        {foundItemList.map((item) => {
-                            return( <FoundListItem key={item.id} {...item} />);
+                        {productList.map((item) => {
+                            return <FoundListItem {...item} />;
                         })}
                     </div>
                 </div>

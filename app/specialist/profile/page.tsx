@@ -12,7 +12,7 @@ import BountyHuntListItem, {
 import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import ProfileButton from "@/components/general/profileButton";
-import { getLocalStorageItem } from "../../delivery/localStorage"
+import { getLocalStorageItem } from "@/components/logic/localStorage"
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
@@ -32,6 +32,15 @@ export default function Home() {
             setUnread(unreadValue === "true");
         }
     }, []);
+
+    // const handleMessageClick = (e) => {
+    //     // check the value from localStorage
+    //     const unreadValue = localStorage.getItem("unread");
+    //     if (unreadValue !== "true") {
+    //         // If "unread" is not true, stop
+    //         e.preventDefault();
+    //     }
+    // };
     return (
         <div className="flex flex-col">
             <title>Specialist Profile Page</title>
@@ -61,7 +70,7 @@ export default function Home() {
                     />
                 </a>
                 <div>
-                <a href="../delivery">
+                <a href="/specialist/profile/delivery">
                 <ProfileButton
                     iconSrc="/ProfileIcon/Email.png"
                     buttonName="Message"

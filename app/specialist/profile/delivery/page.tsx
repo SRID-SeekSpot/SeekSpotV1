@@ -1,13 +1,14 @@
 "use client";
 
 import Header from "@/components/general/header";
-import React, { useContext ,useState, useRef} from 'react';
+import React, { useContext ,useState, useRef, useEffect} from 'react';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/general/navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+
 const Popup = ({ onClose }) => {
     const popupContainerStyle = {
         position: 'fixed',
@@ -34,44 +35,48 @@ const Popup = ({ onClose }) => {
         alignItems: 'center',
     };
     const deliveryTitleStyle = {
-        textAlign: 'center', // 添加居中样式
-        width: '100%', // 确保标题占满整个宽度
-        fontSize: '1.875rem', // 相当于 text-3xl
-        color: '#003366', // 相当于 text-navy
-        marginBottom: '1rem', // 添加一些底部空间
+        textAlign: 'center', 
+        width: '100%', 
+        fontSize: '1.875rem', 
+        color: '#003366', 
+        marginBottom: '1rem', 
     };
     const addressTitleStyle = {
-        fontSize: '1rem', // 比 text-3xl 小
-        color: '#003366', // 相当于 text-navy
-        marginTop: '2rem', // 增加上方间隔
-        textAlign: 'left', // 左对齐文本
+        fontSize: '1rem', 
+        color: '#003366', 
+        marginTop: '2rem', 
+        textAlign: 'left',
     };
     const addressTextAreaStyle = {
-        width: '100%', // 宽度占满容器
-        padding: '10px', // 一些内边距以方便输入
-        marginTop: '1rem', // 在输入框上方留出一些空间
-        borderRadius: '5px', // 轻微的边框圆角
-        border: '1px solid #ccc', // 边框样式
-        resize: 'none', // 防止用户调整大小
+        width: '100%', 
+        padding: '10px', 
+        marginTop: '1rem', 
+        borderRadius: '5px',
+        border: '1px solid #ccc',
+        resize: 'none', 
     };
     // const handleConfirm = () => {
-    //     onClose('DHL');  // 假设用户选择了 DHL
+    //     onClose('DHL');  // Assume user choose DHL
     // };
-    // 新增状态来跟踪用户选择的送货方式
     const [selectedDeliveryOption, setSelectedDeliveryOption] = useState('');
 
-    // 处理送货方式选择的事件
+    // Deal with event for user delivery way
     const handleDeliveryOptionChange = (e) => {
         setSelectedDeliveryOption(e.target.value);
     };
 
-    // 修改确认按钮的处理逻辑
+    // the logic to choose deliver way
     const handleConfirm = () => {
         if (selectedDeliveryOption === 'ups' || selectedDeliveryOption === 'dhl') {
             localStorage.setItem("unread", "false");
+            localStorage.setItem("showPopup", "false");
+            const shipToMeRadio = document.getElementById('ship-to-me');
+            if (shipToMeRadio) {
+                shipToMeRadio.checked = true;
+            }
             onClose(selectedDeliveryOption);
         } else {
-            // 可以在这里显示错误消息或做其他处理
+            // for error message
             console.log('Please select a delivery option.');
         }
     };
@@ -130,7 +135,7 @@ const Popup = ({ onClose }) => {
                         <a>Confirm</a>
                     </Button>
                     <Button className="w-56" variant={"secondary"} onClick={()=> onClose()}>
-                    <a href="/delivery">Cancel</a>
+                    <a>Cancel</a>
                     </Button>
                 </div>
             </div>
@@ -141,26 +146,32 @@ const Popup = ({ onClose }) => {
 
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false);
-    const [selectedDelivery, setSelectedDelivery] = useState(null); // 新增状态
+    const [selectedDelivery, setSelectedDelivery] = useState(null); // for delivery state
     const navButtons = SPECIALIST_ROUTES;
     const shipToMeRef = useRef(null);
+
+    useEffect(() => {
+        localStorage.setItem("showPopup", "false")
+    }, []);
     
 
     const handleDeliveryChange = (e) => {
         if (e.target.value === 'ship-to-me') {
             setShowPopup(true);
         }
+        localStorage.setItem("unread", "false")
+        setSelectedDelivery(e.target.value)
     };
 
     const handlePopupClose = (choice) => {
         setShowPopup(false);
-        setSelectedDelivery(choice); // 设置选中的送货方式
+        setSelectedDelivery(choice); // set the delivery way
     };
 
     
     return (
         <div className="flex flex-col">
-            <Header href="specialist/profile" altText="Message" />
+            <Header href="/specialist/profile" altText="Message" />
             <div className="m-4 flex flex-col items-center justify-center">
             <Separator />
                 <Card className="m-4 w-55">
@@ -172,13 +183,13 @@ export default function Home() {
                         Has Been Founded!
                         </p>
                          {/* image */}
-                         <div className="w-full flex justify-center"> {/* 使用 flex 容器使图像居中 */}
+                         <div className="w-full flex justify-center">
                         <Image
-                            src="/bountyItems/BlackGlasses.png" // 替换成你的图像路径
+                            src="/bountyItems/BlackGlasses.png" 
                             alt="Black Glasses"
-                            width={300} // 设定图像的宽度
-                            height={100} // 设定图像的高度
-                            //objectFit="contain" // 保持图像的宽高比
+                            width={300} 
+                            height={100} 
+                            //objectFit="contain" 
                         />
                         </div>
                         <div className="w-full flex justify-center">
@@ -193,6 +204,7 @@ export default function Home() {
                             name="delivery"
                             value="in-person"
                             className="mr-2"
+                            onChange={handleDeliveryChange}
                         />
                         <label htmlFor="in-person" className="mr-4 text-lg">
                             Get it in person
