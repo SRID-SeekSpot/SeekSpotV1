@@ -8,7 +8,21 @@ import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import EditItemDescriptionForm from "@/components/general/editItemForm";
 import { useSearchParams } from "@/node_modules/next/navigation";
+import { FoundItemProps } from '../found/page';
 
+export interface EachFoundItemProps {
+
+      name: string;
+      imgSrc: string;
+      description: string;
+      color: string;
+      category: string;
+      price: number;
+      location: string;
+      date: string;
+      id: string;
+    
+}
 
 export default function Home(){
     
@@ -18,15 +32,19 @@ export default function Home(){
     // const [itemDetail, setItemDetail] = useState<Item | null>(null);
     const searchParams = useSearchParams()
     const itemIndex = searchParams.getAll("ItemID")
+    
 
-    // useEffect(() => {
-    //     if (itemIndex.length > 0) {
-    //       const foundItem = BOUNTY_ITEMS.find((item) => item.id === itemIndex[0]);
-    //       setItemDetail(foundItem || null);
-    //     }
-    //   }, [itemIndex]);
+    const [foundItem, setFoundItem] = useState<FoundItemProps>(BOUNTY_ITEMS.find((item) => item.id === itemIndex[0]));
 
-    const foundItem = BOUNTY_ITEMS.find((item) => item.id === itemIndex[0]);
+    useEffect(() => {
+        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+            if (updatedBountyItemsString !== "null") {
+            let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+            // foundItem = updatedBountyItems.find((item) => item.id === itemIndex[0]);
+            setFoundItem(updatedBountyItems.find((item: { id: string; }) => item.id === itemIndex[0]))
+        }
+    }, []);  
+
 
     return (
         <div className="flex flex-col">
@@ -34,7 +52,7 @@ export default function Home(){
             <title>Specialist Edit Item Description</title>
             {/* Header that redirects to home */}
             {/* Body */}
-            <EditItemDescriptionForm item={foundItem}></EditItemDescriptionForm>
+            <EditItemDescriptionForm eachItem={foundItem}></EditItemDescriptionForm>
             {/* Bottom Navigation Bar */}
             <Navbar navButtons={navButtons} />
         </div>

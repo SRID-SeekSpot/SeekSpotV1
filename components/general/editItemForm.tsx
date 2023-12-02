@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { BOUNTY_ITEMS } from '@/app/constants/BountyItems';
@@ -7,10 +7,12 @@ import Link from '@/node_modules/next/link';
 import FoundListItem from './foundListItem';
 import { COLORS_CATEGORY } from '@/app/constants/ColorsCategory';
 import { ITEMS_CATEGORY } from '@/app/constants/ItemCategory';
+import { FoundItemProps } from '../found/page';
 
 
 // pop up area
 const PopupDelete = ({ onClose, additionalData }) => {
+
   const popupContainerStyle = {
       position: 'fixed',
       top: 0,
@@ -34,11 +36,17 @@ const PopupDelete = ({ onClose, additionalData }) => {
   const handleDeleteConfirm = () => {
 
       // delete item from the category
-      const updatedBountyItems = BOUNTY_ITEMS.filter((item, index) => item.id !== additionalData);
+      let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+    
+      let updatedBountyItems = null
+      if (updatedBountyItemsString !== "null") {
+        let updatedBountyItemsTmp = JSON.parse(updatedBountyItemsString);
+        updatedBountyItems = updatedBountyItemsTmp.filter((item: { id: any; }) => item.id !== additionalData);
+      }
+      else{
+        updatedBountyItems = BOUNTY_ITEMS.filter((item) => item.id !== additionalData);
+      }
       localStorage.setItem("updatedBountyItems", JSON.stringify(updatedBountyItems))
-
-      // console.log("UpdatedBountyItems: ")
-      // console.log(updatedBountyItems)
 
       window.location.href = '/specialist/found';
   };
@@ -63,7 +71,7 @@ const PopupDelete = ({ onClose, additionalData }) => {
 };
 
 
-const PopupCongratulations = ({onClose}) => {
+const PopupCongratulations = ({onClose, additionalData}) => {
 
     const popupCongratulationsStyle = {
       position: 'fixed',
@@ -91,6 +99,27 @@ const PopupCongratulations = ({onClose}) => {
       fontWeight: 'bold', 
     };
 
+    // handle Report As Found Confirm
+    const handleReportAsFoundConfirm = () => {
+
+      // delete item from the category
+      let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+    
+      let updatedBountyItems = null
+      if (updatedBountyItemsString !== "null") {
+        let updatedBountyItemsTmp = JSON.parse(updatedBountyItemsString);
+        updatedBountyItems = updatedBountyItemsTmp.filter((item: { id: any; }) => item.id !== additionalData);
+        
+        console.log(updatedBountyItems)
+      }
+      else{
+        updatedBountyItems = BOUNTY_ITEMS.filter((item) => item.id !== additionalData);
+      }
+      localStorage.setItem("updatedBountyItems", JSON.stringify(updatedBountyItems))
+
+      window.location.href = '/specialist/found';
+    };
+
     return (
       <div>
         <div className="popup-container" style={popupCongratulationsStyle}>
@@ -105,8 +134,8 @@ const PopupCongratulations = ({onClose}) => {
                         <p className='mt-5 text-sm' style={paragraphStyle}>Congratulations!</p>
                         <p>The item has now been removed from the inventory.</p>
                         <div className="flex items-center justify-center">
-                            <Button className="mt-5 w-200 h-10" >
-                                <a href='/specialist/found'>OK</a>
+                            <Button className="mt-5 w-200 h-10" onClick={handleReportAsFoundConfirm}>
+                              OK
                             </Button>
                         </div>
                     </div>
@@ -170,7 +199,7 @@ const PopupSave = ({onClose}) => {
 }
 
 export interface EditItemProps {
-  item: {
+  eachItem: {
     name: string;
     imgSrc: string;
     description: string;
@@ -184,12 +213,14 @@ export interface EditItemProps {
 }
 
 const EditItemDescriptionForm: React.FC<EditItemProps> = ({
-    item
+  eachItem
 }) => {
 
   const[showPopup, setShowPopup] = useState(false); // pop up message for delete action
   const[showCongratulations, setShowCongratulations] = useState(false);
   const[showSave, setShowSave] = useState(false);
+
+  const [item, setItem] = useState<FoundItemProps>(BOUNTY_ITEMS.find((item) => item.id === eachItem.id));
 
   const [formFields, setFormFields] = useState({
     itemName: item.name,
@@ -199,6 +230,28 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
     itemCategory: item.category,
     additionalDetails: item.description,
   });
+
+  useEffect(() => {
+    let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+
+        if (updatedBountyItemsString !== "null") {
+        let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+        // foundItem = updatedBountyItems.find((item) => item.id === itemIndex[0]);
+        const updatedItem = updatedBountyItems.find((item: { id: string; }) => item.id === eachItem.id);
+        if (updatedItem) {
+          // Update form state based on the retrieved item
+          setFormFields({
+            itemName: updatedItem.name,
+            locationLost: updatedItem.location,
+            dateLost: updatedItem.date,
+            itemColor: updatedItem.color,
+            itemCategory: updatedItem.category,
+            additionalDetails: updatedItem.description,
+          })
+      }
+    }
+  }, [eachItem]);  
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -210,11 +263,58 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Access the form data in the formFields state object
+  
     console.log("Form Data:", formFields);
-    
-    // may need to save data in local storage
+  
+    let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+  
+    if (updatedBountyItemsString !== "null") {
+      let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+  
+      // Identify the index of the item you want to update in updatedBountyItems
+      let itemIndex = updatedBountyItems.findIndex((eachItem) => eachItem.id === item.id);
+  
+      // Check if the item was found
+      if (itemIndex !== -1) {
+        // Update the properties of the item
+        updatedBountyItems[itemIndex] = {
+          ...updatedBountyItems[itemIndex],
+          name: formFields.itemName,
+          description: formFields.additionalDetails,
+          color: formFields.itemColor,
+          category: formFields.itemCategory,
+          location: formFields.locationLost,
+          date: formFields.dateLost
+        };
+      } else {
+        console.error("Item not found in updatedBountyItems");
+      }
+  
+      localStorage.setItem("updatedBountyItems", JSON.stringify(updatedBountyItems));
+    } else {
+      // Identify the index of the item you want to update in BOUNTY_ITEMS
+      let itemIndex = BOUNTY_ITEMS.findIndex((eachItem) => eachItem.id === item.id);
+  
+      // Check if the item was found
+      if (itemIndex !== -1) {
+        // Update the properties of the item
+        BOUNTY_ITEMS[itemIndex] = {
+          ...BOUNTY_ITEMS[itemIndex],
+          name: formFields.itemName,
+          description: formFields.additionalDetails,
+          color: formFields.itemColor,
+          category: formFields.itemCategory,
+          location: formFields.locationLost,
+          date: formFields.dateLost
+        };
+      } else {
+        console.error("Item not found in BOUNTY_ITEMS");
+      }
+  
+      localStorage.setItem("updatedBountyItems", JSON.stringify(BOUNTY_ITEMS));
+    }
   };
+  
 
   
   const showPopupDelete = () => {
@@ -226,7 +326,7 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
   };
 
   const handleCongratulationsClose = () => {
-    setShowCongratulations(false);
+      setShowCongratulations(false);
   };
 
   const handleSaveClose = () => {
@@ -265,7 +365,7 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
             name="itemName"
             // placeholder={item.name}
             style={{backgroundColor:"#DCDCDC", borderRadius: '5px', paddingLeft: '5px', width:'100%'}}
-            value = {item.name}
+            value = {formFields.itemName}
             onChange={handleInputChange}
           />
         </div>
@@ -278,7 +378,7 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
                 name="locationLost"
                 placeholder="parking lot"
                 style={{backgroundColor:"#DCDCDC", borderRadius: '5px', paddingLeft: '5px', width:'100%'}}
-                value = {item.location}
+                value = {formFields.locationLost}
                 onChange={handleInputChange}
             />
           </div>
@@ -287,10 +387,10 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
             <br/>
             <input
                 type="text"
-                name="locationLost"
+                name="dateLost"
                 placeholder="Date Lost"
                 style={{backgroundColor:"#DCDCDC", borderRadius: '5px', paddingLeft: '5px', width:'100%'}}
-                value = {item.date}
+                value = {formFields.dateLost}
                 onChange={handleInputChange}
             />
               {/* <input
@@ -372,14 +472,13 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({
         </div>
         
         <br/>
-        <div className="pb-20 flex flex-column items-center justify-center">
+      </form>
+      <div className="pb-20 flex flex-column items-center justify-center">
           <a onClick={() => setShowCongratulations(true)}>
             <p style={{ color: 'blue', textDecoration: 'underline' }}>Report as Found</p>
           </a>
-          {showCongratulations && <PopupCongratulations onClose={handleCongratulationsClose}  />}
+          {showCongratulations && <PopupCongratulations onClose={handleCongratulationsClose} additionalData={item.id}/>}
         </div>
-
-      </form>
     </div>
   );
   
