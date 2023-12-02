@@ -8,12 +8,91 @@ import Navbar from "@/components/general/navbar";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 
 export default function Home() {
+  const router = useRouter();
+
   // Icon Src and Route for Navigation Bar
   const navButtons = SPECIALIST_ROUTES;
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = {
+      name: event.target.itemName.value,
+      itemDescription: event.target.itemDescription.value,
+      locationFound: event.target.locationFound.value,
+      dateFound: event.target.dateFound.value,
+      itemColor: event.target.itemColor.value,
+      itemCategory: event.target.itemCategory.value,
+    };
+
+    const imageFile = event.target.itemImage.files[0];
+
+    if (imageFile) {
+      const imageFormData = new FormData();
+      imageFormData.append("image", imageFile);
+
+      try {
+        const response = await fetch("https://api.imgur.com/3/image", {
+          method: "POST",
+          headers: {
+            //Authorization: "Bearer cb697543746e1713c13a284153a74244e19fc63e", // Replace with your actual Imgur client ID
+            Authorization: "Client-ID 70d9db442c9850a",
+          },
+          body: imageFormData,
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Add the Imgur image link to formData
+          formData.image = data.data.link;
+        } else {
+          console.error("Image upload to Imgur failed:", data);
+        }
+      } catch (error) {
+        console.error("Error uploading image to Imgur:", error);
+        return; // Exit the function if the image upload fails
+      }
+    }
+
+    const existingItems = JSON.parse(
+      localStorage.getItem("foundItems") || "[]"
+    );
+    existingItems.push(formData);
+    localStorage.setItem("foundItems", JSON.stringify(existingItems));
+
+    router.push("/specialist/found");
+
+    // const imageFile = event.target.itemImage.files[0];
+    // const formData = new FormData();
+    // formData.append("image", imageFile);
+
+    // try {
+    //   const response = await fetch("https://api.imgur.com/3/image/", {
+    //     method: "POST",
+    //     headers: {
+    //       Authorization: "Client-ID 70d9db442c9850a",
+    //     },
+    //     body: formData,
+    //   });
+
+    //   const data = await response.json();
+
+    //   if (data.success) {
+    //     const imageUrl = data.data.link;
+    //     router.push("/found");
+    //   } else {
+    //     console.error("Image upload to Imgur failed:", data);
+    //   }
+    // } catch (error) {
+    //   console.error("Error uploading image to Imgur:", error);
+    // }
+  };
 
   return (
     <div className="flex flex-col text-navy">
@@ -43,7 +122,7 @@ export default function Home() {
 
       {/* Scrollable Body */}
       <ScrollArea className="flex-grow pb-20">
-        <form className="m-5 space-y-6">
+        <form onSubmit={handleSubmit} className="m-5 space-y-6">
           <div className="space-y-2">
             {/* Item Name */}
             <label htmlFor="itemName" className=" font-semibold">
@@ -102,10 +181,9 @@ export default function Home() {
               className="w-full p-2 border rounded"
             >
               <option value="Black">Black</option>
-              <option value="Black">White</option>
-              <option value="Black">Red</option>
-              <option value="Black">Blue</option>
-              {/* Add more color options here */}
+              <option value="White">White</option>
+              <option value="Red">Red</option>
+              <option value="Blue">Blue</option>
             </select>
 
             {/* Item Category */}
