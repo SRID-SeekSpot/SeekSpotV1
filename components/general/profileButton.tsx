@@ -79,7 +79,12 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({
                         onClick={() => setIsEditing(!isEditing)}
                         className="p-1 bg-gray-200 rounded-full"
                     >
-                        <Image alt="editIcon" src="/ProfileIcon/Editing.png" width={20} height={20}/>
+                        <Image
+                            alt="editIcon"
+                            src="/ProfileIcon/Editing.png"
+                            width={20}
+                            height={20}
+                        />
                     </button>
                 )}
             </div>

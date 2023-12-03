@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import React, { useEffect } from 'react';
 
 import LogoSquare from "../public/LogoSquare.png";
 import {
@@ -14,12 +15,23 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 
+const handlePopup = () => {
+    localStorage.setItem("showPopup", "true");
+    localStorage.setItem("unread", "true");
+};
 export default function Home() {
+
+    // Load unread attribute
+    useEffect(() => {
+        localStorage.setItem("unread", "true");
+    }, []);
     const locationOptions = [
         { value: "Vista Valley Mall", label: "Vista Valley Mall" },
         { value: "Spectrum Square", label: "Spectrum Square" },
         { value: "West Marketplace", label: "West Marketplace" },
     ];
+
+    localStorage.setItem("updatedBountyItems", JSON.stringify(null))
 
     return (
         <div className="bg-sky h-screen">
@@ -63,6 +75,11 @@ export default function Home() {
                     <Button className="w-56" variant={"outline"} asChild>
                         <a href="/styleguide">Style Guide</a>
                     </Button>
+                    <div className="w-56 text-center">
+                        <a href="/specialist/dashboard" className="text-sm underline" onClick={handlePopup}>
+                        Task 9 & 10 starts from here
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

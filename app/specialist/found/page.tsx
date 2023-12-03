@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
@@ -28,69 +29,94 @@ import {
 import FoundListItem, {
   FoundListItemProps,
 } from "@/components/general/foundListItem";
+
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { EachFoundItemProps } from "../editItem/page";
+// Icon Src and Route for Navigation Bar
+const navButtons = SPECIALIST_ROUTES;
+
+const foundItemList: FoundListItemProps[] = BOUNTY_ITEMS;
+
+const colorFilter = ["White", "Black", "Red", "Blue"];
+const categoryFilter = ["Cloth", "Bottles", "Phone"];
 
 export default function Home() {
-  const router = useRouter();
-  const handleBackClick = () => {
-    localStorage.removeItem("foundItems"); // Clear specific local storage data
-    router.push("/"); // Navigate to the home page
+  const [productList, setProductList] = useState(BOUNTY_ITEMS); // Product list data
+  const [val, setVal] = useState(""); // input value for query
+  const [color, setColor] = useState(""); // search by filter color
+  const [category, setCategory] = useState(""); // search by filter category
+  const [selectedColor, setSelectedColor] = useState(""); // selected color
+  const [selectedCategory, setSelectedCategory] = useState(""); // selected category
+
+  // Query content changes or filtering changes trigger the query
+  useEffect(() => {
+    searchProductList(val, color, category);
+  }, [val, color, category]);
+
+  const [foundItemList, setFoundItemList] =
+    useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
+
+  // search method
+  const searchProductList = (val: string, color: string, category: string) => {
+    let filterList = BOUNTY_ITEMS;
+    if (val) {
+      // filter val
+      filterList = filterList.filter(
+        (v) => v.name.toLowerCase().indexOf(val.toLowerCase()) > -1
+      );
+    }
+    if (color) {
+      // filter color
+      filterList = filterList.filter((v) => v.color === color);
+    }
+    if (category) {
+      // filter category
+      filterList = filterList.filter((v) => v.category === category);
+    }
+    setProductList(filterList);
+  };
+  //save filter value
+  const onSave = () => {
+    setColor(selectedColor);
+    setCategory(selectedCategory);
+  };
+  // Reset all filter value
+  const onReset = () => {
+    setColor("");
+    setCategory("");
+    setSelectedColor("");
+    setSelectedCategory("");
   };
 
-  // Icon Src and Route for Navigation Bar
-  const navButtons = SPECIALIST_ROUTES;
-
-  //const foundItemList: FoundListItemProps[] = BOUNTY_ITEMS;
-  const [foundItemList, setFoundItemList] = useState([]);
-
   useEffect(() => {
-    const storedItemsJSON = localStorage.getItem("foundItems");
-    const storedItems = storedItemsJSON ? JSON.parse(storedItemsJSON) : [];
-    const combinedItems = [
-      ...BOUNTY_ITEMS,
-      ...storedItems.map(
-        (item: {
-          name: any;
-          itemDescription: any;
-          locationFound: any;
-          dateFound: any;
-          itemColor: any;
-          itemCategory: any;
-        }) => ({
-          title: item.name,
-          description: item.itemDescription,
-          location: item.locationFound,
-          date: item.dateFound,
-          color: item.itemColor,
-          category: item.itemCategory,
-          // image: '', // You can add this later when you handle image uploading
-        })
-      ),
-    ];
-    setFoundItemList(combinedItems);
-  }, []);
+    // Fetch data from localStorage only once when the component mounts
+    let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+    // console.log(updatedBountyItemsString)
 
-  const colorFilter = ["White", "Black"];
-  const categoryFilter = ["Cloth", "Bottles"];
+    if (updatedBountyItemsString !== "null") {
+      let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+      console.log(updatedBountyItems);
+      setFoundItemList(updatedBountyItems);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center px-4 py-2">
-        <button onClick={handleBackClick} className="mr-4">
-          <Image src="/icons/IconBack.png" alt="Back" width={24} height={24} />
-        </button>
-        <title>Specialist Found Item Inventory</title>
-
-        {/* Header that redirects to home */}
-        {/* <Header href="/" altText="Hello"/> */}
-        <Header altText="Found Item Inventory" />
-      </div>
+      <title>Specialist Found Item Inventory</title>
+      {/* Header that redirects to home */}
+      {/* <Header href="/" altText="Hello"/> */}
+      <Header altText="Found Item Inventory" />
       {/* Body */}
       <div className="m-4">
         {/* Search Div */}
         <div className="flex flex-row justify-between space-x-2">
-          <Input type="search" placeholder="Enter Some Keyword For Searching" />
+          <Input
+            type="search"
+            placeholder="Enter Some Keyword For Searching"
+            onChange={(val) => {
+              setVal(val.target.value);
+            }}
+          />
           <Button variant={"link"}>
             <Image
               alt="searchIcon"
@@ -128,7 +154,10 @@ export default function Home() {
                 <div className="flex flex-row justify-between items-center">
                   <p>Color:</p>
                   <div className="">
-                    <Select>
+                    <Select
+                      value={selectedColor}
+                      onValueChange={(val) => setSelectedColor(val)}
+                    >
                       <SelectTrigger className="w-[160px]">
                         <SelectValue placeholder="Select a Color" />
                       </SelectTrigger>
@@ -145,11 +174,13 @@ export default function Home() {
                     </Select>
                   </div>
                 </div>
-                {/* Category Filter */}
                 <div className="flex flex-row justify-between items-center">
                   <p>Category:</p>
                   <div className="">
-                    <Select>
+                    <Select
+                      value={selectedCategory}
+                      onValueChange={(val) => setSelectedCategory(val)}
+                    >
                       <SelectTrigger className="w-[160px]">
                         <SelectValue placeholder="Select a Category" />
                       </SelectTrigger>
@@ -168,8 +199,14 @@ export default function Home() {
                 </div>
                 {/* Confirmation */}
                 <div className="flex flex-row justify-between items-center">
-                  <Button className="w-28 rounded-lg">Save</Button>
-                  <Button className="w-28 rounded-lg" variant={"secondary"}>
+                  <Button className="w-28 rounded-lg" onClick={onSave}>
+                    Save
+                  </Button>
+                  <Button
+                    className="w-28 rounded-lg"
+                    variant={"secondary"}
+                    onClick={onReset}
+                  >
                     Reset
                   </Button>
                 </div>
@@ -180,7 +217,7 @@ export default function Home() {
         {/* Display Div */}
         <div className="mt-8">
           <div className="grid grid-cols-2 gap-x-8 gap-y-8">
-            {foundItemList.map((item) => {
+            {productList.map((item) => {
               return <FoundListItem {...item} />;
             })}
           </div>
