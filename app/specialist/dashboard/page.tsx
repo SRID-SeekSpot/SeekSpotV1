@@ -7,9 +7,13 @@ import Navbar from "@/components/general/navbar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
+import LostItemDetailPage from "../lostItemDetail/page";
+import BountyHuntListItem from "@/components/general/bountyhuntListItem";
+import SquareListItem from "@/components/general/squareListItem";
 
 // Popup component
-const Popup = ({ onClose }) => {
+const Popup = ({}) => {
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-10">
             <div className="bg-white p-5 rounded-lg shadow-lg text-center">
@@ -28,17 +32,21 @@ export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
 
-    const bountyHuntList = [{}, {}, {}, {}];
-    const foundItemList = [{}, {}, {}, {}];
+    const allItems = BOUNTY_ITEMS;
+
+    const bountyHuntList = allItems.filter((item) => {
+        return item.id.charAt(0) == "l";
+    });
+    const foundItemList = allItems.filter((item) => {
+        return item.id.charAt(0) == "f";
+    });
+
     useEffect(() => {
-        // 只在客户端执行
         const showPopup = localStorage.getItem("showPopup");
         if (showPopup === null) {
-            // 如果在 localStorage 中找不到 unread，那么设置它为 "true"
             localStorage.setItem("showPopup", "false");
             setShowPopup(false);
         } else {
-            // 如果找到了，根据存储的值设置状态
             setShowPopup(showPopup === "true");
         }
     }, []);
@@ -75,7 +83,7 @@ export default function Home() {
                         <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
                             <div className="flex w-max space-x-4 p-4">
                                 {bountyHuntList.map((item) => (
-                                    <div className="h-40 w-40 bg-grass"></div>
+                                    <SquareListItem {...item} />
                                 ))}
                             </div>
                             <ScrollBar orientation="horizontal" />
@@ -103,7 +111,7 @@ export default function Home() {
                         <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
                             <div className="flex w-max space-x-4 p-4">
                                 {foundItemList.map((item) => (
-                                    <div className="h-40 w-40 bg-grass"></div>
+                                    <SquareListItem {...item} />
                                 ))}
                             </div>
                             <ScrollBar orientation="horizontal" />
