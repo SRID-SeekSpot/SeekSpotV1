@@ -1,1 +1,11 @@
-export const ITEMS_CATEGORY = ['Clothing', 'Electronics', 'Beauty and Personal Care', 'Books', 'Media', 'Sports equipment', 'Toys', 'Games', 'Bags'];
+export const ITEMS_CATEGORY = [
+    "Clothing",
+    "Electronics",
+    "Beauty and Personal Care",
+    "Books",
+    "Media",
+    "Sports equipment",
+    "Toys",
+    "Games",
+    "Bags",
+];

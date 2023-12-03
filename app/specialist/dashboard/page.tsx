@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 import Header from "@/components/general/header";
@@ -17,14 +17,13 @@ const Popup = ({ onClose }) => {
                 <p className="text-sm mb-4">Your lost item is found!</p>
                 <Button className="w-56" variant={"secondary"}>
                     <a href="/specialist/profile/delivery">Check details</a>
-                    </Button>
+                </Button>
             </div>
         </div>
     );
 };
 
 export default function Home() {
-
     const [showPopup, setShowPopup] = useState(false);
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
@@ -44,8 +43,6 @@ export default function Home() {
         }
     }, []);
 
-
-
     return (
         <div className="flex flex-col">
             <title>Specialist Dashboard</title>
@@ -54,7 +51,7 @@ export default function Home() {
             <Header href="/" />
             {/* pop up component */}
             {showPopup && <Popup />}
-            
+
             {/* Body */}
             <div className="flex flex-col">
                 {/* Bounty Hunt List */}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useState  } from 'react';
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import Header from "@/components/general/header";
@@ -12,13 +12,13 @@ import BountyHuntListItem, {
 import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import ProfileButton from "@/components/general/profileButton";
-import { getLocalStorageItem } from "@/components/logic/localStorage"
+import { getLocalStorageItem } from "@/components/logic/localStorage";
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
     const bountyHuntList: BountyHuntListItemProps[] = BOUNTY_ITEMS;
-    
+
     const [unread, setUnread] = useState(false);
     useEffect(() => {
         // 只在客户端执行
@@ -70,16 +70,16 @@ export default function Home() {
                     />
                 </a>
                 <div>
-                <a href="/specialist/profile/delivery">
-                <ProfileButton
-                    iconSrc="/ProfileIcon/Email.png"
-                    buttonName="Message"
-                    editable={false}
-                    unread={unread}
-                />
-                </a>
+                    <a href="/specialist/profile/delivery">
+                        <ProfileButton
+                            iconSrc="/ProfileIcon/Email.png"
+                            buttonName="Message"
+                            editable={false}
+                            unread={unread}
+                        />
+                    </a>
                 </div>
-                
+
                 <ProfileButton
                     iconSrc="/ProfileIcon/Wallet.png"
                     buttonName="Wallet"

@@ -41,60 +41,69 @@ const colorFilter = ["White", "Black", "Red", "Blue"];
 const categoryFilter = ["Cloth", "Bottles", "Phone"];
 
 export default function Home() {
-    const [productList , setProductList] = useState(BOUNTY_ITEMS); // Product list data
-    const [val , setVal] = useState(''); // input value for query
-    const [color , setColor] = useState(''); // search by filter color
-    const [category , setCategory] = useState(''); // search by filter category
-    const [selectedColor , setSelectedColor] = useState(''); // selected color
-    const [selectedCategory , setSelectedCategory] = useState(''); // selected category
+    const [productList, setProductList] = useState(BOUNTY_ITEMS); // Product list data
+    const [val, setVal] = useState(""); // input value for query
+    const [color, setColor] = useState(""); // search by filter color
+    const [category, setCategory] = useState(""); // search by filter category
+    const [selectedColor, setSelectedColor] = useState(""); // selected color
+    const [selectedCategory, setSelectedCategory] = useState(""); // selected category
 
     // Query content changes or filtering changes trigger the query
-    useEffect(()=>{
+    useEffect(() => {
         searchProductList(val, color, category);
     }, [val, color, category]);
 
+    const [foundItemList, setFoundItemList] =
+        useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
 
-    const [foundItemList, setFoundItemList] = useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
-  
     // search method
-    const searchProductList = (val: string, color: string, category: string) => {
-        let filterList = BOUNTY_ITEMS
-        if(val){ // filter val
-            filterList = filterList.filter(v=>v.name.toLowerCase().indexOf(val.toLowerCase())>-1);
+    const searchProductList = (
+        val: string,
+        color: string,
+        category: string
+    ) => {
+        let filterList = BOUNTY_ITEMS;
+        if (val) {
+            // filter val
+            filterList = filterList.filter(
+                (v) => v.name.toLowerCase().indexOf(val.toLowerCase()) > -1
+            );
         }
-        if(color){ // filter color
-            filterList = filterList.filter(v=>v.color === color);
+        if (color) {
+            // filter color
+            filterList = filterList.filter((v) => v.color === color);
         }
-        if(category){ // filter category
-            filterList = filterList.filter(v=>v.category === category);
+        if (category) {
+            // filter category
+            filterList = filterList.filter((v) => v.category === category);
         }
         setProductList(filterList);
-    }
+    };
     //save filter value
     const onSave = () => {
         setColor(selectedColor);
         setCategory(selectedCategory);
-    }
+    };
     // Reset all filter value
     const onReset = () => {
-        setColor('');
-        setCategory('');
-        setSelectedColor('');
-        setSelectedCategory('');
-    }
-
+        setColor("");
+        setCategory("");
+        setSelectedColor("");
+        setSelectedCategory("");
+    };
 
     useEffect(() => {
         // Fetch data from localStorage only once when the component mounts
-        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+        let updatedBountyItemsString =
+            localStorage.getItem("updatedBountyItems");
         // console.log(updatedBountyItemsString)
-    
+
         if (updatedBountyItemsString !== "null") {
-          let updatedBountyItems = JSON.parse(updatedBountyItemsString);
-          console.log(updatedBountyItems)
-          setFoundItemList(updatedBountyItems);
+            let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+            console.log(updatedBountyItems);
+            setFoundItemList(updatedBountyItems);
         }
-    }, []); 
+    }, []);
 
     return (
         <div className="flex flex-col">
@@ -109,7 +118,7 @@ export default function Home() {
                     <Input
                         type="search"
                         placeholder="Enter Some Keyword For Searching"
-                        onChange={val=>{
+                        onChange={(val) => {
                             setVal(val.target.value);
                         }}
                     />
@@ -150,7 +159,12 @@ export default function Home() {
                                 <div className="flex flex-row justify-between items-center">
                                     <p>Color:</p>
                                     <div className="">
-                                        <Select value={selectedColor} onValueChange={val=>setSelectedColor(val)}>
+                                        <Select
+                                            value={selectedColor}
+                                            onValueChange={(val) =>
+                                                setSelectedColor(val)
+                                            }
+                                        >
                                             <SelectTrigger className="w-[160px]">
                                                 <SelectValue placeholder="Select a Color" />
                                             </SelectTrigger>
@@ -180,13 +194,20 @@ export default function Home() {
                                 <div className="flex flex-row justify-between items-center">
                                     <p>Category:</p>
                                     <div className="">
-                                        <Select value={selectedCategory} onValueChange={val=>setSelectedCategory(val)}>
+                                        <Select
+                                            value={selectedCategory}
+                                            onValueChange={(val) =>
+                                                setSelectedCategory(val)
+                                            }
+                                        >
                                             <SelectTrigger className="w-[160px]">
                                                 <SelectValue placeholder="Select a Category" />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectGroup>
-                                                    <SelectLabel>Select a Category</SelectLabel>
+                                                    <SelectLabel>
+                                                        Select a Category
+                                                    </SelectLabel>
                                                     {categoryFilter.map(
                                                         (color) => {
                                                             return (
@@ -207,8 +228,19 @@ export default function Home() {
                                 </div>
                                 {/* Confirmation */}
                                 <div className="flex flex-row justify-between items-center">
-                                    <Button className="w-28 rounded-lg" onClick={onSave}>Save</Button>
-                                    <Button className="w-28 rounded-lg" variant={"secondary"} onClick={onReset}>Reset</Button>
+                                    <Button
+                                        className="w-28 rounded-lg"
+                                        onClick={onSave}
+                                    >
+                                        Save
+                                    </Button>
+                                    <Button
+                                        className="w-28 rounded-lg"
+                                        variant={"secondary"}
+                                        onClick={onReset}
+                                    >
+                                        Reset
+                                    </Button>
                                 </div>
                             </div>
                         </SheetContent>
