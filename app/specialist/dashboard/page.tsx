@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
@@ -124,6 +125,19 @@ export default function Home() {
                         </ScrollArea>
                     </div>
                 </div>
+            </div>
+            <div
+                className="mt-12 flex justify-end mr-6"
+                style={{ position: "fixed", bottom: "80px", right: "0px" }}
+            >
+                <Link href="/specialist/createLostItem" passHref>
+                    <Image
+                        src="/icons/IconCreate.png"
+                        alt="Create Button"
+                        width={48}
+                        height={48}
+                    />
+                </Link>
             </div>
             {/* Bottom Navigation Bar */}
             <Navbar navButtons={navButtons} />
