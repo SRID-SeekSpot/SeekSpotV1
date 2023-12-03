@@ -1,27 +1,26 @@
 // app/specialist/itemDetail/page.tsx
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 // import { useRouter } from 'next/router';
 import { Button } from "@/components/ui/button";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
-import { BOUNTY_ITEMS } from '@/app/constants/BountyItems'; 
+import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 
 interface LostItemDetailPageProps {
     item: {
-      name: string;
-      imgSrc: string;
-      description: string;
-      price: number;
-      location: string;
-      date: string;
-      claimCode: string;
+        name: string;
+        imgSrc: string;
+        description: string;
+        price: number;
+        location: string;
+        date: string;
+        claimCode: string;
     };
 }
 
 const LostItemDetailPage: React.FC<LostItemDetailPageProps> = ({ item }) => {
-
     const navButtons = SPECIALIST_ROUTES;
 
     if (!item) {
@@ -30,7 +29,7 @@ const LostItemDetailPage: React.FC<LostItemDetailPageProps> = ({ item }) => {
 
     return (
         <div className="flex flex-col h-screen">
-            <Header href="/specialist/found" />
+            <Header href="/specialist/bounty" />
             <div className="flex flex-col items-center bg-gray-100 p-4 shadow rounded-2xl">
                 <div className="w-full max-w-xs mb-4 rounded-2xl overflow-hidden">
                     <Image
@@ -51,9 +50,13 @@ const LostItemDetailPage: React.FC<LostItemDetailPageProps> = ({ item }) => {
                 <p className="text-md">Location Lost: {item.location}</p>
                 <p className="text-md text-right">Date Lost: {item.date}</p>
             </div>
-            <p className="text-md text-gray-400 mt-8 mx-4">{item.description}</p>
+            <p className="text-md text-gray-400 mt-8 mx-4">
+                {item.description}
+            </p>
             <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)] flex justify-center mb-20">
-                <p className="text-lg text-navy">Claim Code: {item.claimCode}</p> 
+                <p className="text-lg text-navy">
+                    Claim Code: {item.claimCode}
+                </p>
             </div>
             <Navbar navButtons={navButtons} />
         </div>

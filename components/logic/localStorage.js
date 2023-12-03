@@ -1,5 +1,5 @@
 export function getLocalStorageItem(key) {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
         return localStorage.getItem(key);
     }
     return null;

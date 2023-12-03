@@ -22,7 +22,7 @@ export default function Home() {
             <title>Specialist Profile Detail Page</title>
             {/* Header that redirects to home */}
             {/* <Header href="/" altText="Hello"/> */}
-            <Header altText="My Profile" href="/specialist/profile"/>
+            <Header altText="My Profile" href="/specialist/profile" />
             {/* Body */}
             <div className="flex flex-col justify-center items-center">
                 {/* Avatar */}
@@ -53,7 +53,6 @@ export default function Home() {
                     buttonName="516 2nd Ave"
                     editable={true}
                 />
- 
             </div>
 
             {/* Bottom Navigation Bar */}

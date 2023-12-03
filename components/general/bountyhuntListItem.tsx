@@ -9,14 +9,17 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 
 // Define the props for the Navbar component
 export interface BountyHuntListItemProps {
+    id: string;
     name: string;
     imgSrc: string;
     description: string;
     price: number;
     onClick?: any;
+    redirectUrl?: string;
 }
 
 // Navbar component with props
@@ -26,9 +29,10 @@ const BountyHuntListItem: React.FC<BountyHuntListItemProps> = ({
     description,
     price,
     onClick,
+    redirectUrl,
     ...props
 }) => {
-    return (
+    const content = (
         <Card className="flex flex-row justify-between" onClick={onClick}>
             <div className="flex h-24 w-24 p-2 bg-white rounded-sm">
                 <Image
@@ -56,6 +60,12 @@ const BountyHuntListItem: React.FC<BountyHuntListItemProps> = ({
             </div>
         </Card>
     );
+
+    if (redirectUrl) {
+        return <Link href={redirectUrl}>{content}</Link>;
+    } else {
+        return content;
+    }
 };
 
 export default BountyHuntListItem;
