@@ -7,6 +7,7 @@ import Navbar from "@/components/general/navbar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import Link from "next/link";
 
 // Popup component
 const Popup = ({ onClose }) => {
@@ -110,6 +111,19 @@ export default function Home() {
             </ScrollArea>
           </div>
         </div>
+      </div>
+      <div
+        className="mt-12 flex justify-end mr-6"
+        style={{ position: "fixed", bottom: "80px", right: "0px" }}
+      >
+        <Link href="/specialist/createBountyItem" passHref>
+          <Image
+            src="/icons/IconCreate.png"
+            alt="Create Button"
+            width={48}
+            height={48}
+          />
+        </Link>
       </div>
       {/* Bottom Navigation Bar */}
       <Navbar navButtons={navButtons} />

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -12,8 +12,14 @@ import { Input } from "@/components/ui/input";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 
 export default function Home() {
+  const router = useRouter();
   // Icon Src and Route for Navigation Bar
   const navButtons = SPECIALIST_ROUTES;
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevents the default form submission
+    router.push("/specialist/newCreateBountyItem"); // Use the correct path for your new page
+  };
 
   return (
     <div className="flex flex-col text-navy">
@@ -43,7 +49,7 @@ export default function Home() {
 
       {/* Scrollable Body */}
       <ScrollArea className="flex-grow pb-20">
-        <form className="m-5 space-y-6">
+        <form className="m-5 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-2">
             {/* Item Name */}
             <label htmlFor="itemName" className=" font-semibold">
@@ -53,7 +59,7 @@ export default function Home() {
               id="itemName"
               name="itemName"
               type="text"
-              placeholder="Black Glasses"
+              placeholder="Yellow Umbrella"
               className="w-full p-2 border rounded"
             />
 
@@ -65,7 +71,7 @@ export default function Home() {
               id="itemDescription"
               name="itemDescription"
               type="text"
-              placeholder="Black glasses with silver decoration"
+              placeholder="Yellow umbrella with wooden handle"
               className="w-full p-2 border rounded"
             />
 
@@ -112,7 +118,7 @@ export default function Home() {
               id="bountyOffer"
               name="bountyOffer"
               type="number"
-              placeholder="$15"
+              placeholder="$5"
               className="w-full p-2 border rounded"
             />
 
@@ -126,9 +132,9 @@ export default function Home() {
               className="w-full p-2 border rounded"
             >
               <option value="Black">Black</option>
-              <option value="Black">White</option>
-              <option value="Black">Red</option>
-              <option value="Black">Blue</option>
+              <option value="White">White</option>
+              <option value="Red">Red</option>
+              <option value="Blue">Blue</option>
             </select>
 
             {/* Item Category */}
@@ -148,8 +154,19 @@ export default function Home() {
             </select>
           </div>
 
+          {/* Image Placeholder */}
+          <div className="flex flex-col items-center justify-center p-4">
+            <Image
+              src="/yelloUmbrella.jpg"
+              alt="Item Image"
+              width={200}
+              height={200}
+              className="rounded"
+            />
+          </div>
+
           {/* Image Upload Placeholder */}
-          <div className="flex flex-col items-center justify-center bg-gray-200 p-4 border border-dashed rounded">
+          {/* <div className="flex flex-col items-center justify-center bg-gray-200 p-4 border border-dashed rounded">
             <p className="mb-3 ">Upload a picture of the item</p>
             <Image
               src="/imageUpload.png"
@@ -164,7 +181,7 @@ export default function Home() {
               accept="image/*"
               className="text-navy file:cursor-pointer file:text-sm file:font-medium"
             />
-          </div>
+          </div> */}
           <div className="flex flex-col items-center justify-center">
             {/* Submit Button */}
             <Button type="submit" size="lg">
