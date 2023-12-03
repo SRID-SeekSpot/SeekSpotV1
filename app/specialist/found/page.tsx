@@ -35,13 +35,13 @@ import { EachFoundItemProps } from "../editItem/page";
 // Icon Src and Route for Navigation Bar
 const navButtons = SPECIALIST_ROUTES;
 
-const foundItemList: FoundListItemProps[] = BOUNTY_ITEMS;
-
 const colorFilter = ["White", "Black", "Red", "Blue"];
 const categoryFilter = ["Cloth", "Bottles", "Phone"];
 
 export default function Home() {
-    const [productList, setProductList] = useState(BOUNTY_ITEMS); // Product list data
+    const foundItems = BOUNTY_ITEMS.filter((item) => item.id[0] === "f");
+
+    const [productList, setProductList] = useState(foundItems); // Product list data
     const [val, setVal] = useState(""); // input value for query
     const [color, setColor] = useState(""); // search by filter color
     const [category, setCategory] = useState(""); // search by filter category
@@ -53,16 +53,13 @@ export default function Home() {
         searchProductList(val, color, category);
     }, [val, color, category]);
 
-    const [foundItemList, setFoundItemList] =
-        useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
-
     // search method
     const searchProductList = (
         val: string,
         color: string,
         category: string
     ) => {
-        let filterList = BOUNTY_ITEMS;
+        let filterList = foundItems;
         if (val) {
             // filter val
             filterList = filterList.filter(
@@ -101,7 +98,6 @@ export default function Home() {
         if (updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             console.log(updatedBountyItems);
-            setFoundItemList(updatedBountyItems);
         }
     }, []);
 

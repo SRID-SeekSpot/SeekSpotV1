@@ -14,7 +14,11 @@ import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
-    const bountyHuntList: BountyHuntListItemProps[] = BOUNTY_ITEMS;
+    const bountyHuntList: BountyHuntListItemProps[] = BOUNTY_ITEMS.filter(
+        (item) => {
+            return item.id.charAt(0) === "l";
+        }
+    );
 
     return (
         <div className="flex flex-col">
@@ -28,11 +32,7 @@ export default function Home() {
                     return (
                         <BountyHuntListItem
                             {...item}
-                            onClick={() => {
-                                console.log(
-                                    "Item " + item.name + " was clicked"
-                                );
-                            }}
+                            redirectUrl={"/specialist/" + item.id}
                         />
                     );
                 })}

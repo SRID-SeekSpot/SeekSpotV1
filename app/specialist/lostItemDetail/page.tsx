@@ -29,7 +29,7 @@ const LostItemDetailPage: React.FC<LostItemDetailPageProps> = ({ item }) => {
 
     return (
         <div className="flex flex-col h-screen">
-            <Header href="/specialist/found" />
+            <Header href="/specialist/bounty" />
             <div className="flex flex-col items-center bg-gray-100 p-4 shadow rounded-2xl">
                 <div className="w-full max-w-xs mb-4 rounded-2xl overflow-hidden">
                     <Image
