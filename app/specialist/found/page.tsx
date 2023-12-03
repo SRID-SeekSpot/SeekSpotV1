@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
@@ -28,7 +29,9 @@ import {
 import FoundListItem, {
     FoundListItemProps,
 } from "@/components/general/foundListItem";
-import { useState, useEffect } from "react";
+
+import { useEffect, useState } from "react";
+import { EachFoundItemProps } from "../editItem/page";
 // Icon Src and Route for Navigation Bar
 const navButtons = SPECIALIST_ROUTES;
 
@@ -50,6 +53,9 @@ export default function Home() {
         searchProductList(val, color, category);
     }, [val, color, category]);
 
+
+    const [foundItemList, setFoundItemList] = useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
+  
     // search method
     const searchProductList = (val: string, color: string, category: string) => {
         let filterList = BOUNTY_ITEMS
@@ -77,6 +83,18 @@ export default function Home() {
         setSelectedCategory('');
     }
 
+
+    useEffect(() => {
+        // Fetch data from localStorage only once when the component mounts
+        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+        // console.log(updatedBountyItemsString)
+    
+        if (updatedBountyItemsString !== "null") {
+          let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+          console.log(updatedBountyItems)
+          setFoundItemList(updatedBountyItems);
+        }
+    }, []); 
 
     return (
         <div className="flex flex-col">
