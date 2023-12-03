@@ -1,20 +1,23 @@
 import React from "react";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
+import Link from "next/link";
 
 export interface SquareListItemProps {
     name: string;
     imgSrc: string;
     onClick?: any;
+    redirectUrl?: string;
 }
 
 const SquareListItem: React.FC<SquareListItemProps> = ({
     name,
     imgSrc,
     onClick,
+    redirectUrl,
     ...props
 }) => {
-    return (
+    const content = (
         <Card
             className="flex items-center justify-center p-1 w-40 h-40"
             onClick={onClick}
@@ -33,6 +36,12 @@ const SquareListItem: React.FC<SquareListItemProps> = ({
             </div>
         </Card>
     );
+
+    if (redirectUrl) {
+        return <Link href={redirectUrl}>{content}</Link>;
+    } else {
+        return content;
+    }
 };
 
 export default SquareListItem;

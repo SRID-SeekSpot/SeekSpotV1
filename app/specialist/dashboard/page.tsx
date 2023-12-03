@@ -83,7 +83,10 @@ export default function Home() {
                         <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
                             <div className="flex w-max space-x-4 p-4">
                                 {bountyHuntList.map((item) => (
-                                    <SquareListItem {...item} />
+                                    <SquareListItem
+                                        {...item}
+                                        redirectUrl={"/specialist/" + item.id}
+                                    />
                                 ))}
                             </div>
                             <ScrollBar orientation="horizontal" />
@@ -111,7 +114,10 @@ export default function Home() {
                         <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
                             <div className="flex w-max space-x-4 p-4">
                                 {foundItemList.map((item) => (
-                                    <SquareListItem {...item} />
+                                    <SquareListItem
+                                        {...item}
+                                        redirectUrl={"/specialist/" + item.id}
+                                    />
                                 ))}
                             </div>
                             <ScrollBar orientation="horizontal" />
