@@ -25,7 +25,7 @@ export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: { preventDefault: () => void }) => {
         event.preventDefault();
 
         // const formData = {
@@ -74,26 +74,7 @@ export default function Home() {
             <title>Create a Found Item</title>
 
             {/* Header with Back Button and Centered Title */}
-            <div className="flex items-center justify-between">
-                <div className="flex items-center px-2">
-                    {" "}
-                    {/* Add padding to the left */}
-                    <Link href="/specialist/dashboard" passHref>
-                        <Image
-                            src="/icons/IconBack.png"
-                            alt="Back"
-                            width={24}
-                            height={24}
-                        />
-                    </Link>
-                </div>
-                <Header altText="Report a Found Item" />
-                <div className="px-2">
-                    {" "}
-                    {/* Dummy div for spacing */}
-                    {/* Empty div to balance the flex space */}
-                </div>
-            </div>
+            <Header altText="Create a Lost Item" href="/specialist/dashboard" />
 
             {/* Scrollable Body */}
             <ScrollArea className="flex-grow pb-20">
