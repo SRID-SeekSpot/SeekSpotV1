@@ -18,7 +18,7 @@ export default function Home() {
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevents the default form submission
-    router.push("/specialist/newCreateBountyItem"); // Use the correct path for your new page
+    router.push("/specialist/newBounty"); // Use the correct path for your new page
   };
 
   return (

@@ -28,45 +28,45 @@ export default function Home() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = {
-      name: event.target.itemName.value,
-      itemDescription: event.target.itemDescription.value,
-      locationFound: event.target.locationFound.value,
-      dateFound: event.target.dateFound.value,
-      itemColor: event.target.itemColor.value,
-      itemCategory: event.target.itemCategory.value,
-    };
+    // const formData = {
+    //   name: event.target.itemName.value,
+    //   itemDescription: event.target.itemDescription.value,
+    //   locationFound: event.target.locationFound.value,
+    //   dateFound: event.target.dateFound.value,
+    //   itemColor: event.target.itemColor.value,
+    //   itemCategory: event.target.itemCategory.value,
+    // };
 
-    const imageFile = event.target.itemImage.files[0];
+    // const imageFile = event.target.itemImage.files[0];
 
-    if (imageFile) {
-      try {
-        // Use ImageKit's upload method
-        const result = imagekit.upload({
-          file: imageFile,
-          fileName: "user_uploaded_image.jpg",
-          signature: "",
-          token: "",
-          expire: 0,
-        });
+    // if (imageFile) {
+    //   try {
+    //     // Use ImageKit's upload method
+    //     const result = imagekit.upload({
+    //       file: imageFile,
+    //       fileName: "user_uploaded_image.jpg",
+    //       signature: "",
+    //       token: "",
+    //       expire: 0,
+    //     });
 
-        if ((await result).url) {
-          // Add the ImageKit image URL to formData
-          formData.image = (await result).url;
-        }
-      } catch (error) {
-        console.error("Error uploading image to ImageKit:", error);
-        return; // Exit the function if the image upload fails
-      }
-    }
+    //     if ((await result).url) {
+    //       // Add the ImageKit image URL to formData
+    //       formData.image = (await result).url;
+    //     }
+    //   } catch (error) {
+    //     console.error("Error uploading image to ImageKit:", error);
+    //     return; // Exit the function if the image upload fails
+    //   }
+    // }
 
-    const existingItems = JSON.parse(
-      localStorage.getItem("foundItems") || "[]"
-    );
-    existingItems.push(formData);
-    localStorage.setItem("foundItems", JSON.stringify(existingItems));
+    // const existingItems = JSON.parse(
+    //   localStorage.getItem("foundItems") || "[]"
+    // );
+    // existingItems.push(formData);
+    // localStorage.setItem("foundItems", JSON.stringify(existingItems));
 
-    router.push("/specialist/found");
+    router.push("/specialist/newFound");
   };
 
   return (
@@ -107,7 +107,7 @@ export default function Home() {
               id="itemName"
               name="itemName"
               type="text"
-              placeholder="Black Glasses"
+              placeholder="Green Backpack"
               className="w-full p-2 border rounded"
             />
 
@@ -119,7 +119,7 @@ export default function Home() {
               id="itemDescription"
               name="itemDescription"
               type="text"
-              placeholder="Black glasses with silver decoration"
+              placeholder="Backpack with a small tear on the side."
               className="w-full p-2 border rounded"
             />
 
@@ -155,7 +155,7 @@ export default function Home() {
               name="itemColor"
               className="w-full p-2 border rounded"
             >
-              <option value="Black">Black</option>
+              <option value="Black">Green</option>
               <option value="White">White</option>
               <option value="Red">Red</option>
               <option value="Blue">Blue</option>
@@ -178,8 +178,17 @@ export default function Home() {
             </select>
           </div>
 
+          <div className="flex flex-col items-center justify-center p-4">
+            <Image
+              src="/greenBag.avif"
+              alt="Item Image"
+              width={200}
+              height={200}
+              className="rounded"
+            />
+          </div>
           {/* Image Upload Placeholder */}
-          <div className="flex flex-col items-center justify-center bg-gray-200 p-4 border border-dashed rounded">
+          {/* <div className="flex flex-col items-center justify-center bg-gray-200 p-4 border border-dashed rounded">
             <p className="mb-3 ">Upload a picture of the item</p>
             <Image
               src="/imageUpload.png"
@@ -194,7 +203,7 @@ export default function Home() {
               accept="image/*"
               className="text-navy file:cursor-pointer file:text-sm file:font-medium"
             />
-          </div>
+          </div> */}
           <div className="flex flex-col items-center justify-center">
             {/* Submit Button */}
             <Button type="submit" size="lg">

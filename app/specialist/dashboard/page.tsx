@@ -116,7 +116,7 @@ export default function Home() {
         className="mt-12 flex justify-end mr-6"
         style={{ position: "fixed", bottom: "80px", right: "0px" }}
       >
-        <Link href="/specialist/createBountyItem" passHref>
+        <Link href="/specialist/createLostItem" passHref>
           <Image
             src="/icons/IconCreate.png"
             alt="Create Button"
