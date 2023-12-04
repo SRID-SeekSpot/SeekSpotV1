@@ -21,14 +21,11 @@ export default function Home() {
 
     const [unread, setUnread] = useState(false);
     useEffect(() => {
-        // 只在客户端执行
         const unreadValue = localStorage.getItem("unread");
         if (unreadValue === null) {
-            // 如果在 localStorage 中找不到 unread，那么设置它为 "true"
             localStorage.setItem("unread", "true");
             setUnread(true);
         } else {
-            // 如果找到了，根据存储的值设置状态
             setUnread(unreadValue === "true");
         }
     }, []);
@@ -52,8 +49,8 @@ export default function Home() {
                 {/* Avatar */}
                 <div className="h-36 w-36 rounded-full mt-12">
                     <Image
-                        alt="KateAvatar"
-                        src="/avatar/Kate.png"
+                        alt="DavidAvatar"
+                        src="/avatar/David.png"
                         layout="responsive"
                         height={36}
                         width={36}
@@ -62,7 +59,7 @@ export default function Home() {
             </div>
             {/* Profile Buttons */}
             <div className="pt-8 space-y-4">
-                <a href="/specialist/profile/detail">
+                <a href="/non-specialist/profile/detail">
                     <ProfileButton
                         iconSrc="/ProfileIcon/User.png"
                         buttonName="My Profile"
@@ -70,21 +67,13 @@ export default function Home() {
                     />
                 </a>
                 <div>
-                    <a href="/specialist/profile/delivery">
-                        <ProfileButton
-                            iconSrc="/ProfileIcon/Email.png"
-                            buttonName="Message"
-                            editable={false}
-                            unread={unread}
-                        />
-                    </a>
+                    <ProfileButton
+                        iconSrc="/ProfileIcon/Email.png"
+                        buttonName="Message"
+                        editable={false}
+                        unread={false}
+                    />
                 </div>
-
-                <ProfileButton
-                    iconSrc="/ProfileIcon/Wallet.png"
-                    buttonName="Wallet"
-                    editable={false}
-                />
                 <ProfileButton
                     iconSrc="/ProfileIcon/Settings.png"
                     buttonName="Setting"

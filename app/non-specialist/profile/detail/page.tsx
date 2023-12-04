@@ -22,14 +22,14 @@ export default function Home() {
             <title>Specialist Profile Detail Page</title>
             {/* Header that redirects to home */}
             {/* <Header href="/" altText="Hello"/> */}
-            <Header altText="My Profile" href="/specialist/profile" />
+            <Header altText="My Profile" href="/non-specialist/profile" />
             {/* Body */}
             <div className="flex flex-col justify-center items-center">
                 {/* Avatar */}
                 <div className="h-36 w-36 rounded-full mt-12">
                     <Image
-                        alt="KateAvatar"
-                        src="/avatar/Kate.png"
+                        alt="DavidAvatar"
+                        src="/avatar/David.png"
                         layout="responsive"
                         height={36}
                         width={36}
@@ -40,19 +40,15 @@ export default function Home() {
             <div className="pt-8 space-y-4">
                 <ProfileButton
                     iconSrc="/ProfileIcon/User.png"
-                    buttonName="Kate"
+                    buttonName="David"
                     editable={true}
                 />
                 <ProfileButton
-                    iconSrc="/ProfileIcon/Contacts.png"
-                    buttonName="123-123-1234"
+                    iconSrc="/ProfileIcon/id.png"
+                    buttonName="01234567"
                     editable={true}
                 />
-                <ProfileButton
-                    iconSrc="/ProfileIcon/Location.png"
-                    buttonName="516 2nd Ave"
-                    editable={true}
-                />
+
             </div>
 
             {/* Bottom Navigation Bar */}
