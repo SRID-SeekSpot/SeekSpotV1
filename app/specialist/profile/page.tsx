@@ -21,14 +21,14 @@ export default function Home() {
 
     const [unread, setUnread] = useState(false);
     useEffect(() => {
-        // 只在客户端执行
+        // execute in client side
         const unreadValue = localStorage.getItem("unread");
         if (unreadValue === null) {
-            // 如果在 localStorage 中找不到 unread，那么设置它为 "true"
+            // if localStorage cannot find unread，set it "true"
             localStorage.setItem("unread", "true");
             setUnread(true);
         } else {
-            // 如果找到了，根据存储的值设置状态
+            // set it true if find
             setUnread(unreadValue === "true");
         }
     }, []);
