@@ -253,7 +253,7 @@ const FoundItemDetailPage_nonspecialist: React.FC<
 
     return (
         <div className="flex flex-col h-screen">
-            <Header href="/specialist/found" />
+            <Header href="/non-specialist/found" />
             <div className="flex flex-col items-center bg-gray-100 p-4 shadow ">
                 <div className="w-full max-w-xs mb-4 rounded-lg overflow-hidden">
                     <Image

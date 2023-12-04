@@ -2,10 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import { ALL_ITEMS } from "@/app/constants/AllItems";
-import FoundItemDetailPage from "@/app/specialist/foundItemDetail/page";
-import LostItemDetailPage from "@/app/specialist/lostItemDetail/page";
 import { useEffect, useState } from "react";
 import { FoundItemProps } from "../found/page";
+import LostItemDetailPage_nonspecialist from "@/app/non-specialist/lostItemDetail_nonspecialist/page";
+import FoundItemDetailPage_nonspecialist from "@/app/non-specialist/foundItemDetail_nonspecialist/page";
 
 const ItemDetail = () => {
     const path = usePathname();
@@ -34,9 +34,9 @@ const ItemDetail = () => {
     }
 
     if (id.startsWith("f")) {
-        return <FoundItemDetailPage item={item} />;
+        return <FoundItemDetailPage_nonspecialist item={item} />;
     } else if (id.startsWith("l")) {
-        return <LostItemDetailPage item={item} />;
+        return <LostItemDetailPage_nonspecialist item={item} />;
     } else {
         return <p>Invalid item ID!</p>;
     }

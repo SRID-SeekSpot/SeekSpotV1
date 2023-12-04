@@ -9,8 +9,6 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 import { BOUNTY_ITEMS, FOUND_ITEMS } from "@/app/constants/AllItems";
-import LostItemDetailPage from "../lostItemDetail/page";
-import BountyHuntListItem from "@/components/general/bountyhuntListItem";
 import SquareListItem from "@/components/general/squareListItem";
 
 // Popup component
@@ -82,7 +80,9 @@ export default function Home() {
                                 {bountyHuntList.map((item) => (
                                     <SquareListItem
                                         {...item}
-                                        redirectUrl={"/non-specialist/" + item.id}
+                                        redirectUrl={
+                                            "/non-specialist/" + item.id
+                                        }
                                         key={item.id}
                                     />
                                 ))}
@@ -118,7 +118,9 @@ export default function Home() {
                                 {foundItemList.map((item) => (
                                     <SquareListItem
                                         {...item}
-                                        redirectUrl={"/non-specialist/" + item.id}
+                                        redirectUrl={
+                                            "/non-specialist/" + item.id
+                                        }
                                         key={item.id}
                                     />
                                 ))}
