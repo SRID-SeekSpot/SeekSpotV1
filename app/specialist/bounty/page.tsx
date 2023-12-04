@@ -14,7 +14,7 @@ import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
-    const bountyHuntList: BountyHuntListItemProps[] = BOUNTY_ITEMS
+    const bountyHuntList: BountyHuntListItemProps[] = BOUNTY_ITEMS;
 
     return (
         <div className="flex flex-col">
