@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
+import { ALL_ITEMS, BOUNTY_ITEMS } from "@/app/constants/AllItems";
 import { BountyHuntListItemProps } from "./bountyhuntListItem";
 import Link from "@/node_modules/next/link";
 import FoundListItem from "./foundListItem";
@@ -43,7 +43,7 @@ const PopupDelete = ({ onClose, additionalData }) => {
                 (item: { id: any }) => item.id !== additionalData
             );
         } else {
-            updatedBountyItems = BOUNTY_ITEMS.filter(
+            updatedBountyItems = ALL_ITEMS.filter(
                 (item) => item.id !== additionalData
             );
         }
@@ -237,7 +237,7 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({ eachItem }) => {
     const [showSave, setShowSave] = useState(false);
 
     const [item, setItem] = useState<FoundItemProps>(
-        BOUNTY_ITEMS.find((item) => item.id === eachItem.id)
+        ALL_ITEMS.find((item) => item.id === eachItem.id)
     );
 
     const [formFields, setFormFields] = useState({
@@ -323,15 +323,15 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({ eachItem }) => {
             );
         } else {
             // Identify the index of the item you want to update in BOUNTY_ITEMS
-            let itemIndex = BOUNTY_ITEMS.findIndex(
+            let itemIndex = ALL_ITEMS.findIndex(
                 (eachItem) => eachItem.id === item.id
             );
 
             // Check if the item was found
             if (itemIndex !== -1) {
                 // Update the properties of the item
-                BOUNTY_ITEMS[itemIndex] = {
-                    ...BOUNTY_ITEMS[itemIndex],
+                ALL_ITEMS[itemIndex] = {
+                    ...ALL_ITEMS[itemIndex],
                     name: formFields.itemName,
                     description: formFields.additionalDetails,
                     color: formFields.itemColor,
@@ -345,7 +345,7 @@ const EditItemDescriptionForm: React.FC<EditItemProps> = ({ eachItem }) => {
 
             localStorage.setItem(
                 "updatedBountyItems",
-                JSON.stringify(BOUNTY_ITEMS)
+                JSON.stringify(ALL_ITEMS)
             );
         }
     };

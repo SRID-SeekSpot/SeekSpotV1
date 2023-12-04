@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
-import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
+import { BOUNTY_ITEMS, FOUND_ITEMS } from "@/app/constants/AllItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -39,8 +39,7 @@ const colorFilter = ["White", "Black", "Red", "Blue"];
 const categoryFilter = ["Cloth", "Bottles", "Phone"];
 
 export default function Home() {
-    const foundItems = BOUNTY_ITEMS.filter((item) => item.id[0] === "f");
-
+    const foundItems = FOUND_ITEMS;
     const [productList, setProductList] = useState(foundItems); // Product list data
     const [val, setVal] = useState(""); // input value for query
     const [color, setColor] = useState(""); // search by filter color

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
-import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
+import { BOUNTY_ITEMS, FOUND_ITEMS } from "@/app/constants/AllItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,7 @@ import { EachFoundItemProps } from "../editItem/page";
 // Icon Src and Route for Navigation Bar
 const navButtons = SPECIALIST_ROUTES;
 
-const foundItemList: FoundListItemProps[] = BOUNTY_ITEMS;
+const foundItemList: FoundListItemProps[] = FOUND_ITEMS;
 
 const colorFilter = ["White", "Black", "Red", "Blue"];
 const categoryFilter = ["Cloth", "Bottles", "Phone"];
@@ -53,7 +53,7 @@ export default function Home() {
 
     const [productList, setProductList] = useState([
         greenBagItem,
-        ...BOUNTY_ITEMS,
+        ...FOUND_ITEMS,
     ]);
 
     const [val, setVal] = useState(""); // input value for query
@@ -68,7 +68,7 @@ export default function Home() {
     }, [val, color, category]);
 
     const [foundItemList, setFoundItemList] =
-        useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
+        useState<EachFoundItemProps[]>(FOUND_ITEMS);
 
     // search method
     const searchProductList = (
@@ -76,7 +76,7 @@ export default function Home() {
         color: string,
         category: string
     ) => {
-        let filterList = [...BOUNTY_ITEMS];
+        let filterList = [...FOUND_ITEMS];
         if (val) {
             // filter val
             filterList = filterList.filter(

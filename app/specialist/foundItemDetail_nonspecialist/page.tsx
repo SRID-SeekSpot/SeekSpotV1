@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
-import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
+import { ALL_ITEMS, BOUNTY_ITEMS } from "@/app/constants/AllItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 
 interface FoundItemDetailPage_nonspecialistProps {
@@ -80,7 +80,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
     const handleConfirmClaim = () => {
         let itemID = localStorage.getItem("claimItemIndex");
         // find the required claim code
-        let targetClaimCode = BOUNTY_ITEMS.find(
+        let targetClaimCode = ALL_ITEMS.find(
             (item) => item.id === itemID
         )?.claimCode;
         if (targetClaimCode == claimCode) {

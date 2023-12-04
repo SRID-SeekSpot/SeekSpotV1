@@ -8,7 +8,7 @@ import Navbar from "@/components/general/navbar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
-import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
+import { BOUNTY_ITEMS, FOUND_ITEMS } from "@/app/constants/AllItems";
 import LostItemDetailPage from "../lostItemDetail/page";
 import BountyHuntListItem from "@/components/general/bountyhuntListItem";
 import SquareListItem from "@/components/general/squareListItem";
@@ -33,14 +33,8 @@ export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
 
-    const allItems = BOUNTY_ITEMS;
-
-    const bountyHuntList = allItems.filter((item) => {
-        return item.id.charAt(0) == "l";
-    });
-    const foundItemList = allItems.filter((item) => {
-        return item.id.charAt(0) == "f";
-    });
+    const bountyHuntList = BOUNTY_ITEMS;
+    const foundItemList = FOUND_ITEMS;
 
     useEffect(() => {
         const showPopup = localStorage.getItem("showPopup");

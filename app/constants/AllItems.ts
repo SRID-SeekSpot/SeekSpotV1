@@ -1,5 +1,21 @@
 export const BOUNTY_ITEMS = [
     {
+        id: "l5",
+        name: "BlackGlasses",
+        imgSrc: "/bountyItems/BlackGlasses.png",
+        description: "Black glasses with silver decoration",
+        price: 15.0,
+        color: "black",
+        category: "Cloth",
+        location: "2nd floor",
+        date: "Nov.6",
+        claimCode: "1234",
+        claimStatus: true,
+    },
+];
+
+export const FOUND_ITEMS = [
+    {
         id: "f1",
         name: "Black Backpack",
         imgSrc: "/bountyItems/BlackBackpack.png",
@@ -52,17 +68,6 @@ export const BOUNTY_ITEMS = [
         claimCode: "1234",
         claimStatus: false,
     },
-    {
-        id: "l5",
-        name: "BlackGlasses",
-        imgSrc: "/bountyItems/BlackGlasses.png",
-        description: "Black glasses with silver decoration",
-        price: 15.0,
-        color: "black",
-        category: "Cloth",
-        location: "2nd floor",
-        date: "Nov.6",
-        claimCode: "1234",
-        claimStatus: true,
-    },
 ];
+
+export const ALL_ITEMS = [...FOUND_ITEMS, ...BOUNTY_ITEMS];

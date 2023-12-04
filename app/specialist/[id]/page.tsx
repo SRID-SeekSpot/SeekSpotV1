@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
+import { ALL_ITEMS } from "@/app/constants/AllItems";
 import FoundItemDetailPage from "@/app/specialist/foundItemDetail/page";
 import LostItemDetailPage from "@/app/specialist/lostItemDetail/page";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ const ItemDetail = () => {
     const path = usePathname();
     const id = path.split("/").pop();
     const [foundItemList, setFoundItemList] =
-        useState<FoundItemProps[]>(BOUNTY_ITEMS);
+        useState<FoundItemProps[]>(ALL_ITEMS);
 
     let item = foundItemList.find((item) => item.id === id);
     useEffect(() => {

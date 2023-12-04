@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
-import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import Link from "@/node_modules/next/link";
 

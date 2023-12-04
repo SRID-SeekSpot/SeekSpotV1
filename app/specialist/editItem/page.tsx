@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 // import { useRouter } from 'next/router';
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
-import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
+import { ALL_ITEMS } from "@/app/constants/AllItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import EditItemDescriptionForm from "@/components/general/editItemForm";
 import { useSearchParams } from "@/node_modules/next/navigation";
@@ -31,7 +31,7 @@ export default function Home() {
     const itemIndex = searchParams.getAll("ItemID");
 
     const [foundItem, setFoundItem] = useState<FoundItemProps>(
-        BOUNTY_ITEMS.find((item) => item.id === itemIndex[0])
+        ALL_ITEMS.find((item) => item.id === itemIndex[0])
     );
 
     useEffect(() => {

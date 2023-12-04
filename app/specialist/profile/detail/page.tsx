@@ -8,7 +8,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import BountyHuntListItem, {
     BountyHuntListItemProps,
 } from "@/components/general/bountyhuntListItem";
-import { BOUNTY_ITEMS } from "@/app/constants/BountyItems";
+import { BOUNTY_ITEMS } from "@/app/constants/AllItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import ProfileButton from "@/components/general/profileButton";
 
