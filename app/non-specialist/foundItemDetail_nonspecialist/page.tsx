@@ -80,9 +80,8 @@ const PopupClaim = ({ onClose, additionalData }) => {
     const handleConfirmClaim = () => {
         let itemID = localStorage.getItem("claimItemIndex");
         // find the required claim code
-        let targetClaimCode = ALL_ITEMS.find(
-            (item) => item.id === itemID
-        )?.claimCode;
+        let targetClaimCode = ALL_ITEMS.find((item) => item.id === itemID)
+            ?.claimCode;
         if (targetClaimCode == claimCode) {
             setShowCongratulations(true);
         } else {
@@ -121,7 +120,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
             );
             console.log(updatedBountyItemsTmp);
         } else {
-            const updatedBountyItems = BOUNTY_ITEMS.map((item) => {
+            const updatedBountyItems = ALL_ITEMS.map((item) => {
                 if (item.id === additionalData) {
                     // Update the status property to true
                     return { ...item, status: true };
@@ -160,7 +159,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
                                     className="mt-5 w-200 h-10"
                                     onClick={() => handleClaimSuccess()}
                                 >
-                                    <a href="/specialist/found">Claim</a>
+                                    <a href="/non-specialist/found">Claim</a>
                                 </Button>
                             </div>
                         </div>

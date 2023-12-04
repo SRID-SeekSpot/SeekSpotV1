@@ -80,9 +80,8 @@ const PopupClaim = ({ onClose, additionalData }) => {
     const handleConfirmClaim = () => {
         let itemID = localStorage.getItem("claimItemIndex");
         // find the required claim code
-        let targetClaimCode = ALL_ITEMS.find(
-            (item) => item.id === itemID
-        )?.claimCode;
+        let targetClaimCode = ALL_ITEMS.find((item) => item.id === itemID)
+            ?.claimCode;
         if (targetClaimCode == claimCode) {
             setShowCongratulations(true);
         } else {

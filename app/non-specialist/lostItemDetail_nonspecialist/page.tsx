@@ -57,7 +57,7 @@ const LostItemDetailPage_nonspecialist: React.FC<
             <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]">
                 <div className="flex justify-center mb-20">
                     <Button className="w-56" asChild>
-                        <a href="/specialist/found">Claim</a>
+                        <a href="/non-specialist/found">Claim</a>
                     </Button>
                 </div>
             </div>

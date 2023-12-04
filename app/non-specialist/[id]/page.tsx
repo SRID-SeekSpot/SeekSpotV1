@@ -3,15 +3,13 @@
 import { usePathname } from "next/navigation";
 import { ALL_ITEMS } from "@/app/constants/AllItems";
 import { useEffect, useState } from "react";
-import { FoundItemProps } from "../found/page";
 import LostItemDetailPage_nonspecialist from "@/app/non-specialist/lostItemDetail_nonspecialist/page";
 import FoundItemDetailPage_nonspecialist from "@/app/non-specialist/foundItemDetail_nonspecialist/page";
 
 const ItemDetail = () => {
     const path = usePathname();
     const id = path.split("/").pop();
-    const [foundItemList, setFoundItemList] =
-        useState<FoundItemProps[]>(ALL_ITEMS);
+    const [foundItemList, setFoundItemList] = useState(ALL_ITEMS);
 
     let item = foundItemList.find((item) => item.id === id);
     useEffect(() => {

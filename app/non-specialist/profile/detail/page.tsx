@@ -48,7 +48,6 @@ export default function Home() {
                     buttonName="01234567"
                     editable={true}
                 />
-
             </div>
 
             {/* Bottom Navigation Bar */}
