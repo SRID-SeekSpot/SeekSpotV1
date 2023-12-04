@@ -9,59 +9,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
-const Popup = ({ onClose }) => {
-    const popupContainerStyle = {
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-    };
-
-    const popupContentStyle = {
-        backgroundColor: "white",
-        padding: "20px",
-        borderRadius: "10px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-    };
-    const deliveryOptionStyle = {
-        display: "flex",
-        justifyContent: "space-between",
-        width: "100%",
-        alignItems: "center",
-    };
-    const deliveryTitleStyle = {
-        textAlign: "center",
-        width: "100%",
-        fontSize: "1.875rem",
-        color: "#003366",
-        marginBottom: "1rem",
-    };
-    const addressTitleStyle = {
-        fontSize: "1rem",
-        color: "#003366",
-        marginTop: "2rem",
-        textAlign: "left",
-    };
-    const addressTextAreaStyle = {
-        width: "100%",
-        padding: "10px",
-        marginTop: "1rem",
-        borderRadius: "5px",
-        border: "1px solid #ccc",
-        resize: "none",
-    };
+const Popup = ({ onClose }: { onClose: any }) => {
     // const handleConfirm = () => {
     //     onClose('DHL');  // Assume user choose DHL
     // };
     const [selectedDeliveryOption, setSelectedDeliveryOption] = useState("");
+    const [shipToMeChecked, setShipTopMeChecked] = useState(false);
 
     // Deal with event for user delivery way
-    const handleDeliveryOptionChange = (e) => {
+    const handleDeliveryOptionChange = (e: {
+        target: { value: React.SetStateAction<string> };
+    }) => {
         setSelectedDeliveryOption(e.target.value);
     };
 
@@ -83,13 +41,16 @@ const Popup = ({ onClose }) => {
             console.log("Please select a delivery option.");
         }
     };
+
+    const deliveryOptionStyle = "flex justify-between w-full items-center";
+
     return (
-        <div className="popup-container" style={popupContainerStyle}>
-            <div className="popup-content" style={popupContentStyle}>
-                <p style={deliveryTitleStyle}>
+        <div className="popup-container fixed top-0 right-0 left-0 bottom-0 bg-slate-200 bg-opacity-50 flex items-center  justify-center">
+            <div className="popup-content bg-white p-12 rounded-3xl shadow-md ">
+                <p className="text-center w-full text-3xl text-blue-800 mb-4">
                     <strong>Delivery</strong>
                 </p>
-                <div style={deliveryOptionStyle}>
+                <div className={deliveryOptionStyle}>
                     <div style={{ display: "flex", alignItems: "center" }}>
                         <input
                             type="radio"
@@ -105,7 +66,7 @@ const Popup = ({ onClose }) => {
                     </div>
                     <div className="text-lg">Shipping fee: $7</div>
                 </div>
-                <div style={deliveryOptionStyle}>
+                <div className={deliveryOptionStyle}>
                     <div style={{ display: "flex", alignItems: "center" }}>
                         <input
                             type="radio"
@@ -121,10 +82,12 @@ const Popup = ({ onClose }) => {
                     </div>
                     <div className="text-lg">Shipping fee: $9</div>
                 </div>
-                <p style={addressTitleStyle}>Enter Address:</p>
+                <p className="text-1xl text-blue-600 mt-8 text-left">
+                    Enter Address:
+                </p>
                 <textarea
                     defaultValue="516 2nd Ave, Mountain View, CA, 90128"
-                    style={addressTextAreaStyle}
+                    className="w-full p-4 mt-4 rounded-md border border-gray-300 resize-none"
                     rows={3}
                 />
                 {/* Button Panel */}
@@ -178,16 +141,16 @@ export default function Home() {
             <Header href="/non-specialist/profile" altText="Message" />
             <div className="m-4 flex flex-col items-center justify-center">
                 <Separator />
-                <Card className="m-4 w-55">
+                <Card className="m-4 w-55 rounded-2xl">
                     <CardContent className="grid gap-4">
-                        <p className="lg:text-3xl sm:text-2xl text-navy">
+                        <p className="lg:text-3xl sm:text-2xl text-navy pt-8">
                             Your reported item: <strong>Black Glasses </strong>
                         </p>
                         <p className="lg:text-3xl sm:text-2xl text-navy">
                             Has Been Founded!
                         </p>
                         {/* image */}
-                        <div className="w-full flex justify-center">
+                        <div className="w-full flex justify-center shadow-md rounded-3xl overflow-hidden border-slate-400 border-solid border-2">
                             <Image
                                 src="/bountyItems/BlackGlasses.png"
                                 alt="Black Glasses"
