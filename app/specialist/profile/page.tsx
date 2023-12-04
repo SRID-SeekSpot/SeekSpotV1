@@ -10,9 +10,8 @@ import BountyHuntListItem, {
     BountyHuntListItemProps,
 } from "@/components/general/bountyhuntListItem";
 import { BOUNTY_ITEMS } from "@/app/constants/AllItems";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import ProfileButton from "@/components/general/profileButton";
-import { getLocalStorageItem } from "@/components/logic/localStorage";
+import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
@@ -21,14 +20,11 @@ export default function Home() {
 
     const [unread, setUnread] = useState(false);
     useEffect(() => {
-        // execute in client side
         const unreadValue = localStorage.getItem("unread");
         if (unreadValue === null) {
-            // if localStorage cannot find unread，set it "true"
             localStorage.setItem("unread", "true");
             setUnread(true);
         } else {
-            // set it true if find
             setUnread(unreadValue === "true");
         }
     }, []);
@@ -52,8 +48,8 @@ export default function Home() {
                 {/* Avatar */}
                 <div className="h-36 w-36 rounded-full mt-12">
                     <Image
-                        alt="KateAvatar"
-                        src="/avatar/Kate.png"
+                        alt="DavidAvatar"
+                        src="/avatar/David.png"
                         layout="responsive"
                         height={36}
                         width={36}
@@ -70,21 +66,13 @@ export default function Home() {
                     />
                 </a>
                 <div>
-                    <a href="/specialist/profile/delivery">
-                        <ProfileButton
-                            iconSrc="/ProfileIcon/Email.png"
-                            buttonName="Message"
-                            editable={false}
-                            unread={unread}
-                        />
-                    </a>
+                    <ProfileButton
+                        iconSrc="/ProfileIcon/Email.png"
+                        buttonName="Message"
+                        editable={false}
+                        unread={false}
+                    />
                 </div>
-
-                <ProfileButton
-                    iconSrc="/ProfileIcon/Wallet.png"
-                    buttonName="Wallet"
-                    editable={false}
-                />
                 <ProfileButton
                     iconSrc="/ProfileIcon/Settings.png"
                     buttonName="Setting"

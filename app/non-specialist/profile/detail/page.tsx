@@ -9,8 +9,8 @@ import BountyHuntListItem, {
     BountyHuntListItemProps,
 } from "@/components/general/bountyhuntListItem";
 import { BOUNTY_ITEMS } from "@/app/constants/AllItems";
-import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 import ProfileButton from "@/components/general/profileButton";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
@@ -19,7 +19,7 @@ export default function Home() {
 
     return (
         <div className="flex flex-col">
-            <title>Specialist Profile Detail Page</title>
+            <title>User Detail Page</title>
             {/* Header that redirects to home */}
             {/* <Header href="/" altText="Hello"/> */}
             <Header altText="My Profile" href="/non-specialist/profile" />
@@ -28,8 +28,8 @@ export default function Home() {
                 {/* Avatar */}
                 <div className="h-36 w-36 rounded-full mt-12">
                     <Image
-                        alt="DavidAvatar"
-                        src="/avatar/David.png"
+                        alt="KateAvatar"
+                        src="/avatar/Kate.png"
                         layout="responsive"
                         height={36}
                         width={36}
@@ -40,12 +40,17 @@ export default function Home() {
             <div className="pt-8 space-y-4">
                 <ProfileButton
                     iconSrc="/ProfileIcon/User.png"
-                    buttonName="David"
+                    buttonName="Kate"
                     editable={true}
                 />
                 <ProfileButton
-                    iconSrc="/ProfileIcon/id.png"
-                    buttonName="01234567"
+                    iconSrc="/ProfileIcon/Contacts.png"
+                    buttonName="123-123-1234"
+                    editable={true}
+                />
+                <ProfileButton
+                    iconSrc="/ProfileIcon/Location.png"
+                    buttonName="516 2nd Ave"
                     editable={true}
                 />
             </div>

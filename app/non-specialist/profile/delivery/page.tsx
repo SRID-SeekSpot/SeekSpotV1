@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/general/navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
 const Popup = ({ onClose }) => {
     const popupContainerStyle = {
@@ -153,7 +153,7 @@ const Popup = ({ onClose }) => {
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null); // for delivery state
-    const navButtons = SPECIALIST_ROUTES;
+    const navButtons = NON_SPECIALIST_ROUTES;
     const shipToMeRef = useRef(null);
 
     useEffect(() => {
@@ -175,7 +175,7 @@ export default function Home() {
 
     return (
         <div className="flex flex-col">
-            <Header href="/specialist/profile" altText="Message" />
+            <Header href="/non-specialist/profile" altText="Message" />
             <div className="m-4 flex flex-col items-center justify-center">
                 <Separator />
                 <Card className="m-4 w-55">
@@ -183,7 +183,9 @@ export default function Home() {
                         <p className="lg:text-3xl sm:text-2xl text-navy">
                             Your reported item: <strong>Black Glasses </strong>
                         </p>
-                        <p className="lg:text-3xl sm:text-2xl text-navy">Has Been Founded!</p>
+                        <p className="lg:text-3xl sm:text-2xl text-navy">
+                            Has Been Founded!
+                        </p>
                         {/* image */}
                         <div className="w-full flex justify-center">
                             <Image
@@ -208,7 +210,10 @@ export default function Home() {
                                 className="mr-2"
                                 onChange={handleDeliveryChange}
                             />
-                            <label htmlFor="in-person" className="lg:text-3xl sm:text-2xl text-navy">
+                            <label
+                                htmlFor="in-person"
+                                className="lg:text-3xl sm:text-2xl text-navy"
+                            >
                                 Get it in person
                             </label>
                         </div>
@@ -222,7 +227,10 @@ export default function Home() {
                                 onChange={handleDeliveryChange}
                                 ref={shipToMeRef}
                             />
-                            <label htmlFor="ship-to-me" className="lg:text-3xl sm:text-2xl text-navy">
+                            <label
+                                htmlFor="ship-to-me"
+                                className="lg:text-3xl sm:text-2xl text-navy"
+                            >
                                 Ship it to me
                             </label>
                         </div>
