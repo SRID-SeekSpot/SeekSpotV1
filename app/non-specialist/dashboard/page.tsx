@@ -21,7 +21,7 @@ const Popup = ({}) => {
                 <h2 className="text-2xl font-bold mb-4">Congratulations!</h2>
                 <p className="text-sm mb-4">Your lost item is found!</p>
                 <Button className="w-56" variant={"secondary"}>
-                    <a href="/specialist/profile/delivery">Check details</a>
+                    <a href="/non-specialist/profile/delivery">Check details</a>
                 </Button>
             </div>
         </div>
@@ -48,7 +48,7 @@ export default function Home() {
 
     return (
         <div className="flex flex-col">
-            <title>Specialist Dashboard</title>
+            <title>User Dashboard</title>
             {/* Header that redirects to home */}
             {/* <Header href="/" altText="Hello"/> */}
             <Header href="/" altText="User Dashboard" />
@@ -59,7 +59,7 @@ export default function Home() {
             <div className="flex flex-col">
                 {/* Bounty Hunt List */}
                 <div className="flex flex-col m-4">
-                    <a href="/specialist/bounty">
+                    <a href="/non-specialist/bounty">
                         <div className="flex flex-row justify-start items-baseline">
                             <Image
                                 src="/icons/IconMoney.png"
@@ -82,7 +82,7 @@ export default function Home() {
                                 {bountyHuntList.map((item) => (
                                     <SquareListItem
                                         {...item}
-                                        redirectUrl={"/specialist/" + item.id}
+                                        redirectUrl={"/non-specialist/" + item.id}
                                         key={item.id}
                                     />
                                 ))}
@@ -93,7 +93,7 @@ export default function Home() {
                 </div>
                 {/* Found Item Inventory */}
                 <div className="flex flex-col m-4">
-                    <a href="/specialist/found">
+                    <a href="/non-specialist/found">
                         <div className="flex flex-row justify-start items-baseline">
                             <Image
                                 src="/icons/IconSearch.png"
@@ -118,7 +118,7 @@ export default function Home() {
                                 {foundItemList.map((item) => (
                                     <SquareListItem
                                         {...item}
-                                        redirectUrl={"/specialist/" + item.id}
+                                        redirectUrl={"/non-specialist/" + item.id}
                                         key={item.id}
                                     />
                                 ))}
