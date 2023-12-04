@@ -32,11 +32,13 @@ import FoundListItem, {
 
 import { useEffect, useState } from "react";
 import { EachFoundItemProps } from "../editItem/page";
+import { COLORS_CATEGORY } from "@/app/constants/ColorsCategory";
+import { ITEMS_CATEGORY } from "@/app/constants/ItemCategory";
 // Icon Src and Route for Navigation Bar
 const navButtons = SPECIALIST_ROUTES;
 
-const colorFilter = ["White", "Black", "Red", "Blue"];
-const categoryFilter = ["Cloth", "Bottles", "Phone"];
+const colorFilter = COLORS_CATEGORY;
+const categoryFilter = ITEMS_CATEGORY;
 
 export default function Home() {
     const foundItems = FOUND_ITEMS;
@@ -112,10 +114,11 @@ export default function Home() {
                 <div className="flex flex-row justify-between space-x-2">
                     <Input
                         type="search"
-                        placeholder="Enter Some Keyword For Searching"
+                        placeholder="Enter some Keyword ..."
                         onChange={(val) => {
                             setVal(val.target.value);
                         }}
+                        className="rounded-2xl"
                     />
                     <Button variant={"link"}>
                         <Image
