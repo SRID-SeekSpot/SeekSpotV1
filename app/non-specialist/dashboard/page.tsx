@@ -10,6 +10,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 import { BOUNTY_ITEMS, FOUND_ITEMS } from "@/app/constants/AllItems";
 import SquareListItem from "@/components/general/squareListItem";
+import DashboardTitle from "@/components/general/dashboardTitle";
 
 // Popup component
 const Popup = ({}) => {
@@ -56,24 +57,15 @@ export default function Home() {
             {/* Body */}
             <div className="flex flex-col">
                 {/* Bounty Hunt List */}
+
                 <div className="flex flex-col m-4">
-                    <a href="/non-specialist/bounty">
-                        <div className="flex flex-row justify-start items-baseline">
-                            <Image
-                                src="/icons/IconMoney.png"
-                                alt="BountyHunt"
-                                width={25}
-                                height={25}
-                            ></Image>
-                            <p className="text-3xl ml-2">Bounty Hunt List</p>
-                        </div>
-                        <div className="mt-2">
-                            <p className="text-sm">
-                                List of items people have lost. Help them find
-                                their treasures and gain a reward!
-                            </p>
-                        </div>
-                    </a>
+                    <DashboardTitle
+                        iconSrc="/icons/IconMoney.png"
+                        title="Bounty Hunt List"
+                        description="List of items people have lost. Help them find
+                    their treasures and gain a reward!"
+                        linkUrl="/non-specialist/bounty"
+                    />
                     <div className="mt-4">
                         <ScrollArea className="w-full px-4 whitespace-nowrap rounded-md border">
                             <div className="flex w-max space-x-4 p-4">
@@ -93,25 +85,13 @@ export default function Home() {
                 </div>
                 {/* Found Item Inventory */}
                 <div className="flex flex-col m-4">
-                    <a href="/non-specialist/found">
-                        <div className="flex flex-row justify-start items-baseline">
-                            <Image
-                                src="/icons/IconSearch.png"
-                                alt="FoundItem"
-                                width={25}
-                                height={25}
-                            ></Image>
-                            <p className="text-3xl ml-2">
-                                Found Item Inventory
-                            </p>
-                        </div>
-                        <div className="mt-2">
-                            <p className="text-sm">
-                                List of items stored in the Lost & Found office.
-                                Come and see if your item is here!
-                            </p>
-                        </div>
-                    </a>
+                    <DashboardTitle
+                        iconSrc="/icons/IconSearch.png"
+                        title="Found Item Inventory"
+                        description="List of items stored in the Lost & Found office.
+                    Come and see if your item is here!"
+                        linkUrl="/non-specialist/found"
+                    />
                     <div className="mt-4">
                         <ScrollArea className="w-full px-4 whitespace-nowrap rounded-md border">
                             <div className="flex w-max space-x-4 p-4">
