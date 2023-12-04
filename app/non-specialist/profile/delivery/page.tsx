@@ -214,9 +214,10 @@ export default function Home() {
                 </Card>
             </div>
             {(selectedDelivery === "ups" || selectedDelivery === "dhl") && (
-                <p className="text-xl text-green-600 mx-6">
+                <p className="lg:text-1xl sm:text-1xl text-black-600 mx-6">
                     Congratulations! Your item will come back home shortly. Here
-                    is the tracking info: XX123456ABC
+                    is the tracking info:&nbsp;
+                    <span style={{ textDecoration: "underline", color: "#5B21B6" }}>XX123456ABC</span>
                 </p>
             )}
             {showPopup && <Popup onClose={handlePopupClose} />}
