@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { ALL_ITEMS, BOUNTY_ITEMS } from "@/app/constants/AllItems";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
 interface FoundItemDetailPage_nonspecialistProps {
     item: {
@@ -120,7 +120,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
             );
             console.log(updatedBountyItemsTmp);
         } else {
-            const updatedBountyItems = BOUNTY_ITEMS.map((item) => {
+            const updatedBountyItems = ALL_ITEMS.map((item) => {
                 if (item.id === additionalData) {
                     // Update the status property to true
                     return { ...item, status: true };
@@ -159,7 +159,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
                                     className="mt-5 w-200 h-10"
                                     onClick={() => handleClaimSuccess()}
                                 >
-                                    <a href="/specialist/found">Claim</a>
+                                    <a href="/non-specialist/found">Claim</a>
                                 </Button>
                             </div>
                         </div>
@@ -233,7 +233,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
 const FoundItemDetailPage_nonspecialist: React.FC<
     FoundItemDetailPage_nonspecialistProps
 > = ({ item }) => {
-    const navButtons = SPECIALIST_ROUTES;
+    const navButtons = NON_SPECIALIST_ROUTES;
 
     // pop up message for delete action
     const [showPopup, setShowPopup] = useState(false);
@@ -252,7 +252,7 @@ const FoundItemDetailPage_nonspecialist: React.FC<
 
     return (
         <div className="flex flex-col h-screen">
-            <Header href="/specialist/found" />
+            <Header href="/non-specialist/found" />
             <div className="flex flex-col items-center bg-gray-100 p-4 shadow ">
                 <div className="w-full max-w-xs mb-4 rounded-lg overflow-hidden">
                     <Image

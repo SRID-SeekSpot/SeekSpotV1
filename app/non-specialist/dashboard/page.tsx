@@ -7,7 +7,7 @@ import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 import { BOUNTY_ITEMS, FOUND_ITEMS } from "@/app/constants/AllItems";
 import SquareListItem from "@/components/general/squareListItem";
 import DashboardTitle from "@/components/general/dashboardTitle";
@@ -20,7 +20,7 @@ const Popup = ({}) => {
                 <h2 className="text-2xl font-bold mb-4">Congratulations!</h2>
                 <p className="text-sm mb-4">Your lost item is found!</p>
                 <Button className="w-56" variant={"secondary"}>
-                    <a href="/specialist/profile/delivery">Check details</a>
+                    <a href="/non-specialist/profile/delivery">Check details</a>
                 </Button>
             </div>
         </div>
@@ -30,7 +30,7 @@ const Popup = ({}) => {
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false);
     // Icon Src and Route for Navigation Bar
-    const navButtons = SPECIALIST_ROUTES;
+    const navButtons = NON_SPECIALIST_ROUTES;
 
     const bountyHuntList = BOUNTY_ITEMS;
     const foundItemList = FOUND_ITEMS;
@@ -47,23 +47,24 @@ export default function Home() {
 
     return (
         <div className="flex flex-col">
-            <title>Specialist Dashboard</title>
+            <title>User Dashboard</title>
             {/* Header that redirects to home */}
             {/* <Header href="/" altText="Hello"/> */}
-            <Header href="/" altText="Specialist Dashboard" />
+            <Header href="/" altText="User Dashboard" />
             {/* pop up component */}
             {showPopup && <Popup />}
 
             {/* Body */}
             <div className="flex flex-col">
                 {/* Bounty Hunt List */}
+
                 <div className="flex flex-col m-4">
                     <DashboardTitle
                         iconSrc="/icons/IconMoney.png"
                         title="Bounty Hunt List"
                         description="List of items people have lost. Help them find
                     their treasures and gain a reward!"
-                        linkUrl="/specialist/bounty"
+                        linkUrl="/non-specialist/bounty"
                     />
                     <div className="mt-4">
                         <ScrollArea className="w-full px-4 whitespace-nowrap rounded-md border">
@@ -71,7 +72,9 @@ export default function Home() {
                                 {bountyHuntList.map((item) => (
                                     <SquareListItem
                                         {...item}
-                                        redirectUrl={"/specialist/" + item.id}
+                                        redirectUrl={
+                                            "/non-specialist/" + item.id
+                                        }
                                         key={item.id}
                                     />
                                 ))}
@@ -87,7 +90,7 @@ export default function Home() {
                         title="Found Item Inventory"
                         description="List of items stored in the Lost & Found office.
                     Come and see if your item is here!"
-                        linkUrl="/specialist/found"
+                        linkUrl="/non-specialist/found"
                     />
                     <div className="mt-4">
                         <ScrollArea className="w-full px-4 whitespace-nowrap rounded-md border">
@@ -95,7 +98,9 @@ export default function Home() {
                                 {foundItemList.map((item) => (
                                     <SquareListItem
                                         {...item}
-                                        redirectUrl={"/specialist/" + item.id}
+                                        redirectUrl={
+                                            "/non-specialist/" + item.id
+                                        }
                                         key={item.id}
                                     />
                                 ))}
@@ -109,7 +114,7 @@ export default function Home() {
                 className="mt-12 flex justify-end mr-6"
                 style={{ position: "fixed", bottom: "80px", right: "0px" }}
             >
-                <Link href="/specialist/createLostItem" passHref>
+                <Link href="/non-specialist/createBountyItem" passHref>
                     <Image
                         src="/icons/IconCreate.png"
                         alt="Create Button"
