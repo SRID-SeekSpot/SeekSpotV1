@@ -180,10 +180,10 @@ export default function Home() {
                 <Separator />
                 <Card className="m-4 w-55">
                     <CardContent className="grid gap-4">
-                        <p className="text-3xl text-navy">
+                        <p className="lg:text-3xl sm:text-2xl text-navy">
                             Your reported item: <strong>Black Glasses </strong>
                         </p>
-                        <p className="text-3xl text-navy">Has Been Founded!</p>
+                        <p className="lg:text-3xl sm:text-2xl text-navy">Has Been Founded!</p>
                         {/* image */}
                         <div className="w-full flex justify-center">
                             <Image
@@ -195,7 +195,7 @@ export default function Home() {
                             />
                         </div>
                         <div className="w-full flex justify-center">
-                            <p className="text-3xl text-navy">
+                            <p className="lg:text-3xl sm:text-2xl text-navy">
                                 <strong>Get it back now!</strong>
                             </p>
                         </div>
@@ -208,7 +208,7 @@ export default function Home() {
                                 className="mr-2"
                                 onChange={handleDeliveryChange}
                             />
-                            <label htmlFor="in-person" className="mr-4 text-lg">
+                            <label htmlFor="in-person" className="lg:text-3xl sm:text-2xl text-navy">
                                 Get it in person
                             </label>
                         </div>
@@ -222,7 +222,7 @@ export default function Home() {
                                 onChange={handleDeliveryChange}
                                 ref={shipToMeRef}
                             />
-                            <label htmlFor="ship-to-me" className="text-lg">
+                            <label htmlFor="ship-to-me" className="lg:text-3xl sm:text-2xl text-navy">
                                 Ship it to me
                             </label>
                         </div>
