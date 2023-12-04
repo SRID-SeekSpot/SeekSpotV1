@@ -28,7 +28,7 @@ export default function Home() {
                     return (
                         <BountyHuntListItem
                             {...item}
-                            redirectUrl={"/specialist/" + item.id}
+                            redirectUrl={"/non-specialist/" + item.id}
                         />
                     );
                 })}

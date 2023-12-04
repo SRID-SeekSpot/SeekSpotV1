@@ -251,7 +251,7 @@ export default function Home() {
                             return (
                                 <FoundListItem
                                     {...item}
-                                    redirectUrl={"/specialist/" + item.id}
+                                    redirectUrl={"/non-specialist/" + item.id}
                                 />
                             );
                         })}
