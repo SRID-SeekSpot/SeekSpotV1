@@ -83,6 +83,7 @@ export default function Home() {
                                     <SquareListItem
                                         {...item}
                                         redirectUrl={"/specialist/" + item.id}
+                                        key={item.id}
                                     />
                                 ))}
                             </div>
@@ -118,6 +119,7 @@ export default function Home() {
                                     <SquareListItem
                                         {...item}
                                         redirectUrl={"/specialist/" + item.id}
+                                        key={item.id}
                                     />
                                 ))}
                             </div>
