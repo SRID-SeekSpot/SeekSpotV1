@@ -48,6 +48,7 @@ export default function Home() {
     const [category, setCategory] = useState(""); // search by filter category
     const [selectedColor, setSelectedColor] = useState(""); // selected color
     const [selectedCategory, setSelectedCategory] = useState(""); // selected category
+    const [filterApplied, setFilterApplied] = useState(false);
 
     // Query content changes or filtering changes trigger the query
     useEffect(() => {
@@ -81,6 +82,7 @@ export default function Home() {
     const onSave = () => {
         setColor(selectedColor);
         setCategory(selectedCategory);
+        setFilterApplied(!(selectedColor === "" && selectedCategory === ""));
     };
     // Reset all filter value
     const onReset = () => {
@@ -88,6 +90,7 @@ export default function Home() {
         setCategory("");
         setSelectedColor("");
         setSelectedCategory("");
+        setFilterApplied(false);
     };
 
     useEffect(() => {
@@ -137,6 +140,9 @@ export default function Home() {
                                 width={12}
                                 height={12}
                             />
+                            {filterApplied && (
+                                <div className="bg-red-700 h-2 w-2 rounded-full relative top-[-25px] right-[-20px]"></div>
+                            )}
                         </SheetTrigger>
                         <SheetContent>
                             <SheetHeader className="flex flex-row justify-start items-center">
@@ -164,7 +170,7 @@ export default function Home() {
                                             }
                                         >
                                             <SelectTrigger className="w-[160px]">
-                                                <SelectValue placeholder="Select a Color" />
+                                                <SelectValue placeholder="Color?" />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectGroup>
@@ -199,7 +205,7 @@ export default function Home() {
                                             }
                                         >
                                             <SelectTrigger className="w-[160px]">
-                                                <SelectValue placeholder="Select a Category" />
+                                                <SelectValue placeholder="Category?" />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectGroup>
