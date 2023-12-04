@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { ALL_ITEMS } from "@/app/constants/AllItems";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 import EditItemDescriptionForm from "@/components/general/editItemForm";
 import { useSearchParams } from "@/node_modules/next/navigation";
 import { FoundItemProps } from "../found/page";
@@ -24,7 +24,7 @@ export interface EachFoundItemProps {
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
-    const navButtons = SPECIALIST_ROUTES;
+    const navButtons = NON_SPECIALIST_ROUTES;
 
     // const [itemDetail, setItemDetail] = useState<Item | null>(null);
     const searchParams = useSearchParams();

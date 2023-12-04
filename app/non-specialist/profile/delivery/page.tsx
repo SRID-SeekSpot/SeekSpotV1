@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/general/navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
 const Popup = ({ onClose }) => {
     const popupContainerStyle = {
@@ -153,7 +153,7 @@ const Popup = ({ onClose }) => {
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null); // for delivery state
-    const navButtons = SPECIALIST_ROUTES;
+    const navButtons = NON_SPECIALIST_ROUTES;
     const shipToMeRef = useRef(null);
 
     useEffect(() => {

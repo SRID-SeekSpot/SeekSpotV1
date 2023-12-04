@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 
 import ImageKit from "imagekit-javascript";
 
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
 export default function Home() {
     const router = useRouter();
@@ -23,7 +23,7 @@ export default function Home() {
     });
 
     // Icon Src and Route for Navigation Bar
-    const navButtons = SPECIALIST_ROUTES;
+    const navButtons = NON_SPECIALIST_ROUTES;
 
     const handleSubmit = async (event: { preventDefault: () => void }) => {
         event.preventDefault();

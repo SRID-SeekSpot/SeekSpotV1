@@ -68,7 +68,7 @@ export default function Home() {
                         <a href="/specialist/dashboard">Specialist</a>
                     </Button>
                     <Button className="w-56" variant={"secondary"}>
-                        Non-Specialist
+                        <a href="/non-specialist/dashboard">Non-Specialist</a>
                     </Button>
                     <Button className="w-56" variant={"outline"} asChild>
                         <a href="/styleguide">Style Guide</a>

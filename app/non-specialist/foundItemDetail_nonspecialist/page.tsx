@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { ALL_ITEMS, BOUNTY_ITEMS } from "@/app/constants/AllItems";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
 interface FoundItemDetailPage_nonspecialistProps {
     item: {
@@ -234,7 +234,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
 const FoundItemDetailPage_nonspecialist: React.FC<
     FoundItemDetailPage_nonspecialistProps
 > = ({ item }) => {
-    const navButtons = SPECIALIST_ROUTES;
+    const navButtons = NON_SPECIALIST_ROUTES;
 
     // pop up message for delete action
     const [showPopup, setShowPopup] = useState(false);

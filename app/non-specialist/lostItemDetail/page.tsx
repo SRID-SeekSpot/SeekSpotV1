@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
 interface LostItemDetailPageProps {
     item: {
@@ -20,7 +20,7 @@ interface LostItemDetailPageProps {
 }
 
 const LostItemDetailPage: React.FC<LostItemDetailPageProps> = ({ item }) => {
-    const navButtons = SPECIALIST_ROUTES;
+    const navButtons = NON_SPECIALIST_ROUTES;
 
     if (!item) {
         return <p>Item not found!</p>;

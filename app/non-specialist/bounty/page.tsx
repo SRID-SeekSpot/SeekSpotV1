@@ -9,11 +9,11 @@ import BountyHuntListItem, {
     BountyHuntListItemProps,
 } from "@/components/general/bountyhuntListItem";
 import { BOUNTY_ITEMS } from "@/app/constants/AllItems";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
 export default function Home() {
     // Icon Src and Route for Navigation Bar
-    const navButtons = SPECIALIST_ROUTES;
+    const navButtons = NON_SPECIALIST_ROUTES;
     const bountyHuntList: BountyHuntListItemProps[] = BOUNTY_ITEMS;
 
     return (

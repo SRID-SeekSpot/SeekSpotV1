@@ -7,7 +7,7 @@ import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 import { BOUNTY_ITEMS, FOUND_ITEMS } from "@/app/constants/AllItems";
 import LostItemDetailPage from "../lostItemDetail/page";
 import BountyHuntListItem from "@/components/general/bountyhuntListItem";
@@ -31,7 +31,7 @@ const Popup = ({}) => {
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false);
     // Icon Src and Route for Navigation Bar
-    const navButtons = SPECIALIST_ROUTES;
+    const navButtons = NON_SPECIALIST_ROUTES;
 
     const bountyHuntList = BOUNTY_ITEMS;
     const foundItemList = FOUND_ITEMS;

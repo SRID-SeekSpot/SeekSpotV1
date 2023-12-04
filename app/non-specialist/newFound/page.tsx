@@ -6,7 +6,7 @@ import Link from "next/link";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { BOUNTY_ITEMS, FOUND_ITEMS } from "@/app/constants/AllItems";
-import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,7 +33,7 @@ import FoundListItem, {
 import { useEffect, useState } from "react";
 import { EachFoundItemProps } from "../editItem/page";
 // Icon Src and Route for Navigation Bar
-const navButtons = SPECIALIST_ROUTES;
+const navButtons = NON_SPECIALIST_ROUTES;
 
 const foundItemList: FoundListItemProps[] = FOUND_ITEMS;
 
