@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({
                 )}
                 {altText && (
                     <div className="mt-5 text-center">
-                        <p className="text-3xl text-grass">{altText}</p>
+                        <p className="text-[25px] font-bold text-grass">{altText}</p>
                     </div>
                 )}
             </div>

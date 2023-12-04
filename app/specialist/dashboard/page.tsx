@@ -51,7 +51,7 @@ export default function Home() {
             <title>Specialist Dashboard</title>
             {/* Header that redirects to home */}
             {/* <Header href="/" altText="Hello"/> */}
-            <Header href="/" />
+            <Header href="/" altText="Specialist Dashboard" />
             {/* pop up component */}
             {showPopup && <Popup />}
 
