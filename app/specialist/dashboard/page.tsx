@@ -81,7 +81,7 @@ export default function Home() {
                         </p>
                     </div>
                     <div className="mt-4">
-                        <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
+                        <ScrollArea className="w-full px-4 whitespace-nowrap rounded-md border">
                             <div className="flex w-max space-x-4 p-4">
                                 {bountyHuntList.map((item) => (
                                     <SquareListItem
@@ -112,7 +112,7 @@ export default function Home() {
                         </p>
                     </div>
                     <div className="mt-4">
-                        <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
+                        <ScrollArea className="w-full px-4 whitespace-nowrap rounded-md border">
                             <div className="flex w-max space-x-4 p-4">
                                 {foundItemList.map((item) => (
                                     <SquareListItem
