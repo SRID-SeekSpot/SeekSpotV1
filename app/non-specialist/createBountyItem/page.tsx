@@ -1,13 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
@@ -16,9 +14,9 @@ export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = NON_SPECIALIST_ROUTES;
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault(); // Prevents the default form submission
-        router.push("/specialist/newBounty"); // Use the correct path for your new page
+        router.push("/non-specialist/newBounty"); // Use the correct path for your new page
     };
 
     return (
@@ -26,26 +24,10 @@ export default function Home() {
             <title>Create a Bounty Item</title>
 
             {/* Header with Back Button and Centered Title */}
-            <div className="flex items-center justify-between">
-                <div className="flex items-center px-2">
-                    {" "}
-                    {/* Add padding to the left */}
-                    <Link href="/specialist/dashboard" passHref>
-                        <Image
-                            src="/icons/IconBack.png"
-                            alt="Back"
-                            width={24} // Adjust size as needed
-                            height={24} // Adjust size as needed
-                        />
-                    </Link>
-                </div>
-                <Header altText="Report a Lost Item" />
-                <div className="px-2">
-                    {" "}
-                    {/* Dummy div for spacing */}
-                    {/* Empty div to balance the flex space */}
-                </div>
-            </div>
+            <Header
+                altText="Create a Bounty Item"
+                href="/non-specialist/dashboard"
+            />
 
             {/* Scrollable Body */}
             <ScrollArea className="flex-grow pb-20">
