@@ -27,14 +27,17 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({
     ...props
 }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [editableText, setEditableText] = useState(() => {
+    const [editableText, setEditableText] = useState(buttonName);
+    const inputRef = useRef(null);
+
+    useEffect(() => {
         if (localStorageKey) {
             const storedValue = localStorage.getItem(localStorageKey);
-            return storedValue ?? buttonName;
+            if (storedValue !== null) {
+                setEditableText(storedValue);
+            }
         }
-        return buttonName;
-    });
-    const inputRef = useRef(null);
+    }, [localStorageKey]);
 
     useEffect(() => {
         if (isEditing) {

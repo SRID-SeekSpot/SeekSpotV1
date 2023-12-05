@@ -75,7 +75,7 @@ export default function Home() {
                     </Button>
                     <div className="w-56 text-center">
                         <a
-                            href="/specialist/dashboard"
+                            href="/non-specialist/dashboard"
                             className="text-sm underline"
                             onClick={handlePopup}
                         >
