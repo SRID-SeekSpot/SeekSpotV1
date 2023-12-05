@@ -23,6 +23,8 @@ const Popup = ({ onClose }: { onClose: any }) => {
         setSelectedDeliveryOption(e.target.value);
     };
 
+    
+
     // the logic to choose deliver way
     const handleConfirm = () => {
         if (
@@ -129,12 +131,15 @@ export default function Home() {
         }
         localStorage.setItem("unread", "false");
         setSelectedDelivery(e.target.value);
+        console.log(e.target.value)
     };
 
     const handlePopupClose = (choice) => {
         setShowPopup(false);
         setSelectedDelivery(choice); // set the delivery way
     };
+
+   
 
     return (
         <div className="flex flex-col">
@@ -164,7 +169,7 @@ export default function Home() {
                                 <strong>Get it back now!</strong>
                             </p>
                         </div>
-                        <div className="flex items-center">
+                        <div className="w-full flex items-center">
                             <input
                                 type="radio"
                                 id="in-person"
@@ -179,8 +184,11 @@ export default function Home() {
                             >
                                 Get it in person
                             </label>
+                            {selectedDelivery === "in-person" && (
+                                <span className="ml-auto text-green-600">saved!</span>
+                            )}
                         </div>
-                        <div className="flex items-center">
+                        <div className="w-full flex items-center">
                             <input
                                 type="radio"
                                 id="ship-to-me"
@@ -188,22 +196,28 @@ export default function Home() {
                                 value="ship-to-me"
                                 className="mr-2"
                                 onChange={handleDeliveryChange}
-                                ref={shipToMeRef}
+                                //ref={shipToMeRef}
                             />
                             <label
                                 htmlFor="ship-to-me"
                                 className="lg:text-3xl sm:text-2xl text-navy"
                             >
-                                Ship it to me
+                                Ship it to me{(selectedDelivery === "ups" || selectedDelivery === "dhl") && (
+                                    <span> via <strong>{selectedDelivery.toUpperCase()}</strong></span>
+                                )}
                             </label>
+                            {(selectedDelivery === "ups" || selectedDelivery === "dhl") && (
+                                <span className="ml-auto text-green-600">saved!</span>
+                            )}
                         </div>
                     </CardContent>
                 </Card>
             </div>
-            {selectedDelivery && (
-                <p className="text-xl text-green-600 mx-6">
+            {(selectedDelivery === "ups" || selectedDelivery === "dhl") && (
+                <p className="lg:text-1xl sm:text-1xl text-black-600 mx-6">
                     Congratulations! Your item will come back home shortly. Here
-                    is the tracking info: XX123456ABC
+                    is the tracking info:&nbsp;
+                    <span style={{ textDecoration: "underline", color: "#5B21B6" }}>XX123456ABC</span>
                 </p>
             )}
             {showPopup && <Popup onClose={handlePopupClose} />}

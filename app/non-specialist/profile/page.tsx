@@ -64,7 +64,7 @@ export default function Home() {
                     />
                 </a>
                 <div>
-                    <a href="/non-specialist/profile/delivery">
+                    <a href="/non-specialist/profile/delivery" style={{ pointerEvents: unread ? 'auto' : 'none' }}>
                         <ProfileButton
                             iconSrc="/ProfileIcon/Email.png"
                             buttonName="Message"
