@@ -22,6 +22,66 @@ interface FoundItemDetailPage_nonspecialistProps {
     };
 }
 
+const FoundItemDetailPage_nonspecialist: React.FC<FoundItemDetailPage_nonspecialistProps> = ({ item }) => {
+    const navButtons = NON_SPECIALIST_ROUTES;
+
+    // pop up message for delete action
+    const [showPopup, setShowPopup] = useState(false);
+    const showPopupClaim = () => {
+        setShowPopup(true);
+    };
+    localStorage.setItem("claimItemIndex", item.id);
+
+    if (!item) {
+        return <p>Item not found!</p>;
+    }
+
+    const handlePopupClose = () => {
+        setShowPopup(false);
+    };
+
+    return (
+        <div className="flex flex-col h-screen">
+            <Header href="/non-specialist/found" />
+            <div className="flex flex-col items-center bg-gray-100 p-4 shadow ">
+                <div className="w-full max-w-xs mb-4 rounded-lg overflow-hidden">
+                    <Image
+                        src={item.imgSrc}
+                        alt={`Picture of ${item.name}`}
+                        width={300}
+                        height={180}
+                        layout="responsive"
+                        className="rounded-2xl"
+                    />
+                </div>
+            </div>
+            <h1 className="text-2xl text-navy font-bold mt-12 mx-4">
+                {item.name}
+            </h1>
+            <div className="flex justify-between items-center mt-8 mx-4">
+                <p className="text-md">Location Found: {item.location}</p>
+                <p className="text-md text-right">Date Found: {item.date}</p>
+            </div>
+
+            <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]">
+                <div className="flex justify-center mb-20">
+                    <Button className="w-56" asChild onClick={showPopupClaim}>
+                        <p>Claim</p>
+                    </Button>
+                    {showPopup && (
+                        <PopupClaim
+                            onClose={handlePopupClose}
+                            additionalData={item.id}
+                        />
+                    )}
+                </div>
+            </div>
+
+            <Navbar navButtons={navButtons} />
+        </div>
+    );
+};
+
 // pop up area for claim
 const PopupClaim = ({ onClose, additionalData }) => {
     const [claimCode, setClaimCode] = useState("");
@@ -227,66 +287,6 @@ const PopupClaim = ({ onClose, additionalData }) => {
                     </div>
                 </div>
             )}
-        </div>
-    );
-};
-
-const FoundItemDetailPage_nonspecialist: React.FC<FoundItemDetailPage_nonspecialistProps> = ({ item }) => {
-    const navButtons = NON_SPECIALIST_ROUTES;
-
-    // pop up message for delete action
-    const [showPopup, setShowPopup] = useState(false);
-    const showPopupClaim = () => {
-        setShowPopup(true);
-    };
-    localStorage.setItem("claimItemIndex", item.id);
-
-    if (!item) {
-        return <p>Item not found!</p>;
-    }
-
-    const handlePopupClose = () => {
-        setShowPopup(false);
-    };
-
-    return (
-        <div className="flex flex-col h-screen">
-            <Header href="/non-specialist/found" />
-            <div className="flex flex-col items-center bg-gray-100 p-4 shadow ">
-                <div className="w-full max-w-xs mb-4 rounded-lg overflow-hidden">
-                    <Image
-                        src={item.imgSrc}
-                        alt={`Picture of ${item.name}`}
-                        width={300}
-                        height={180}
-                        layout="responsive"
-                        className="rounded-2xl"
-                    />
-                </div>
-            </div>
-            <h1 className="text-2xl text-navy font-bold mt-12 mx-4">
-                {item.name}
-            </h1>
-            <div className="flex justify-between items-center mt-8 mx-4">
-                <p className="text-md">Location Found: {item.location}</p>
-                <p className="text-md text-right">Date Found: {item.date}</p>
-            </div>
-
-            <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]">
-                <div className="flex justify-center mb-20">
-                    <Button className="w-56" asChild onClick={showPopupClaim}>
-                        <p>Claim</p>
-                    </Button>
-                    {showPopup && (
-                        <PopupClaim
-                            onClose={handlePopupClose}
-                            additionalData={item.id}
-                        />
-                    )}
-                </div>
-            </div>
-
-            <Navbar navButtons={navButtons} />
         </div>
     );
 };
