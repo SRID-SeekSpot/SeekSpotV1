@@ -12,17 +12,29 @@ const ItemDetail = () => {
     const [foundItemList, setFoundItemList] = useState(ALL_ITEMS);
     const [item, setItem] = useState(() => foundItemList.find((item) => item.id === id));
 
-    useEffect(() => {
-        // Fetch data from localStorage only once when the component mounts
-        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+    // useEffect(() => {
+    //     // Fetch data from localStorage only once when the component mounts
+    //     let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
 
-        if (updatedBountyItemsString !== "null") {
-            let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+    //     if (updatedBountyItemsString !== "null") {
+    //         let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+    //         setFoundItemList(updatedBountyItems);
+    //         const newItem = updatedBountyItems.find((item) => item.id === id);
+    //         setItem(newItem);
+    //     }
+    // }, []);
+
+    useEffect(() => {
+        const updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+    
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
+            const updatedBountyItems = JSON.parse(updatedBountyItemsString);
             setFoundItemList(updatedBountyItems);
             const newItem = updatedBountyItems.find((item) => item.id === id);
             setItem(newItem);
         }
-    }, []);
+    }, [id]); // Add id as a dependency
+    
 
     // If item is not found
     if (!item || !id) {
