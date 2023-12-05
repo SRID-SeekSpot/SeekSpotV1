@@ -231,9 +231,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
     );
 };
 
-const FoundItemDetailPage_nonspecialist: React.FC<
-    FoundItemDetailPage_nonspecialistProps
-> = ({ item }) => {
+const FoundItemDetailPage_nonspecialist: React.FC<FoundItemDetailPage_nonspecialistProps> = ({ item }) => {
     const navButtons = NON_SPECIALIST_ROUTES;
 
     // pop up message for delete action
