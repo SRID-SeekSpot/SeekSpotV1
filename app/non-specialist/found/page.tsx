@@ -181,6 +181,7 @@ export default function Home() {
                                                         (color) => {
                                                             return (
                                                                 <SelectItem
+                                                                    key={color}
                                                                     value={
                                                                         color
                                                                     }
@@ -216,6 +217,7 @@ export default function Home() {
                                                         (color) => {
                                                             return (
                                                                 <SelectItem
+                                                                    key = {color}
                                                                     value={
                                                                         color
                                                                     }
