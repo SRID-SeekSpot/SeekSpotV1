@@ -156,7 +156,7 @@ export default function Home() {
                                 {/* Color Filter */}
                                 <div className="flex flex-row justify-between items-center">
                                     <p>Color:</p>
-                                    <div className="">
+                                    <div>
                                         <Select
                                             value={selectedColor}
                                             onValueChange={(val) =>
@@ -164,7 +164,7 @@ export default function Home() {
                                             }
                                         >
                                             <SelectTrigger className="w-[160px]">
-                                                <SelectValue placeholder="Select a Color" />
+                                                <SelectValue placeholder="Color?" />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectGroup>
@@ -199,7 +199,7 @@ export default function Home() {
                                             }
                                         >
                                             <SelectTrigger className="w-[160px]">
-                                                <SelectValue placeholder="Select a Category" />
+                                                <SelectValue placeholder="Category?" />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectGroup>
@@ -228,16 +228,16 @@ export default function Home() {
                                 <div className="flex flex-row justify-between items-center">
                                     <Button
                                         className="w-28 rounded-lg"
-                                        onClick={onSave}
-                                    >
-                                        Save
-                                    </Button>
-                                    <Button
-                                        className="w-28 rounded-lg"
                                         variant={"secondary"}
                                         onClick={onReset}
                                     >
                                         Reset
+                                    </Button>
+                                    <Button
+                                        className="w-28 rounded-lg"
+                                        onClick={onSave}
+                                    >
+                                        Save
                                     </Button>
                                 </div>
                             </div>
