@@ -256,6 +256,7 @@ export default function Home() {
                         {productList.map((item) => {
                             return (
                                 <FoundListItem
+                                    key={item.id}
                                     {...item}
                                     redirectUrl={"/non-specialist/" + item.id}
                                 />

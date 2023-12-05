@@ -10,20 +10,18 @@ const ItemDetail = () => {
     const path = usePathname();
     const id = path.split("/").pop();
     const [foundItemList, setFoundItemList] = useState(ALL_ITEMS);
+    const [item, setItem] = useState(() => foundItemList.find((item) => item.id === id));
 
-    let item = foundItemList.find((item) => item.id === id);
     useEffect(() => {
         // Fetch data from localStorage only once when the component mounts
-        let updatedBountyItemsString =
-            localStorage.getItem("updatedBountyItems");
-        // console.log(updatedBountyItemsString)
+        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
 
         if (updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
-            console.log(updatedBountyItems);
             setFoundItemList(updatedBountyItems);
+            const newItem = updatedBountyItems.find((item) => item.id === id);
+            setItem(newItem);
         }
-        item = foundItemList.find((item) => item.id === id);
     }, []);
 
     // If item is not found

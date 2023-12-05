@@ -27,6 +27,7 @@ export default function Home() {
                 {bountyHuntList.map((item) => {
                     return (
                         <BountyHuntListItem
+                            key={item.id}
                             {...item}
                             redirectUrl={"/specialist/" + item.id}
                         />

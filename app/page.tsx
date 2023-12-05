@@ -52,7 +52,7 @@ export default function Home() {
                                     <SelectLabel>Select a Location</SelectLabel>
                                     {locationOptions.map((location) => {
                                         return (
-                                            <SelectItem value={location.value}>
+                                            <SelectItem key={location.value} value={location.value}>
                                                 {location.label}
                                             </SelectItem>
                                         );
