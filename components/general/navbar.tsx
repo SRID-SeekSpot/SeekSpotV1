@@ -26,8 +26,8 @@ const Navbar: React.FC<NavbarProps> = ({ navButtons }) => {
                         <Image
                             src={button.src}
                             alt={button.alt}
-                            width={24}
-                            height={24}
+                            width={44}
+                            height={44}
                         />
                     </Link>
                 ))}

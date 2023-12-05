@@ -128,8 +128,8 @@ export default function Home() {
                         <Image
                             alt="searchIcon"
                             src="/icons/IconZoom.png"
-                            width={12}
-                            height={12}
+                            width={25}
+                            height={25}
                         />
                     </Button>
                     {/* Sidebar for Filter */}
@@ -138,8 +138,8 @@ export default function Home() {
                             <Image
                                 alt="filterIcon"
                                 src="/icons/IconFilter.png"
-                                width={12}
-                                height={12}
+                                width={22}
+                                height={22}
                             />
                         </SheetTrigger>
                         <SheetContent>

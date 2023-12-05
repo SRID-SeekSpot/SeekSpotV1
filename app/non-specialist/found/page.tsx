@@ -127,8 +127,8 @@ export default function Home() {
                         <Image
                             alt="searchIcon"
                             src="/icons/IconZoom.png"
-                            width={12}
-                            height={12}
+                            width={25}
+                            height={25}
                         />
                     </Button>
                     {/* Sidebar for Filter */}
@@ -137,8 +137,8 @@ export default function Home() {
                             <Image
                                 alt="filterIcon"
                                 src="/icons/IconFilter.png"
-                                width={12}
-                                height={12}
+                                width={22}
+                                height={22}
                             />
                             {filterApplied && (
                                 <div className="bg-red-700 h-2 w-2 rounded-full relative top-[-25px] right-[-20px]"></div>

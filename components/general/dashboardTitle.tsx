@@ -17,8 +17,10 @@ const DashboardTitle: React.FC<DashboardTitleProps> = ({
     return (
         <a href={linkUrl}>
             <div className="flex flex-row justify-start items-baseline">
-                <Image src={iconSrc} alt={title} width={25} height={25} />
-                <p className="text-3xl ml-2 font-semibold">{title}</p>
+                <div className="relative" style={{ top: '8px' }}>
+                    <Image src={iconSrc} alt={title} width={40} height={40} />
+                </div>
+                <p className="text-2xl ml-2 font-semibold">{title}</p>
             </div>
             <div className="mt-2">
                 <p className="text-sm">{description}</p>
