@@ -48,7 +48,7 @@ export default function Home() {
     const [category, setCategory] = useState(""); // search by filter category
     const [selectedColor, setSelectedColor] = useState(""); // selected color
     const [selectedCategory, setSelectedCategory] = useState(""); // selected category
-
+    const [foundItemList, setFoundItemList] = useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
     // Query content changes or filtering changes trigger the query
     useEffect(() => {
         searchProductList(val, color, category);
@@ -90,15 +90,19 @@ export default function Home() {
         setSelectedCategory("");
     };
 
-    useEffect(() => {
-        // Fetch data from localStorage only once when the component mounts
-        let updatedBountyItemsString =
-            localStorage.getItem("updatedBountyItems");
-        // console.log(updatedBountyItemsString)
 
+    useEffect(() => {
+        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+    
         if (updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
-            console.log(updatedBountyItems);
+            
+            setProductList(prevProductList => {
+                return prevProductList.map(item => {
+                    const updatedItem = updatedBountyItems.find((updatedItem: { id: string; }) => updatedItem.id === item.id);
+                    return updatedItem || item;
+                });
+            });
         }
     }, []);
 
