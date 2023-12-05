@@ -42,11 +42,13 @@ export default function Home() {
                     iconSrc="/ProfileIcon/User.png"
                     buttonName="David"
                     editable={true}
+                    localStorageKey="specialist-profile-name"
                 />
                 <ProfileButton
                     iconSrc="/ProfileIcon/id.png"
                     buttonName="01234567"
                     editable={true}
+                    localStorageKey="specialist-profile-id"
                 />
             </div>
 

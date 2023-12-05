@@ -42,16 +42,19 @@ export default function Home() {
                     iconSrc="/ProfileIcon/User.png"
                     buttonName="Kate"
                     editable={true}
+                    localStorageKey="non-specialist-profile-name"
                 />
                 <ProfileButton
                     iconSrc="/ProfileIcon/Contacts.png"
                     buttonName="123-123-1234"
                     editable={true}
+                    localStorageKey="non-specialist-profile-phone"
                 />
                 <ProfileButton
                     iconSrc="/ProfileIcon/Location.png"
                     buttonName="516 2nd Ave"
                     editable={true}
+                    localStorageKey="non-specialist-profile-address"
                 />
             </div>
 

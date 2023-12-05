@@ -234,16 +234,16 @@ export default function Home() {
                                 <div className="flex flex-row justify-between items-center">
                                     <Button
                                         className="w-28 rounded-lg"
-                                        onClick={onSave}
-                                    >
-                                        Save
-                                    </Button>
-                                    <Button
-                                        className="w-28 rounded-lg"
                                         variant={"secondary"}
                                         onClick={onReset}
                                     >
                                         Reset
+                                    </Button>
+                                    <Button
+                                        className="w-28 rounded-lg"
+                                        onClick={onSave}
+                                    >
+                                        Save
                                     </Button>
                                 </div>
                             </div>

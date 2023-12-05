@@ -12,6 +12,7 @@ interface ProfileButtonProps {
     href?: string;
     unread?: boolean;
     editable?: boolean;
+    localStorageKey?: string;
 }
 
 const ProfileButton: React.FC<ProfileButtonProps> = ({
@@ -22,6 +23,7 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({
     href,
     unread,
     editable,
+    localStorageKey,
     ...props
 }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -29,15 +31,34 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({
     const inputRef = useRef(null);
 
     useEffect(() => {
+        if (localStorageKey) {
+            const storedValue = localStorage.getItem(localStorageKey);
+            if (storedValue !== null) {
+                setEditableText(storedValue);
+            }
+        }
+    }, [localStorageKey]);
+
+    useEffect(() => {
         if (isEditing) {
             inputRef.current?.focus();
         }
     }, [isEditing]);
 
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: { key: string }) => {
         if (event.key === "Enter") {
             setIsEditing(false);
             // Handle saving changes here
+        }
+    };
+
+    const handleTextChange = (e: {
+        target: { value: React.SetStateAction<string> };
+    }) => {
+        const changedValue = e.target.value.toString();
+        setEditableText(changedValue);
+        if (localStorageKey) {
+            localStorage.setItem(localStorageKey, changedValue);
         }
     };
 
@@ -67,7 +88,7 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({
                             type="text"
                             className="text-navy font-bold bg-transparent outline-none w-32"
                             value={editableText}
-                            onChange={(e) => setEditableText(e.target.value)}
+                            onChange={handleTextChange}
                             onKeyDown={handleKeyDown}
                         />
                     ) : (
