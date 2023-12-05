@@ -183,7 +183,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
                                 Sorry!
                             </p>
                             <p>
-                                The claim code doesn't match! Please try again!
+                                The claim code does not match! Please try again!
                             </p>
                             <div className="flex items-center justify-center">
                                 <Button
