@@ -131,7 +131,7 @@ export default function Home() {
                 <div className="flex flex-row justify-between space-x-2">
                     <Input
                         type="search"
-                        placeholder="Enter Some Keyword For Searching"
+                        placeholder="Enter Some Keyword..."
                         onChange={(val) => {
                             setVal(val.target.value);
                         }}
