@@ -99,7 +99,7 @@ export default function Home() {
         let updatedBountyItemsString =
             localStorage.getItem("updatedBountyItems");
 
-        if (updatedBountyItemsString !== "null") {
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
 
             setProductList((prevProductList) => {

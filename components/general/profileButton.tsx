@@ -43,7 +43,7 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({
 
     useEffect(() => {
         if (isEditing) {
-            inputRef.current?.focus();
+            (inputRef.current as unknown as HTMLInputElement)?.focus();
         }
     }, [isEditing]);
 

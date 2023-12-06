@@ -99,7 +99,7 @@ export default function Home() {
             localStorage.getItem("updatedBountyItems");
         // console.log(updatedBountyItemsString)
 
-        if (updatedBountyItemsString !== "null") {
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             console.log(updatedBountyItems);
         }

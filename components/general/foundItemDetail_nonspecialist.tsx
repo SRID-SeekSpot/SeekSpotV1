@@ -9,88 +9,88 @@ import Navbar from "@/components/general/navbar";
 import { ALL_ITEMS, BOUNTY_ITEMS } from "@/app/constants/AllItems";
 import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
 
-interface FoundItemDetailPage_nonspecialistProps {
-    item: {
-        name: string;
-        imgSrc: string;
-        description: string;
-        price: number;
-        location: string;
-        date: string;
-        id: string;
-        claimStatus: boolean;
-    };
+export interface FoundItemDetailPageProps {
+    id: string;
+    name: string;
+    imgSrc: string;
+    description: string;
+    price: number;
+    color: string;
+    category: string;
+    location: string;
+    date: string;
+    claimCode: string;
+    claimStatus: boolean;
 }
 
-const FoundItemDetailPage_nonspecialist: React.FC<
-    FoundItemDetailPage_nonspecialistProps
-> = ({ item }) => {
-    const navButtons = NON_SPECIALIST_ROUTES;
+const FoundItemDetailPage_nonspecialist: React.FC< FoundItemDetailPageProps > = (props) => {
+const navButtons = NON_SPECIALIST_ROUTES;
 
-    // pop up message for delete action
-    const [showPopup, setShowPopup] = useState(false);
-    const showPopupClaim = () => {
-        setShowPopup(true);
-    };
-    localStorage.setItem("claimItemIndex", item.id);
+// pop up message for delete action
+const [showPopup, setShowPopup] = useState(false);
+const showPopupClaim = () => {
+    setShowPopup(true);
+};
+localStorage.setItem("claimItemIndex", props.id);
 
-    if (!item) {
-        return <p>Item not found!</p>;
-    }
+if (!props) {
+    return <p>Item not found!</p>;
+}
 
-    const handlePopupClose = () => {
-        setShowPopup(false);
-    };
-
-    return (
-        <div className="flex flex-col h-screen">
-            <Header href="/non-specialist/found" />
-            <div className="flex flex-col items-center bg-gray-100 p-4 shadow ">
-                <div className="w-full max-w-xs mb-4 rounded-lg overflow-hidden">
-                    <Image
-                        src={item.imgSrc}
-                        alt={`Picture of ${item.name}`}
-                        width={300}
-                        height={180}
-                        layout="responsive"
-                        className="rounded-2xl"
-                    />
-                </div>
-            </div>
-            <h1 className="text-2xl text-navy font-bold mt-12 mx-4">
-                {item.name}
-            </h1>
-            <div className="flex justify-between items-center mt-8 mx-4">
-                <p className="text-md">Location Found: {item.location}</p>
-                <p className="text-md text-right">Date Found: {item.date}</p>
-            </div>
-
-            <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]">
-                <div className="flex justify-center mb-20">
-                    <Button className="w-56 hidden" asChild onClick={showPopupClaim}>
-                        <p>Claim</p>
-                    </Button>
-                    {showPopup && (
-                        <PopupClaim
-                            onClose={handlePopupClose}
-                            additionalData={item.id}
-                        />
-                    )}
-                </div>
-            </div>
-
-            <Navbar navButtons={navButtons} />
-        </div>
-    );
+const handlePopupClose = () => {
+    setShowPopup(false);
 };
 
-// pop up area for claim
-const PopupClaim = ({ onClose, additionalData }) => {
+return (
+    <div className="flex flex-col h-screen">
+        <Header href="/non-specialist/found" />
+        <div className="flex flex-col items-center bg-gray-100 p-4 shadow ">
+            <div className="w-full max-w-xs mb-4 rounded-lg overflow-hidden">
+                <Image
+                    src={props.imgSrc}
+                    alt={`Picture of ${props.name}`}
+                    width={300}
+                    height={180}
+                    layout="responsive"
+                    className="rounded-2xl"
+                />
+            </div>
+        </div>
+        <h1 className="text-2xl text-navy font-bold mt-12 mx-4">
+            {props.name}
+        </h1>
+        <div className="flex justify-between items-center mt-8 mx-4">
+            <p className="text-md">Location Found: {props.location}</p>
+            <p className="text-md text-right">Date Found: {props.date}</p>
+        </div>
+
+        <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]">
+            <div className="flex justify-center mb-20">
+                <Button className="w-56 hidden" asChild onClick={showPopupClaim}>
+                    <p>Claim</p>
+                </Button>
+                {showPopup && (
+                    <PopupClaim
+                        onClose={handlePopupClose}
+                        additionalData={props.id}
+                    />
+                )}
+            </div>
+        </div>
+
+        <Navbar navButtons={navButtons} />
+    </div>
+);
+};
+
+
+
+const PopupClaim = ({onClose, additionalData}:{onClose:any, additionalData:any}) => {
     const [claimCode, setClaimCode] = useState("");
     const [showCongratulations, setShowCongratulations] = useState(false);
     const [showFail, setShowFail] = useState(false);
 
-    const popupContainerStyle = {
+    const popupContainerStyle: React.CSSProperties = {
         position: "fixed",
         top: 0,
         left: 0,
@@ -105,7 +105,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
         textAlign: "center",
     };
 
-    const popupContentStyle = {
+    const popupContentStyle: React.CSSProperties = {
         backgroundColor: "white",
         padding: "20px",
         borderRadius: "10px",
@@ -113,7 +113,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
         width: "90%", // Adjust as needed
     };
 
-    const popupCongratulationsFailStyle = {
+    const popupCongratulationsFailStyle: React.CSSProperties = {
         position: "fixed",
         top: 0,
         left: 0,
@@ -167,7 +167,7 @@ const PopupClaim = ({ onClose, additionalData }) => {
         let updatedBountyItemsString =
             localStorage.getItem("updatedBountyItems");
 
-        if (updatedBountyItemsString !== "null") {
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             const updatedBountyItemsTmp = updatedBountyItems.map(
                 (item: { id: string }) => {

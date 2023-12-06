@@ -16,7 +16,7 @@ export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault(); // Prevents the default form submission
         router.push("/specialist/newBounty"); // Use the correct path for your new page
     };

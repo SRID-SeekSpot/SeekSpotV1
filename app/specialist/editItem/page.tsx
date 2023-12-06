@@ -8,8 +8,7 @@ import { ALL_ITEMS } from "@/app/constants/AllItems";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
 import EditItemDescriptionForm from "@/components/general/editItemForm";
 import { useSearchParams } from "@/node_modules/next/navigation";
-import { FoundItemProps } from "../found/page";
-
+import { FoundItemDetailPageProps } from "@/components/general/foundItemDetail_nonspecialist";
 export interface EachFoundItemProps {
     name: string;
     imgSrc: string;
@@ -30,14 +29,14 @@ export default function Home() {
     const searchParams = useSearchParams();
     const itemIndex = searchParams.getAll("ItemID");
 
-    const [foundItem, setFoundItem] = useState<FoundItemProps>(
-        ALL_ITEMS.find((item) => item.id === itemIndex[0])
+    const [foundItem, setFoundItem] = useState<FoundItemDetailPageProps | undefined>(
+        ALL_ITEMS.length > 0 ? ALL_ITEMS.find((item) => item.id === itemIndex[0]) : undefined
     );
 
     useEffect(() => {
         let updatedBountyItemsString =
             localStorage.getItem("updatedBountyItems");
-        if (updatedBountyItemsString !== "null") {
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             // foundItem = updatedBountyItems.find((item) => item.id === itemIndex[0]);
             setFoundItem(
@@ -51,14 +50,18 @@ export default function Home() {
     return (
         <div className="flex flex-col">
             <Header
-                href={`/specialist/${foundItem.id}`}
+                href={`/specialist/${foundItem?.id}`}
                 altText="Report a Found Item"
             />
             <title>Specialist Edit Item Description</title>
             {/* Header that redirects to home */}
             {/* Body */}
             <EditItemDescriptionForm
-                eachItem={foundItem}
+                id={foundItem?.id || ""} name={foundItem?.name || ""} 
+                imgSrc={foundItem?.imgSrc || ""} description={foundItem?.description || ""} 
+                price={foundItem?.price || 0} color={foundItem?.color || ""} category={foundItem?.category || ""} 
+                location={foundItem?.location || ""} date={foundItem?.date || ""} claimCode={foundItem?.claimCode || ""} 
+                claimStatus={false}     
             ></EditItemDescriptionForm>
             {/* Bottom Navigation Bar */}
             <Navbar navButtons={navButtons} />
