@@ -74,7 +74,7 @@ export const FOUND_ITEMS = [
         description: "500ml",
         price: 20.0,
         color: "Red",
-        category: "Bottles",
+        category: "Cups",
         location: "1st floor",
         date: "Nov.5",
         claimCode: "0000",
