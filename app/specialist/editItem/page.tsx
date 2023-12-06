@@ -46,7 +46,7 @@ export default function Home() {
                 )
             );
         }
-    }, []);
+    }, [itemIndex]);
 
     return (
         <div className="flex flex-col">

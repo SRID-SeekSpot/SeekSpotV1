@@ -5,15 +5,21 @@ import { ALL_ITEMS } from "@/app/constants/AllItems";
 import FoundItemDetailPage from "@/app/specialist/foundItemDetail/page";
 import LostItemDetailPage from "@/app/specialist/lostItemDetail/page";
 import { useEffect, useState } from "react";
-import { FoundItemProps } from "../found/page";
+
+import { useRef } from "react";
+import { ALL_ITEM_TYPES } from "@/types/AllItemTypes";
+
+// ...
 
 const ItemDetail = () => {
     const path = usePathname();
     const id = path.split("/").pop();
     const [foundItemList, setFoundItemList] =
-        useState<FoundItemProps[]>(ALL_ITEMS);
+        useState<ALL_ITEM_TYPES[]>(ALL_ITEMS);
 
-    let item = foundItemList.find((item) => item.id === id);
+    // Use useRef to store the 'item' variable
+    const itemRef = useRef<ALL_ITEM_TYPES | null>(null);
+
     useEffect(() => {
         // Fetch data from localStorage only once when the component mounts
         let updatedBountyItemsString =
@@ -24,9 +30,14 @@ const ItemDetail = () => {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             console.log(updatedBountyItems);
             setFoundItemList(updatedBountyItems);
+
+            // Assign the value to the 'item' variable using the useRef
+            itemRef.current = updatedBountyItems.find((item) => item.id === id);
         }
-        item = foundItemList.find((item) => item.id === id);
-    }, []);
+    }, [id]);
+
+    // Access the 'item' variable from the useRef
+    const item = itemRef.current;
 
     // If item is not found
     if (!item || !id) {

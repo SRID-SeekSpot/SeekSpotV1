@@ -19,9 +19,9 @@ interface LostItemDetailPage_nonspecialistProps {
     };
 }
 
-const LostItemDetailPage_nonspecialist: React.FC<
-    LostItemDetailPage_nonspecialistProps
-> = ({ item }) => {
+const LostItemDetailPage_nonspecialist = ({
+    item,
+}: LostItemDetailPage_nonspecialistProps) => {
     const navButtons = NON_SPECIALIST_ROUTES;
 
     if (!item) {

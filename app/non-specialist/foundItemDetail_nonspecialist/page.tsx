@@ -22,9 +22,9 @@ interface FoundItemDetailPage_nonspecialistProps {
     };
 }
 
-const FoundItemDetailPage_nonspecialist: React.FC<
-    FoundItemDetailPage_nonspecialistProps
-> = ({ item }) => {
+const FoundItemDetailPage_nonspecialist = ({
+    item,
+}: FoundItemDetailPage_nonspecialistProps) => {
     const navButtons = NON_SPECIALIST_ROUTES;
 
     // pop up message for delete action
@@ -67,7 +67,11 @@ const FoundItemDetailPage_nonspecialist: React.FC<
 
             <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]">
                 <div className="flex justify-center mb-20">
-                    <Button className="w-56 hidden" asChild onClick={showPopupClaim}>
+                    <Button
+                        className="w-56 hidden"
+                        asChild
+                        onClick={showPopupClaim}
+                    >
                         <p>Claim</p>
                     </Button>
                     {showPopup && (
@@ -85,7 +89,13 @@ const FoundItemDetailPage_nonspecialist: React.FC<
 };
 
 // pop up area for claim
-const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: any}) => {
+const PopupClaim = ({
+    onClose,
+    additionalData,
+}: {
+    onClose: any;
+    additionalData: any;
+}) => {
     const [claimCode, setClaimCode] = useState("");
     const [showCongratulations, setShowCongratulations] = useState(false);
     const [showFail, setShowFail] = useState(false);
