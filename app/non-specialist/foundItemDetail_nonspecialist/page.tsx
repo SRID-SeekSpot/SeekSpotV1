@@ -85,7 +85,7 @@ const FoundItemDetailPage_nonspecialist: React.FC<
 };
 
 // pop up area for claim
-const PopupClaim = ({ onClose, additionalData }) => {
+const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: any}) => {
     const [claimCode, setClaimCode] = useState("");
     const [showCongratulations, setShowCongratulations] = useState(false);
     const [showFail, setShowFail] = useState(false);
