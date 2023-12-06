@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ALL_ITEMS, BOUNTY_ITEMS } from "@/app/constants/AllItems";
+import { ALL_ITEMS, BOUNTY_ITEMS, FOUND_ITEMS } from "@/app/constants/AllItems";
 import { BountyHuntListItemProps } from "./bountyhuntListItem";
 import Link from "@/node_modules/next/link";
 import FoundListItem from "./foundListItem";
@@ -84,7 +84,7 @@ const PopupDelete = ({ onClose, additionalData }) => {
     );
 };
 
-const PopupCongratulations = ({ onClose, additionalData }) => {
+const PopupCongratulations = ({ onClose, additionalData }:{onClose:any, additionalData:any}) => {
     const popupCongratulationsStyle = {
         position: "fixed",
         top: 0,
@@ -126,9 +126,11 @@ const PopupCongratulations = ({ onClose, additionalData }) => {
 
             console.log(updatedBountyItems);
         } else {
-            updatedBountyItems = BOUNTY_ITEMS.filter(
+            updatedBountyItems = ALL_ITEMS.filter(
                 (item) => item.id !== additionalData
             );
+            console.log(updatedBountyItems)
+
         }
         localStorage.setItem(
             "updatedBountyItems",
@@ -168,7 +170,7 @@ const PopupCongratulations = ({ onClose, additionalData }) => {
     );
 };
 
-const PopupSave = ({ onClose }) => {
+const PopupSave = ({ onClose }:{onClose: any}) => {
     const popupSaveStyle = {
         position: "fixed",
         top: 0,
