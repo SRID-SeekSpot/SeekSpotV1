@@ -30,7 +30,7 @@ const LostItemDetailPage_nonspecialist: React.FC<
 
     return (
         <div className="flex flex-col h-screen">
-            <Header href="/non-specialist/found" />
+            <Header href="/non-specialist/bounty" />
             <div className="flex flex-col items-center bg-gray-100 p-4 shadow rounded-2xl">
                 <div className="w-full max-w-xs mb-4 rounded-2xl overflow-hidden">
                     <Image
@@ -57,7 +57,7 @@ const LostItemDetailPage_nonspecialist: React.FC<
             <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]">
                 <div className="flex justify-center mb-20">
                     <Button className="w-56" asChild>
-                        <a href="/non-specialist/found">Claim</a>
+                        <a href="/non-specialist/bounty">Claim</a>
                     </Button>
                 </div>
             </div>
