@@ -48,11 +48,14 @@ export default function Home() {
     const [category, setCategory] = useState(""); // search by filter category
     const [selectedColor, setSelectedColor] = useState(""); // selected color
     const [selectedCategory, setSelectedCategory] = useState(""); // selected category
-    const [foundItemList, setFoundItemList] = useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
+    const [foundItemList, setFoundItemList] =
+        useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
     // Query content changes or filtering changes trigger the query
     useEffect(() => {
         searchProductList(val, color, category);
     }, [val, color, category]);
+
+    const [filterApplied, setFilterApplied] = useState(false);
 
     // search method
     const searchProductList = (
@@ -81,6 +84,7 @@ export default function Home() {
     const onSave = () => {
         setColor(selectedColor);
         setCategory(selectedCategory);
+        setFilterApplied(!(selectedColor === "" && selectedCategory === ""));
     };
     // Reset all filter value
     const onReset = () => {
@@ -88,18 +92,22 @@ export default function Home() {
         setCategory("");
         setSelectedColor("");
         setSelectedCategory("");
+        setFilterApplied(false);
     };
 
-
     useEffect(() => {
-        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
-    
+        let updatedBountyItemsString =
+            localStorage.getItem("updatedBountyItems");
+
         if (updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
-            
-            setProductList(prevProductList => {
-                return prevProductList.map(item => {
-                    const updatedItem = updatedBountyItems.find((updatedItem: { id: string; }) => updatedItem.id === item.id);
+
+            setProductList((prevProductList) => {
+                return prevProductList.map((item) => {
+                    const updatedItem = updatedBountyItems.find(
+                        (updatedItem: { id: string }) =>
+                            updatedItem.id === item.id
+                    );
                     return updatedItem || item;
                 });
             });
@@ -141,6 +149,9 @@ export default function Home() {
                                 width={22}
                                 height={22}
                             />
+                            {filterApplied && (
+                                <div className="bg-red-700 h-2 w-2 rounded-full relative top-[-25px] right-[-20px]"></div>
+                            )}
                         </SheetTrigger>
                         <SheetContent>
                             <SheetHeader className="flex flex-row justify-start items-center">
@@ -179,7 +190,7 @@ export default function Home() {
                                                         (color) => {
                                                             return (
                                                                 <SelectItem
-                                                                    key = {color}
+                                                                    key={color}
                                                                     value={
                                                                         color
                                                                     }
@@ -215,7 +226,7 @@ export default function Home() {
                                                         (color) => {
                                                             return (
                                                                 <SelectItem
-                                                                    key = {color}
+                                                                    key={color}
                                                                     value={
                                                                         color
                                                                     }

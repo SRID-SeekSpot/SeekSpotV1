@@ -22,7 +22,9 @@ interface FoundItemDetailPage_nonspecialistProps {
     };
 }
 
-const FoundItemDetailPage_nonspecialist: React.FC<FoundItemDetailPage_nonspecialistProps> = ({ item }) => {
+const FoundItemDetailPage_nonspecialist: React.FC<
+    FoundItemDetailPage_nonspecialistProps
+> = ({ item }) => {
     const navButtons = NON_SPECIALIST_ROUTES;
 
     // pop up message for delete action
@@ -65,7 +67,7 @@ const FoundItemDetailPage_nonspecialist: React.FC<FoundItemDetailPage_nonspecial
 
             <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]">
                 <div className="flex justify-center mb-20">
-                    <Button className="w-56" asChild onClick={showPopupClaim}>
+                    <Button className="w-56 hidden" asChild onClick={showPopupClaim}>
                         <p>Claim</p>
                     </Button>
                     {showPopup && (
@@ -141,8 +143,9 @@ const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: 
     const handleConfirmClaim = () => {
         let itemID = localStorage.getItem("claimItemIndex");
         // find the required claim code
-        let targetClaimCode = ALL_ITEMS.find((item) => item.id === itemID)
-            ?.claimCode;
+        let targetClaimCode = ALL_ITEMS.find(
+            (item) => item.id === itemID
+        )?.claimCode;
         if (targetClaimCode == claimCode) {
             setShowCongratulations(true);
         } else {
