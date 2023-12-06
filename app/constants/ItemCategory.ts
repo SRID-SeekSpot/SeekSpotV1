@@ -8,4 +8,6 @@ export const ITEMS_CATEGORY = [
     "Toys",
     "Games",
     "Bags",
+    "Cups",
+    "Bottles"
 ];

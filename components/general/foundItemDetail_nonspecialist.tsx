@@ -86,6 +86,7 @@ return (
 
 
 const PopupClaim = ({onClose, additionalData}:{onClose:any, additionalData:any}) => {
+// pop up area for claim
     const [claimCode, setClaimCode] = useState("");
     const [showCongratulations, setShowCongratulations] = useState(false);
     const [showFail, setShowFail] = useState(false);

@@ -38,7 +38,7 @@ const navButtons = NON_SPECIALIST_ROUTES;
 const foundItemList: FoundListItemProps[] = FOUND_ITEMS;
 
 const colorFilter = ["White", "Black", "Red", "Blue"];
-const categoryFilter = ["Cloth", "Bottles", "Phone"];
+const categoryFilter = ["Cloth", "Bottles", "Phone","Cups"];
 
 export default function Home() {
     //Product List Data

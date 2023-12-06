@@ -12,23 +12,8 @@ import { BOUNTY_ITEMS, FOUND_ITEMS } from "@/app/constants/AllItems";
 import SquareListItem from "@/components/general/squareListItem";
 import DashboardTitle from "@/components/general/dashboardTitle";
 
-// Popup component
-const Popup = ({}) => {
-    return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-10">
-            <div className="bg-white p-5 rounded-lg shadow-lg text-center">
-                <h2 className="text-2xl font-bold mb-4">Congratulations!</h2>
-                <p className="text-sm mb-4">Your lost item is found!</p>
-                <Button className="w-56" variant={"secondary"}>
-                    <a href="/specialist/profile/delivery">Check details</a>
-                </Button>
-            </div>
-        </div>
-    );
-};
 
 export default function Home() {
-    const [showPopup, setShowPopup] = useState(false);
     // Icon Src and Route for Navigation Bar
     const navButtons = SPECIALIST_ROUTES;
 
@@ -36,12 +21,14 @@ export default function Home() {
     const [foundItemList, setFoundItemList] = useState(FOUND_ITEMS); // Product list data
 
     useEffect(() => {
-        const showPopup = localStorage.getItem("showPopup");
-        if (showPopup === null) {
-            localStorage.setItem("showPopup", "false");
-            setShowPopup(false);
-        } else {
-            setShowPopup(showPopup === "true");
+        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+        if (updatedBountyItemsString !== "null") {
+            let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+            // console.log(updatedBountyItems)
+            let updatedFoundList = updatedBountyItems.filter((item: { id: string; }) => item.id.startsWith("f"));
+            setFoundItemList(updatedFoundList);
+            let updatedBountyList = updatedBountyItems.filter((item: { id: string; }) => item.id.startsWith("l"));
+            setBountyHuntList(updatedBountyList);
         }
 
         let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
@@ -55,6 +42,7 @@ export default function Home() {
         }
         
     }, []);
+    
 
     return (
         <div className="flex flex-col">
@@ -63,7 +51,6 @@ export default function Home() {
             {/* <Header href="/" altText="Hello"/> */}
             <Header href="/" altText="Specialist Dashboard" />
             {/* pop up component */}
-            {showPopup && <Popup />}
 
             {/* Body */}
             <div className="flex flex-col">

@@ -48,8 +48,6 @@ export default function Home() {
     const [category, setCategory] = useState(""); // search by filter category
     const [selectedColor, setSelectedColor] = useState(""); // selected color
     const [selectedCategory, setSelectedCategory] = useState(""); // selected category
-    const [foundItemList, setFoundItemList] =
-        useState<EachFoundItemProps[]>(BOUNTY_ITEMS);
     // Query content changes or filtering changes trigger the query
     useEffect(() => {
         searchProductList(val, color, category);
