@@ -52,7 +52,10 @@ export default function Home() {
                                     <SelectLabel>Select a Location</SelectLabel>
                                     {locationOptions.map((location) => {
                                         return (
-                                            <SelectItem key={location.value} value={location.value}>
+                                            <SelectItem
+                                                key={location.value}
+                                                value={location.value}
+                                            >
                                                 {location.label}
                                             </SelectItem>
                                         );
@@ -79,7 +82,7 @@ export default function Home() {
                             className="text-sm underline"
                             onClick={handlePopup}
                         >
-                            Task 9 & 10 starts from here
+                            Notification Experience
                         </a>
                     </div>
                 </div>
