@@ -157,22 +157,6 @@ export default function Home() {
                     </div>
 
                     {/* Image Upload Placeholder */}
-                    {/* <div className="flex flex-col items-center justify-center bg-gray-200 p-4 border border-dashed rounded">
-            <p className="mb-3 ">Upload a picture of the item</p>
-            <Image
-              src="/imageUpload.png"
-              alt="Upload Image Icon"
-              width={200}
-              height={200}
-              className="mb-3"
-            />
-            <Input
-              type="file"
-              name="itemImage"
-              accept="image/*"
-              className="text-navy file:cursor-pointer file:text-sm file:font-medium"
-            />
-          </div> */}
                     <div className="flex flex-col items-center justify-center">
                         {/* Submit Button */}
                         <Button type="submit" size="lg">

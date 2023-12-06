@@ -96,21 +96,12 @@ export default function Home() {
     };
 
     useEffect(() => {
-        let updatedBountyItemsString =
-            localStorage.getItem("updatedBountyItems");
-
-        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
+        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+        if (updatedBountyItemsString && updatedBountyItemsString!== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
-
-            setProductList((prevProductList) => {
-                return prevProductList.map((item) => {
-                    const updatedItem = updatedBountyItems.find(
-                        (updatedItem: { id: string }) =>
-                            updatedItem.id === item.id
-                    );
-                    return updatedItem || item;
-                });
-            });
+            // console.log(updatedBountyItems)
+            let updatedProductList = updatedBountyItems.filter((item: { id: string; }) => item.id.startsWith("f"));
+            setProductList(updatedProductList);
         }
     }, []);
 

@@ -223,7 +223,7 @@ const PopupClaim = ({onClose, additionalData}:{onClose:any, additionalData:any})
                                     className="mt-5 w-200 h-10"
                                     onClick={() => handleClaimSuccess()}
                                 >
-                                    <a href="/non-specialist/found">Claim</a>
+                                    Claim
                                 </Button>
                             </div>
                         </div>

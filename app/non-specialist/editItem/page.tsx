@@ -63,7 +63,7 @@ export default function Home() {
                 imgSrc={foundItem?.imgSrc || ""} description={foundItem?.description || ""} 
                 price={foundItem?.price || 0} color={foundItem?.color || ""} category={foundItem?.category || ""} 
                 location={foundItem?.location || ""} date={foundItem?.date || ""} claimCode={foundItem?.claimCode || ""} 
-                claimStatus={false}                
+                claimStatus={foundItem?.claimStatus || false}                
             ></EditItemDescriptionForm>
             {/* Bottom Navigation Bar */}
             <Navbar navButtons={navButtons} />

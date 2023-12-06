@@ -59,6 +59,7 @@ const BountyHuntListItem: React.FC<BountyHuntListItemProps> = ({
                 </div>
             </div>
         </Card>
+        
     );
 
     if (redirectUrl) {

@@ -10,7 +10,7 @@ export const BOUNTY_ITEMS = [
         location: "2nd floor",
         date: "Nov.6",
         claimCode: "1234",
-        claimStatus: true,
+        claimStatus: false,
     },
     {
         id: "l2",
@@ -36,7 +36,7 @@ export const BOUNTY_ITEMS = [
         location: "2nd floor",
         date: "Nov.5",
         claimCode: "1234",
-        claimStatus: true,
+        claimStatus: false,
     },
     {
         id: "l4",
