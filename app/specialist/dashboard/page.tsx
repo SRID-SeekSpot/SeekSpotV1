@@ -22,16 +22,6 @@ export default function Home() {
 
     useEffect(() => {
         let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
-        if (updatedBountyItemsString !== "null") {
-            let updatedBountyItems = JSON.parse(updatedBountyItemsString);
-            // console.log(updatedBountyItems)
-            let updatedFoundList = updatedBountyItems.filter((item: { id: string; }) => item.id.startsWith("f"));
-            setFoundItemList(updatedFoundList);
-            let updatedBountyList = updatedBountyItems.filter((item: { id: string; }) => item.id.startsWith("l"));
-            setBountyHuntList(updatedBountyList);
-        }
-
-        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
         if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             // console.log(updatedBountyItems)
