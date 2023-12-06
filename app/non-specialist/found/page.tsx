@@ -97,9 +97,9 @@ export default function Home() {
         // Fetch data from localStorage only once when the component mounts
         let updatedBountyItemsString =
             localStorage.getItem("updatedBountyItems");
-        // console.log(updatedBountyItemsString)
+        console.log(updatedBountyItemsString)
 
-        if (updatedBountyItemsString !== "null") {
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             console.log(updatedBountyItems);
         }

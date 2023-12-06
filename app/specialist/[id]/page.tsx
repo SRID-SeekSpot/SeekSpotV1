@@ -2,16 +2,16 @@
 
 import { usePathname } from "next/navigation";
 import { ALL_ITEMS } from "@/app/constants/AllItems";
-import FoundItemDetailPage from "@/app/specialist/foundItemDetail/page";
-import LostItemDetailPage from "@/app/specialist/lostItemDetail/page";
+import FoundItemDetailPage from "@/components/general/foundItemDetail";
+import LostItemDetailPage from "@/components/general/lostItemDetail";
 import { useEffect, useState } from "react";
-import { FoundItemProps } from "../found/page";
+import { FoundItemDetailPageProps } from "@/components/general/foundItemDetail_nonspecialist";
 
 const ItemDetail = () => {
     const path = usePathname();
     const id = path.split("/").pop();
     const [foundItemList, setFoundItemList] =
-        useState<FoundItemProps[]>(ALL_ITEMS);
+        useState<FoundItemDetailPageProps[]>(ALL_ITEMS);
 
     let item = foundItemList.find((item) => item.id === id);
     useEffect(() => {
@@ -20,7 +20,7 @@ const ItemDetail = () => {
             localStorage.getItem("updatedBountyItems");
         // console.log(updatedBountyItemsString)
 
-        if (updatedBountyItemsString !== "null") {
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             console.log(updatedBountyItems);
             setFoundItemList(updatedBountyItems);
@@ -34,9 +34,15 @@ const ItemDetail = () => {
     }
 
     if (id.startsWith("f")) {
-        return <FoundItemDetailPage item={item} />;
+        return <FoundItemDetailPage 
+        id={item.id} name={item.name} imgSrc={item.imgSrc} description={item.description} price={item.price}
+        color={item.color} category={item.category} location={item.location} date={item.date} 
+        claimCode={item.claimCode} claimStatus={item.claimStatus} />;
     } else if (id.startsWith("l")) {
-        return <LostItemDetailPage item={item} />;
+        return <LostItemDetailPage 
+        id={item.id} name={item.name} imgSrc={item.imgSrc} description={item.description} price={item.price}
+        color={item.color} category={item.category} location={item.location} date={item.date} 
+        claimCode={item.claimCode} claimStatus={item.claimStatus} />;
     } else {
         return <p>Invalid item ID!</p>;
     }

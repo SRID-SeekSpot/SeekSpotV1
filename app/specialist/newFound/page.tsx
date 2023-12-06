@@ -48,6 +48,7 @@ export default function Home() {
         imgSrc: "/greenBag.avif", // Replace with the path to your image
         description: "A sturdy green bag, lost in the park.",
         price: 25, // Specify the price or any other relevant property
+        id: "f220"
         // Include any other properties required by FoundListItemProps
     };
 
@@ -112,7 +113,7 @@ export default function Home() {
             localStorage.getItem("updatedBountyItems");
         // console.log(updatedBountyItemsString)
 
-        if (updatedBountyItemsString !== "null") {
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             console.log(updatedBountyItems);
             setFoundItemList(updatedBountyItems);
@@ -266,7 +267,7 @@ export default function Home() {
                 {/* Display Div */}
                 <div className="mt-8">
                     <div className="grid grid-cols-2 gap-x-8 gap-y-8">
-                        {productList.map((item) => {
+                        {productList.map((item, index) => {
                             return <FoundListItem key={item.id} {...item} />;
                         })}
                     </div>

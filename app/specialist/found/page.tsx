@@ -95,7 +95,7 @@ export default function Home() {
 
     useEffect(() => {
         let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
-        if (updatedBountyItemsString !== "null") {
+        if (updatedBountyItemsString && updatedBountyItemsString!== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             // console.log(updatedBountyItems)
             let updatedProductList = updatedBountyItems.filter((item: { id: string; }) => item.id.startsWith("f"));

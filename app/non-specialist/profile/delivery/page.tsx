@@ -33,7 +33,7 @@ const Popup = ({ onClose }: { onClose: any }) => {
         ) {
             localStorage.setItem("unread", "false");
             localStorage.setItem("showPopup", "false");
-            const shipToMeRadio = document.getElementById("ship-to-me");
+            const shipToMeRadio = document.getElementById("ship-to-me") as HTMLInputElement | null;;
             if (shipToMeRadio) {
                 shipToMeRadio.checked = true;
             }
@@ -117,7 +117,7 @@ const Popup = ({ onClose }: { onClose: any }) => {
 
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false);
-    const [selectedDelivery, setSelectedDelivery] = useState(null); // for delivery state
+    const [selectedDelivery, setSelectedDelivery] = useState<String | null>(null); // for delivery state
     const navButtons = NON_SPECIALIST_ROUTES;
     const shipToMeRef = useRef(null);
 
@@ -125,7 +125,7 @@ export default function Home() {
         localStorage.setItem("showPopup", "false");
     }, []);
 
-    const handleDeliveryChange = (e) => {
+    const handleDeliveryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value === "ship-to-me") {
             setShowPopup(true);
         }
@@ -134,12 +134,11 @@ export default function Home() {
         console.log(e.target.value)
     };
 
-    const handlePopupClose = (choice) => {
+    const handlePopupClose = (choice: React.SetStateAction<String | null>) => {
         setShowPopup(false);
         setSelectedDelivery(choice); // set the delivery way
     };
 
-   
 
     return (
         <div className="flex flex-col">

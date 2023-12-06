@@ -6,36 +6,24 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
 import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import Link from "@/node_modules/next/link";
+import { FoundItemDetailPageProps } from "./foundItemDetail_nonspecialist";
 
-interface LostItemDetailPage_nonspecialistProps {
-    item: {
-        name: string;
-        imgSrc: string;
-        description: string;
-        price: number;
-        location: string;
-        date: string;
-        claimCode: string;
-    };
-}
-
-const LostItemDetailPage_nonspecialist: React.FC<
-    LostItemDetailPage_nonspecialistProps
-> = ({ item }) => {
+const FoundItemDetailPage: React.FC<FoundItemDetailPageProps> = (props) => {
     const navButtons = SPECIALIST_ROUTES;
 
-    if (!item) {
+    if (!props) {
         return <p>Item not found!</p>;
     }
 
     return (
         <div className="flex flex-col h-screen">
             <Header href="/specialist/found" />
-            <div className="flex flex-col items-center bg-gray-100 p-4 shadow rounded-2xl">
-                <div className="w-full max-w-xs mb-4 rounded-2xl overflow-hidden">
+            <div className="flex flex-col items-center bg-gray-100 p-4 shadow ">
+                <div className="w-full max-w-xs mb-4 rounded-lg overflow-hidden">
                     <Image
-                        src={item.imgSrc}
-                        alt={`Picture of ${item.name}`}
+                        src={props.imgSrc}
+                        alt={`Picture of ${props.name}`}
                         width={300}
                         height={180}
                         layout="responsive"
@@ -43,28 +31,32 @@ const LostItemDetailPage_nonspecialist: React.FC<
                     />
                 </div>
             </div>
-            <div className="flex justify-between items-center mt-12 mx-4">
-                <h1 className="text-2xl text-navy font-bold">{item.name}</h1>
-                <p className="text-2xl text-navy font-bold">${item.price}</p>
-            </div>
+            <h1 className="text-2xl text-navy font-bold mt-12 mx-4">
+                {props.name}
+            </h1>
             <div className="flex justify-between items-center mt-8 mx-4">
-                <p className="text-md">Location Lost: {item.location}</p>
-                <p className="text-md text-right">Date Lost: {item.date}</p>
+                <p className="text-md">Location Found: {props.location}</p>
+                <p className="text-md text-right">Date Found: {props.date}</p>
             </div>
             <p className="text-md text-gray-400 mt-8 mx-4">
-                {item.description}
+                {props.description}
             </p>
+
             <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]">
                 <div className="flex justify-center mb-20">
                     <Button className="w-56" asChild>
-                        <a href="/specialist/found">Claim</a>
+                        <Link
+                            href={`/specialist/editItem?ItemID=${props.id}`}
+                            passHref
+                        >
+                            Edit
+                        </Link>
                     </Button>
                 </div>
             </div>
-
             <Navbar navButtons={navButtons} />
         </div>
     );
 };
 
-export default LostItemDetailPage_nonspecialist;
+export default FoundItemDetailPage;

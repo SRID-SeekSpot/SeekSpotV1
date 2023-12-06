@@ -22,7 +22,7 @@ export default function Home() {
 
     useEffect(() => {
         let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
-        if (updatedBountyItemsString !== "null") {
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             // console.log(updatedBountyItems)
             let updatedFoundList = updatedBountyItems.filter((item: { id: string; }) => item.id.startsWith("f"));
@@ -30,6 +30,7 @@ export default function Home() {
             let updatedBountyList = updatedBountyItems.filter((item: { id: string; }) => item.id.startsWith("l"));
             setBountyHuntList(updatedBountyList);
         }
+        
     }, []);
     
 

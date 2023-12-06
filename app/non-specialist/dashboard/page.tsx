@@ -32,8 +32,8 @@ export default function Home() {
     // Icon Src and Route for Navigation Bar
     const navButtons = NON_SPECIALIST_ROUTES;
 
-    const bountyHuntList = BOUNTY_ITEMS;
-    const foundItemList = FOUND_ITEMS;
+    const [bountyHuntList, setBountyHuntList] = useState(BOUNTY_ITEMS); // Product list data
+    const [foundItemList, setFoundItemList] = useState(FOUND_ITEMS); // Product list data
 
     useEffect(() => {
         const showPopup = localStorage.getItem("showPopup");
@@ -42,6 +42,16 @@ export default function Home() {
             setShowPopup(false);
         } else {
             setShowPopup(showPopup === "true");
+        }
+
+        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
+            let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+            // console.log(updatedBountyItems)
+            let updatedFoundList = updatedBountyItems.filter((item: { id: string; }) => item.id.startsWith("f"));
+            setFoundItemList(updatedFoundList);
+            let updatedBountyList = updatedBountyItems.filter((item: { id: string; }) => item.id.startsWith("l"));
+            setBountyHuntList(updatedBountyList);
         }
     }, []);
 

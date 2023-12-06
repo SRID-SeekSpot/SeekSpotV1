@@ -1,55 +1,56 @@
-"use client";
-
+// app/specialist/itemDetail/page.tsx
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 // import { useRouter } from 'next/router';
 import { Button } from "@/components/ui/button";
 import Header from "@/components/general/header";
 import Navbar from "@/components/general/navbar";
-import { ALL_ITEMS, BOUNTY_ITEMS } from "@/app/constants/AllItems";
-import { NON_SPECIALIST_ROUTES } from "@/app/constants/NonSpecialistRoutes";
+import { SPECIALIST_ROUTES } from "@/app/constants/SpecialistRoutes";
+import { FoundItemDetailPageProps } from "./foundItemDetail_nonspecialist";
+import { ALL_ITEMS } from "@/app/constants/AllItems";
 
-interface FoundItemDetailPage_nonspecialistProps {
-    item: {
-        name: string;
-        imgSrc: string;
-        description: string;
-        price: number;
-        location: string;
-        date: string;
-        id: string;
-        claimStatus: boolean;
-    };
-}
 
-const FoundItemDetailPage_nonspecialist: React.FC<
-    FoundItemDetailPage_nonspecialistProps
-> = ({ item }) => {
-    const navButtons = NON_SPECIALIST_ROUTES;
+const LostItemDetailPage_nonspecialist: React.FC<
+    FoundItemDetailPageProps
+> = (props) => {
+    const navButtons = SPECIALIST_ROUTES;
 
-    // pop up message for delete action
     const [showPopup, setShowPopup] = useState(false);
     const showPopupClaim = () => {
         setShowPopup(true);
     };
-    localStorage.setItem("claimItemIndex", item.id);
-
-    if (!item) {
-        return <p>Item not found!</p>;
-    }
+    localStorage.setItem("claimItemIndex", props.id);
 
     const handlePopupClose = () => {
         setShowPopup(false);
     };
+    
+
+    const [thisItemIfClaim, setThisItemIfClaim] = useState<boolean>(false);
+    useEffect(() => {
+        let updatedBountyItemsString = localStorage.getItem("updatedBountyItems");
+        if (updatedBountyItemsString && updatedBountyItemsString!== "null") {
+            let updatedBountyItems = JSON.parse(updatedBountyItemsString);
+            let updatedProduct = updatedBountyItems
+                                    .filter((item: { id: string; }) => item.id === props.id)
+                                    .map((item: { claimStatus?: boolean }) => item?.claimStatus);
+            setThisItemIfClaim(updatedProduct[0]);
+            console.log(updatedProduct[0])
+        }
+    }, []);
+
+    if (!props) {
+        return <p>Item not found!</p>;
+    }
 
     return (
         <div className="flex flex-col h-screen">
-            <Header href="/non-specialist/found" />
-            <div className="flex flex-col items-center bg-gray-100 p-4 shadow ">
-                <div className="w-full max-w-xs mb-4 rounded-lg overflow-hidden">
+            <Header href="/non-specialist/bounty" />
+            <div className="flex flex-col items-center bg-gray-100 p-4 shadow rounded-2xl">
+                <div className="w-full max-w-xs mb-4 rounded-2xl overflow-hidden">
                     <Image
-                        src={item.imgSrc}
-                        alt={`Picture of ${item.name}`}
+                        src={props.imgSrc}
+                        alt={`Picture of ${props.name}`}
                         width={300}
                         height={180}
                         layout="responsive"
@@ -57,23 +58,30 @@ const FoundItemDetailPage_nonspecialist: React.FC<
                     />
                 </div>
             </div>
-            <h1 className="text-2xl text-navy font-bold mt-12 mx-4">
-                {item.name}
-            </h1>
-            <div className="flex justify-between items-center mt-8 mx-4">
-                <p className="text-md">Location Found: {item.location}</p>
-                <p className="text-md text-right">Date Found: {item.date}</p>
+            <div className="flex justify-between items-center mt-12 mx-4">
+                <h1 className="text-2xl text-navy font-bold">{props.name}</h1>
+                <p className="text-2xl text-navy font-bold">${props.price}</p>
             </div>
-
+            <div className="flex justify-between items-center mt-8 mx-4">
+                <p className="text-md">Location Lost: {props.location}</p>
+                <p className="text-md text-right">Date Lost: {props.date}</p>
+            </div>
+            <p className="text-md text-gray-400 mt-8 mx-4">
+                {props.description}
+            </p>
             <div className="mt-auto px-4 pb-[env(safe-area-inset-bottom)]">
                 <div className="flex justify-center mb-20">
-                    <Button className="w-56 hidden" asChild onClick={showPopupClaim}>
-                        <p>Claim</p>
-                    </Button>
+                    {thisItemIfClaim? (
+                            <p>Item Claimed</p>
+                    ):(
+                        <Button className="w-56" asChild onClick={showPopupClaim}>
+                            <p>Claim</p>
+                        </Button>
+                    )}
                     {showPopup && (
                         <PopupClaim
                             onClose={handlePopupClose}
-                            additionalData={item.id}
+                            additionalData={props.id}
                         />
                     )}
                 </div>
@@ -84,13 +92,12 @@ const FoundItemDetailPage_nonspecialist: React.FC<
     );
 };
 
-// pop up area for claim
-const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: any}) => {
+const PopupClaim = ({onClose, additionalData}:{onClose:any, additionalData:any}) => {
     const [claimCode, setClaimCode] = useState("");
     const [showCongratulations, setShowCongratulations] = useState(false);
     const [showFail, setShowFail] = useState(false);
 
-    const popupContainerStyle = {
+    const popupContainerStyle: React.CSSProperties = {
         position: "fixed",
         top: 0,
         left: 0,
@@ -105,7 +112,7 @@ const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: 
         textAlign: "center",
     };
 
-    const popupContentStyle = {
+    const popupContentStyle: React.CSSProperties = {
         backgroundColor: "white",
         padding: "20px",
         borderRadius: "10px",
@@ -113,7 +120,7 @@ const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: 
         width: "90%", // Adjust as needed
     };
 
-    const popupCongratulationsFailStyle = {
+    const popupCongratulationsFailStyle: React.CSSProperties = {
         position: "fixed",
         top: 0,
         left: 0,
@@ -126,7 +133,7 @@ const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: 
         textAlign: "center",
     };
 
-    const inputStyle = {
+    const inputStyle: React.CSSProperties = {
         width: "80%",
         padding: "10px",
         margin: "10px auto",
@@ -134,7 +141,7 @@ const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: 
         borderRadius: "5px",
     };
 
-    const paragraphStyle = {
+    const paragraphStyle: React.CSSProperties = {
         fontSize: "18px",
         fontWeight: "bold",
     };
@@ -167,7 +174,7 @@ const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: 
         let updatedBountyItemsString =
             localStorage.getItem("updatedBountyItems");
 
-        if (updatedBountyItemsString !== "null") {
+        if (updatedBountyItemsString && updatedBountyItemsString !== "null") {
             let updatedBountyItems = JSON.parse(updatedBountyItemsString);
             const updatedBountyItemsTmp = updatedBountyItems.map(
                 (item: { id: string }) => {
@@ -182,12 +189,12 @@ const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: 
                 "updatedBountyItems",
                 JSON.stringify(updatedBountyItemsTmp)
             );
-            console.log(updatedBountyItemsTmp);
+            // console.log(updatedBountyItemsTmp);
         } else {
             const updatedBountyItems = ALL_ITEMS.map((item) => {
                 if (item.id === additionalData) {
                     // Update the status property to true
-                    return { ...item, status: true };
+                    return { ...item, claimStatus: true };
                 }
                 return item;
             });
@@ -196,6 +203,7 @@ const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: 
                 JSON.stringify(updatedBountyItems)
             );
         }
+        window.location.href = "/non-specialist/bounty";
     };
 
     return (
@@ -217,13 +225,12 @@ const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: 
                                 Congratulations!
                             </p>
                             <p>The bounty is now in your wallet.</p>
-                            {/* <p>The bounty is now in your wallet.</p> */}
                             <div className="flex items-center justify-center">
                                 <Button
                                     className="mt-5 w-200 h-10"
                                     onClick={() => handleClaimSuccess()}
                                 >
-                                    <a href="/non-specialist/found">Claim</a>
+                                    Claim
                                 </Button>
                             </div>
                         </div>
@@ -293,5 +300,4 @@ const PopupClaim = ({ onClose, additionalData }:{ onClose: any, additionalData: 
         </div>
     );
 };
-
-export default FoundItemDetailPage_nonspecialist;
+export default LostItemDetailPage_nonspecialist;
