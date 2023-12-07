@@ -19,6 +19,13 @@ export default function Home() {
         router.push("/non-specialist/newBounty"); // Use the correct path for your new page
     };
 
+    const today = new Date().toISOString().split("T")[0]; // Gets today's date in YYYY-MM-DD format
+    const lastYear = new Date(
+        new Date().setFullYear(new Date().getFullYear() - 1)
+    )
+        .toISOString()
+        .split("T")[0];
+
     return (
         <div className="flex flex-col text-navy">
             <title>Create a Bounty Item</title>
@@ -43,6 +50,9 @@ export default function Home() {
                             type="text"
                             placeholder="Yellow Umbrella"
                             className="w-full p-2 border rounded"
+                            pattern="^[a-zA-Z\s]*$"
+                            title="Only letters and spaces are allowed"
+                            required
                         />
 
                         {/* Item Description */}
@@ -58,6 +68,9 @@ export default function Home() {
                             type="text"
                             placeholder="Yellow umbrella with wooden handle"
                             className="w-full p-2 border rounded"
+                            pattern="^[a-zA-Z\s]*$"
+                            title="Only letters and spaces are allowed"
+                            required
                         />
 
                         {/* Location Lost */}
@@ -73,6 +86,9 @@ export default function Home() {
                             type="text"
                             placeholder="1st Floor"
                             className="w-full p-2 border rounded"
+                            pattern="^[a-zA-Z\s]*$"
+                            title="Only letters and spaces are allowed"
+                            required
                         />
 
                         {/* Date Lost */}
@@ -84,6 +100,9 @@ export default function Home() {
                             name="dateLost"
                             type="date"
                             className="w-full p-2 border rounded"
+                            min={lastYear}
+                            max={today}
+                            required
                         />
 
                         {/* Contact Details */}
@@ -99,6 +118,7 @@ export default function Home() {
                             type="text"
                             placeholder="123-123-1234"
                             className="w-full p-2 border rounded"
+                            required
                         />
 
                         {/* Bounty Offer */}
@@ -111,6 +131,8 @@ export default function Home() {
                             type="number"
                             placeholder="$5"
                             className="w-full p-2 border rounded"
+                            min="0"
+                            step="1"
                         />
 
                         {/* Item Color */}
