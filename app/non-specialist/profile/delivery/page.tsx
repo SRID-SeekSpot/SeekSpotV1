@@ -23,8 +23,6 @@ const Popup = ({ onClose }: { onClose: any }) => {
         setSelectedDeliveryOption(e.target.value);
     };
 
-    
-
     // the logic to choose deliver way
     const handleConfirm = () => {
         if (
@@ -33,7 +31,9 @@ const Popup = ({ onClose }: { onClose: any }) => {
         ) {
             localStorage.setItem("unread", "false");
             localStorage.setItem("showPopup", "false");
-            const shipToMeRadio = document.getElementById("ship-to-me") as HTMLInputElement | null;;
+            const shipToMeRadio = document.getElementById(
+                "ship-to-me"
+            ) as HTMLInputElement | null;
             if (shipToMeRadio) {
                 shipToMeRadio.checked = true;
             }
@@ -49,7 +49,7 @@ const Popup = ({ onClose }: { onClose: any }) => {
     return (
         <div className="popup-container fixed top-0 right-0 left-0 bottom-0 bg-slate-200 bg-opacity-50 flex items-center  justify-center">
             <div className="popup-content bg-white p-12 rounded-3xl shadow-md ">
-                <p className="text-center w-full text-3xl text-blue-800 mb-4">
+                <p className="text-center w-full text-3xl text-grass mb-4">
                     <strong>Delivery</strong>
                 </p>
                 <div className={deliveryOptionStyle}>
@@ -84,7 +84,7 @@ const Popup = ({ onClose }: { onClose: any }) => {
                     </div>
                     <div className="text-lg">Shipping fee: $9</div>
                 </div>
-                <p className="text-1xl text-blue-600 mt-8 text-left">
+                <p className="text-1xl text-trees mt-8 text-left">
                     Enter Address:
                 </p>
                 <textarea
@@ -117,7 +117,9 @@ const Popup = ({ onClose }: { onClose: any }) => {
 
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false);
-    const [selectedDelivery, setSelectedDelivery] = useState<String | null>(null); // for delivery state
+    const [selectedDelivery, setSelectedDelivery] = useState<String | null>(
+        null
+    ); // for delivery state
     const navButtons = NON_SPECIALIST_ROUTES;
     const shipToMeRef = useRef(null);
 
@@ -131,14 +133,13 @@ export default function Home() {
         }
         localStorage.setItem("unread", "false");
         setSelectedDelivery(e.target.value);
-        console.log(e.target.value)
+        console.log(e.target.value);
     };
 
     const handlePopupClose = (choice: React.SetStateAction<String | null>) => {
         setShowPopup(false);
         setSelectedDelivery(choice); // set the delivery way
     };
-
 
     return (
         <div className="flex flex-col">
@@ -184,7 +185,9 @@ export default function Home() {
                                 Get it in person
                             </label>
                             {selectedDelivery === "in-person" && (
-                                <span className="ml-auto text-green-600">saved!</span>
+                                <span className="ml-auto text-green-600">
+                                    saved!
+                                </span>
                             )}
                         </div>
                         <div className="w-full flex items-center">
@@ -201,12 +204,23 @@ export default function Home() {
                                 htmlFor="ship-to-me"
                                 className="lg:text-3xl sm:text-2xl text-navy"
                             >
-                                Ship it to me{(selectedDelivery === "ups" || selectedDelivery === "dhl") && (
-                                    <span> via <strong>{selectedDelivery.toUpperCase()}</strong></span>
+                                Ship it to me
+                                {(selectedDelivery === "ups" ||
+                                    selectedDelivery === "dhl") && (
+                                    <span>
+                                        {" "}
+                                        via{" "}
+                                        <strong>
+                                            {selectedDelivery.toUpperCase()}
+                                        </strong>
+                                    </span>
                                 )}
                             </label>
-                            {(selectedDelivery === "ups" || selectedDelivery === "dhl") && (
-                                <span className="ml-auto text-green-600">saved!</span>
+                            {(selectedDelivery === "ups" ||
+                                selectedDelivery === "dhl") && (
+                                <span className="ml-auto text-green-600">
+                                    saved!
+                                </span>
                             )}
                         </div>
                     </CardContent>
@@ -216,7 +230,14 @@ export default function Home() {
                 <p className="lg:text-1xl sm:text-1xl text-black-600 mx-6">
                     Congratulations! Your item will come back home shortly. Here
                     is the tracking info:&nbsp;
-                    <span style={{ textDecoration: "underline", color: "#5B21B6" }}>XX123456ABC</span>
+                    <span
+                        style={{
+                            textDecoration: "underline",
+                            color: "#5B21B6",
+                        }}
+                    >
+                        XX123456ABC
+                    </span>
                 </p>
             )}
             {showPopup && <Popup onClose={handlePopupClose} />}
