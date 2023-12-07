@@ -358,6 +358,16 @@ const EditItemDescriptionForm: React.FC<FoundItemDetailPageProps> = (props) => {
         setShowSave(false);
     };
 
+    const isSaveButtonDisabled = () => {
+        return (
+            formFields.itemName.trim() === "" ||
+            formFields.locationLost.trim() === "" ||
+            formFields.dateLost.trim() === "" ||
+            formFields.itemColor.trim() === "" ||
+            formFields.itemCategory.trim() === ""
+        );
+    };
+
     return (
         // <div style={{width:"95%"}}>
         <div
@@ -429,6 +439,18 @@ const EditItemDescriptionForm: React.FC<FoundItemDetailPageProps> = (props) => {
                         value={formFields.itemName}
                         onChange={handleInputChange}
                     />
+                </div>
+                <div style={{
+                        display: formFields.itemName.trim() === "" ? "block" : "none",
+                        justifyContent: "center",
+                    }}>
+                        {formFields.itemName.trim() === "" && (
+                            <div>
+                                <p style={{ color: "red", fontSize: "12px" }}>
+                                    Please enter the item name.
+                                </p>
+                            </div>
+                        )}
                 </div>
                 <div
                     style={{
@@ -562,6 +584,7 @@ const EditItemDescriptionForm: React.FC<FoundItemDetailPageProps> = (props) => {
                     <Button
                         onClick={() => setShowSave(true)}
                         className="w-40 rounded-lg"
+                        disabled={isSaveButtonDisabled()}
                     >
                         Save
                     </Button>

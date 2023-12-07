@@ -10,4 +10,5 @@ export const COLORS_CATEGORY = [
     "Gray",
     "Black",
     "White",
+    "Silver"
 ];
