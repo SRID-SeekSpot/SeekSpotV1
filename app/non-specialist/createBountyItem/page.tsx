@@ -52,6 +52,7 @@ export default function Home() {
                             className="w-full p-2 border rounded"
                             pattern="^[a-zA-Z\s]*$"
                             title="Only letters and spaces are allowed"
+                            required
                         />
 
                         {/* Item Description */}
@@ -69,6 +70,7 @@ export default function Home() {
                             className="w-full p-2 border rounded"
                             pattern="^[a-zA-Z\s]*$"
                             title="Only letters and spaces are allowed"
+                            required
                         />
 
                         {/* Location Lost */}
@@ -86,6 +88,7 @@ export default function Home() {
                             className="w-full p-2 border rounded"
                             pattern="^[a-zA-Z\s]*$"
                             title="Only letters and spaces are allowed"
+                            required
                         />
 
                         {/* Date Lost */}
@@ -99,6 +102,7 @@ export default function Home() {
                             className="w-full p-2 border rounded"
                             min={lastYear}
                             max={today}
+                            required
                         />
 
                         {/* Contact Details */}
@@ -114,6 +118,7 @@ export default function Home() {
                             type="text"
                             placeholder="123-123-1234"
                             className="w-full p-2 border rounded"
+                            required
                         />
 
                         {/* Bounty Offer */}
@@ -126,6 +131,8 @@ export default function Home() {
                             type="number"
                             placeholder="$5"
                             className="w-full p-2 border rounded"
+                            min="0"
+                            step="1"
                         />
 
                         {/* Item Color */}

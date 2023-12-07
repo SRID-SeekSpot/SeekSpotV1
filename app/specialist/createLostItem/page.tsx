@@ -99,6 +99,7 @@ export default function Home() {
                             className="w-full p-2 border rounded"
                             pattern="^[a-zA-Z\s]*$"
                             title="Only letters and spaces are allowed"
+                            required
                         />
 
                         {/* Item Description */}
@@ -116,6 +117,7 @@ export default function Home() {
                             className="w-full p-2 border rounded"
                             pattern="^[a-zA-Z\s]*$"
                             title="Only letters and spaces are allowed"
+                            required
                         />
 
                         {/* Location Found */}
@@ -133,6 +135,7 @@ export default function Home() {
                             className="w-full p-2 border rounded"
                             pattern="^[a-zA-Z\s]*$"
                             title="Only letters and spaces are allowed"
+                            required
                         />
 
                         {/* Date Found */}
@@ -146,6 +149,7 @@ export default function Home() {
                             className="w-full p-2 border rounded"
                             min={lastYear}
                             max={today}
+                            required
                         />
 
                         {/* Item Color */}
