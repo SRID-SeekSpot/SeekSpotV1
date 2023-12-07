@@ -19,6 +19,13 @@ export default function Home() {
         router.push("/non-specialist/newBounty"); // Use the correct path for your new page
     };
 
+    const today = new Date().toISOString().split("T")[0]; // Gets today's date in YYYY-MM-DD format
+    const lastYear = new Date(
+        new Date().setFullYear(new Date().getFullYear() - 1)
+    )
+        .toISOString()
+        .split("T")[0];
+
     return (
         <div className="flex flex-col text-navy">
             <title>Create a Bounty Item</title>
@@ -43,6 +50,8 @@ export default function Home() {
                             type="text"
                             placeholder="Yellow Umbrella"
                             className="w-full p-2 border rounded"
+                            pattern="^[a-zA-Z\s]*$"
+                            title="Only letters and spaces are allowed"
                         />
 
                         {/* Item Description */}
@@ -58,6 +67,8 @@ export default function Home() {
                             type="text"
                             placeholder="Yellow umbrella with wooden handle"
                             className="w-full p-2 border rounded"
+                            pattern="^[a-zA-Z\s]*$"
+                            title="Only letters and spaces are allowed"
                         />
 
                         {/* Location Lost */}
@@ -73,6 +84,8 @@ export default function Home() {
                             type="text"
                             placeholder="1st Floor"
                             className="w-full p-2 border rounded"
+                            pattern="^[a-zA-Z\s]*$"
+                            title="Only letters and spaces are allowed"
                         />
 
                         {/* Date Lost */}
@@ -84,6 +97,8 @@ export default function Home() {
                             name="dateLost"
                             type="date"
                             className="w-full p-2 border rounded"
+                            min={lastYear}
+                            max={today}
                         />
 
                         {/* Contact Details */}

@@ -69,6 +69,13 @@ export default function Home() {
         router.push("/specialist/newFound");
     };
 
+    const today = new Date().toISOString().split("T")[0];
+    const lastYear = new Date(
+        new Date().setFullYear(new Date().getFullYear() - 1)
+    )
+        .toISOString()
+        .split("T")[0];
+
     return (
         <div className="flex flex-col text-navy">
             <title>Create a Found Item</title>
@@ -90,6 +97,8 @@ export default function Home() {
                             type="text"
                             placeholder="Green Backpack"
                             className="w-full p-2 border rounded"
+                            pattern="^[a-zA-Z\s]*$"
+                            title="Only letters and spaces are allowed"
                         />
 
                         {/* Item Description */}
@@ -105,6 +114,8 @@ export default function Home() {
                             type="text"
                             placeholder="Backpack with a small tear on the side."
                             className="w-full p-2 border rounded"
+                            pattern="^[a-zA-Z\s]*$"
+                            title="Only letters and spaces are allowed"
                         />
 
                         {/* Location Found */}
@@ -120,6 +131,8 @@ export default function Home() {
                             type="text"
                             placeholder="Parking Lot"
                             className="w-full p-2 border rounded"
+                            pattern="^[a-zA-Z\s]*$"
+                            title="Only letters and spaces are allowed"
                         />
 
                         {/* Date Found */}
@@ -127,10 +140,12 @@ export default function Home() {
                             Date Found
                         </label>
                         <input
-                            id="dateFound"
-                            name="dateFound"
+                            id="dateLost"
+                            name="dateLost"
                             type="date"
                             className="w-full p-2 border rounded"
+                            min={lastYear}
+                            max={today}
                         />
 
                         {/* Item Color */}
