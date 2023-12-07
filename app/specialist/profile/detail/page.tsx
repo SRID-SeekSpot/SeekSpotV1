@@ -43,12 +43,14 @@ export default function Home() {
                     buttonName="David"
                     editable={true}
                     localStorageKey="specialist-profile-name"
+                    regexPattern="^[A-Za-z-' 0-9]+$"
                 />
                 <ProfileButton
                     iconSrc="/ProfileIcon/id.png"
                     buttonName="01234567"
                     editable={true}
                     localStorageKey="specialist-profile-id"
+                    regexPattern="^[0-9]+$"
                 />
             </div>
 
