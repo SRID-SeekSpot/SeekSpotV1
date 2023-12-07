@@ -49,7 +49,7 @@ const Popup = ({ onClose }: { onClose: any }) => {
     return (
         <div className="popup-container fixed top-0 right-0 left-0 bottom-0 bg-slate-200 bg-opacity-50 flex items-center  justify-center">
             <div className="popup-content bg-white p-12 rounded-3xl shadow-md ">
-                <p className="text-center w-full text-3xl text-blue-800 mb-4">
+                <p className="text-center w-full text-3xl text-grass">
                     <strong>Delivery</strong>
                 </p>
                 <div className={deliveryOptionStyle}>
@@ -84,7 +84,7 @@ const Popup = ({ onClose }: { onClose: any }) => {
                     </div>
                     <div className="text-lg">Shipping fee: $9</div>
                 </div>
-                <p className="text-1xl text-blue-600 mt-8 text-left">
+                <p className="text-1xl text-trees mt-8 text-left">
                     Enter Address:
                 </p>
                 <textarea
