@@ -15,6 +15,7 @@ interface ProfileButtonProps {
     unread?: boolean;
     editable?: boolean;
     localStorageKey?: string;
+    regexPattern?: string;
 }
 
 const ProfileButton: React.FC<ProfileButtonProps> = ({
@@ -26,6 +27,7 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({
     unread,
     editable,
     localStorageKey,
+    regexPattern,
     ...props
 }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -58,6 +60,10 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({
         target: { value: React.SetStateAction<string> };
     }) => {
         const changedValue = e.target.value.toString();
+        // console.log("Changed value: " + changedValue);
+        if (regexPattern && !new RegExp(regexPattern).test(changedValue)) {
+            return;
+        }
         setEditableText(changedValue);
         if (localStorageKey) {
             localStorage.setItem(localStorageKey, changedValue);
