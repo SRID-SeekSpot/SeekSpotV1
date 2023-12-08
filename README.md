@@ -31,29 +31,39 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 
 ## Limitations
+### Essential Terms explained:
+#### Bounty Hunt List: 
+list of “bounty hunt” items created by users. The list contains items that people lost and want to get back by paying the finder a certain amount of “bounty” as a reward.
+#### Found Item Inventory: 
+list of “found” items managed by lost & found managers (specialists). This inventory contains unclaimed items that are sent to the lost & found office.
+#### Specialist: 
+a manager at the lost & found office. A specialist can create a lost item (that someone else has found and hand it over to the L&F office), and provide a claim code to someone who finds something on the bounty hunt list.
+#### Non-Specialist:
+anyone who either loses something or finds something that other people have lost. Non-specialists can create bounty items for something they have lost. If someone finds the items and sends them back to the lost & found office, the owner can receive a notification & request delivery. They can also get a reward for finding something on the bounty list. 
 
-### VR Field Trip
-Why not complete: It requires lots of work on game designing, such as VR development platform and 3D models creation. Then, we need database to store our games.
-What we have now: The VR page will show an error page indicating the feature is still under development.
-### Game search bar
-Why not complete: It requires work on backend. First, we should have a database to store all available games. Second, we should have backend api to handle queries and retrieve games from the database.
-What we have now: The search bar and a search button
-### Create Game
-Why not complete: It requires work on backend. We need relevant apis to create new games and store in database.
-What we have now: A game creation page providing style options and text input for game notes and quiz.
-### AI Chat search bar
-Why not complete: Same as “Game search bar”
-What we have now: Same as “Game search bar”
-### Download CSV
-Why not complete: It requires work on backend. First, we need apis to convert the leaderboard as a csv file. Second, in order to realize downloading, a client-server communication should be established, which always involves using HTTP or FTP protocols.
-What we have now: a button to allow users to download and a pop-up window to inform users the success of downloading.
-### Export to Canvas
-Why not complete: It requires integration with third-party application. We probably need to use Canvas provided api to integrate our app and Canvas.
-What we have now: a button to allow users to export and a pop-up window to inform users the success of exporting.
-### Go to Canvas
-Why not complete: Same as “Export to Canvas”
-What we have now: a button to allow users to go to Canvas.
-### Only the example student profile can be viewed in leaderboard
-Why not complete: Avoid duplicate work. One example student is enough to show the functoionality.
-What we have now: We can view the example student’s profile by clicking on the user in the leaderboard.
+> Our MVP for SeekSpot has the following limitations:  
 
+### For all features:
+- Please use mobile resolution when browsing our app
+- Please select ‘Vista Valley Mall’ at the welcome screen
+- No Database Storage.
+
+> When using the app as a specialist:
+
+### Create a Lost Item:
+- No storage after creating an item due to no database & backend handling storage logic. Image uploading is not available at this point.
+- Can only create the specified item as prompted in the form. The created item will not be visible after navigating to another page.
+
+### Retrieving Claim Code for Bounty Hunt items:
+- No Claim code generation algorithm. The same claim code placeholder is displayed for all available bounty hunt items
+
+> When using the app as a non-specialist:
+### Create a Bounty Item:
+- No storage after creating an item due to no database & backend handling storage logic. Image uploading is not available at this point.
+- Can only create the specified item as prompted in the form. The created item will not be visible after navigating to another page.
+
+### Receive Notification:
+- Popup notification is only available through using the “Notification Experience” link from the starting page.
+
+### Request Delivery:
+- Not connected to any actual shipping partner’s API. The system will provide a static shipping number once the user chooses to get their item back via mail.
